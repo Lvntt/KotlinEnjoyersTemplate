@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.kotlinenjoyerstemplate.ui.components.button.HackathonButton
-import com.example.kotlinenjoyerstemplate.ui.components.button.HackathonButtonBase
 import com.example.kotlinenjoyerstemplate.ui.components.button.hackathonButtonColors
 import com.example.kotlinenjoyerstemplate.ui.components.button.model.HackathonButtonIcon
 import com.example.kotlinenjoyerstemplate.ui.components.loader_button.HackathonLoaderButton
@@ -102,6 +100,28 @@ class MainActivity : ComponentActivity() {
                                     sizeDp = 24,
                                     tintColor = HackathonTheme.colors.common.staticWhite,
                                 ),
+                                buttonColors = hackathonButtonColors(
+                                    containerColor = HackathonTheme.colors.common.accent,
+                                    contentColor = HackathonTheme.colors.common.staticWhite,
+                                ),
+                            )
+                        }
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(16.dp),
+                        ) {
+                            HackathonLoaderButton.L(
+                                buttonColors = hackathonButtonColors(
+                                    containerColor = HackathonTheme.colors.common.accent,
+                                    contentColor = HackathonTheme.colors.common.staticWhite,
+                                ),
+                            )
+                            HackathonLoaderButton.M(
+                                buttonColors = hackathonButtonColors(
+                                    containerColor = HackathonTheme.colors.common.accent,
+                                    contentColor = HackathonTheme.colors.common.staticWhite,
+                                ),
+                            )
+                            HackathonLoaderButton.S(
                                 buttonColors = hackathonButtonColors(
                                     containerColor = HackathonTheme.colors.common.accent,
                                     contentColor = HackathonTheme.colors.common.staticWhite,
