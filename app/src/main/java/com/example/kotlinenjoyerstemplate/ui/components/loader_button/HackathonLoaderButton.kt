@@ -15,6 +15,8 @@ object HackathonLoaderButton {
     fun L(
         modifier: Modifier = Modifier,
         onClick: (() -> Unit)? = null,
+        loaderSizeDp: Int = 48,
+        strokeWidthDp: Int = 6,
         buttonColors: ButtonColors = hackathonButtonColors(),
         contentPadding: PaddingValues = PaddingValues(all = 20.dp),
         shape: Shape = RoundedCornerShape(8.dp),
@@ -22,6 +24,8 @@ object HackathonLoaderButton {
     ) = HackathonLoaderButtonBase(
         modifier = modifier,
         onClick = onClick,
+        loaderSizeDp = loaderSizeDp,
+        strokeWidthDp = strokeWidthDp,
         buttonColors = buttonColors,
         contentPadding = contentPadding,
         shape = shape,
@@ -32,6 +36,8 @@ object HackathonLoaderButton {
     fun M(
         modifier: Modifier = Modifier,
         onClick: (() -> Unit)? = null,
+        loaderSizeDp: Int = 32,
+        strokeWidthDp: Int = 4,
         buttonColors: ButtonColors = hackathonButtonColors(),
         contentPadding: PaddingValues = PaddingValues(all = 12.dp),
         shape: Shape = RoundedCornerShape(8.dp),
@@ -39,6 +45,8 @@ object HackathonLoaderButton {
     ) = HackathonLoaderButtonBase(
         modifier = modifier,
         onClick = onClick,
+        loaderSizeDp = loaderSizeDp,
+        strokeWidthDp = strokeWidthDp,
         buttonColors = buttonColors,
         contentPadding = contentPadding,
         shape = shape,
@@ -49,13 +57,17 @@ object HackathonLoaderButton {
     fun S(
         modifier: Modifier = Modifier,
         onClick: (() -> Unit)? = null,
+        loaderSizeDp: Int = 24,
+        strokeWidthDp: Int = 3,
         buttonColors: ButtonColors = hackathonButtonColors(),
-        contentPadding: PaddingValues = PaddingValues(all = 6.dp),
+        contentPadding: PaddingValues = PaddingValues(all = 8.dp),
         shape: Shape = RoundedCornerShape(8.dp),
         isFillMaxWidth: Boolean = false,
     ) = HackathonLoaderButtonBase(
         modifier = modifier,
         onClick = onClick,
+        loaderSizeDp = loaderSizeDp,
+        strokeWidthDp = strokeWidthDp,
         buttonColors = buttonColors,
         contentPadding = contentPadding,
         shape = shape,

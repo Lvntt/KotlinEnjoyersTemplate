@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.CircularProgressIndicator
@@ -24,6 +25,8 @@ import com.example.kotlinenjoyerstemplate.ui.components.button.hackathonButtonCo
 fun HackathonLoaderButtonBase(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
+    loaderSizeDp: Int = 32,
+    strokeWidthDp: Int = 4,
     buttonColors: ButtonColors = hackathonButtonColors(),
     contentPadding: PaddingValues = PaddingValues(all = 20.dp),
     shape: Shape = RoundedCornerShape(8.dp),
@@ -50,8 +53,11 @@ fun HackathonLoaderButtonBase(
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator(
-            modifier = Modifier.padding(contentPadding),
+            modifier = Modifier
+                .padding(contentPadding)
+                .size(loaderSizeDp.dp),
             color = buttonColors.contentColor,
+            strokeWidth = strokeWidthDp.dp,
         )
     }
 }
