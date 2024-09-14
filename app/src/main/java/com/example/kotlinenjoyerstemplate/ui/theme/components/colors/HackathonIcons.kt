@@ -7,9 +7,11 @@ import com.example.kotlinenjoyerstemplate.R
 
 class HackathonIcons(
     val primary: Color,
+    val secondary: Color,
 )
 
 @Composable
 fun getHackathonIcons() = HackathonIcons(
     primary = colorResource(id = R.color.colorsIconsPrimary),
+    secondary = colorResource(id = R.color.colorsIconsSecondary),
 )
