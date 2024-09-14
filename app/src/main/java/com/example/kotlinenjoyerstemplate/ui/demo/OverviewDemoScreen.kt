@@ -52,6 +52,12 @@ fun OverviewDemoScreen(
                 navController.navigate(DemoNavDestination.LoaderButtonDemo.baseRoute)
             },
         )
+        OverviewElement(
+            elementName = "HackathonBlock",
+            onClick = {
+                navController.navigate(DemoNavDestination.BlockDemo.baseRoute)
+            },
+        )
     }
 }
 

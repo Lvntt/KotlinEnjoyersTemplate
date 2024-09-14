@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.kotlinenjoyerstemplate.ui.demo.HackathonBlockDemoScreen
 import com.example.kotlinenjoyerstemplate.ui.demo.HackathonButtonDemoScreen
 import com.example.kotlinenjoyerstemplate.ui.demo.HackathonLoaderButtonDemoScreen
 import com.example.kotlinenjoyerstemplate.ui.demo.OverviewDemoScreen
@@ -20,6 +21,8 @@ sealed class DemoNavDestination(val baseRoute: String) {
     data object ButtonDemo : DemoNavDestination("ButtonDemo")
 
     data object LoaderButtonDemo : DemoNavDestination("LoaderButtonDemo")
+
+    data object BlockDemo : DemoNavDestination("BlockDemo")
 }
 
 class MainActivity : ComponentActivity() {
@@ -43,6 +46,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(route = DemoNavDestination.LoaderButtonDemo.baseRoute) {
                         HackathonLoaderButtonDemoScreen(onBack)
+                    }
+                    composable(route = DemoNavDestination.BlockDemo.baseRoute) {
+                        HackathonBlockDemoScreen(onBack)
                     }
                 }
             }

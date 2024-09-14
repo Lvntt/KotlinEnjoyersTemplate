@@ -26,75 +26,71 @@ fun HackathonButtonDemoScreen(onBack: () -> Unit) = BaseDemoScreen(
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-        ) {
-            HackathonButton.L(
-                onClick = {},
-                text = "Обновить",
-                buttonColors = hackathonButtonColors(
-                    containerColor = HackathonTheme.colors.common.accent,
-                    contentColor = HackathonTheme.colors.common.staticWhite,
-                ),
-                icon = HackathonButtonIcon(
-                    resId = R.drawable.ic_renew_24dp,
-                    sizeDp = 24,
-                    tintColor = HackathonTheme.colors.common.staticWhite,
-                ),
-            )
-            HackathonButton.M(
-                onClick = {},
-                text = "Обновить",
-                buttonColors = hackathonButtonColors(
-                    containerColor = HackathonTheme.colors.common.accent,
-                    contentColor = HackathonTheme.colors.common.staticWhite,
-                ),
-                icon = HackathonButtonIcon(
-                    resId = R.drawable.ic_renew_24dp,
-                    sizeDp = 24,
-                    tintColor = HackathonTheme.colors.common.staticWhite,
-                ),
-            )
-            HackathonButton.S(
-                onClick = {},
-                text = "Обновить",
-                buttonColors = hackathonButtonColors(
-                    containerColor = HackathonTheme.colors.common.accent,
-                    contentColor = HackathonTheme.colors.common.staticWhite,
-                ),
-            )
-            HackathonButton.XS(
-                onClick = {},
-                text = "Обновить",
-                buttonColors = hackathonButtonColors(
-                    containerColor = HackathonTheme.colors.common.accent,
-                    contentColor = HackathonTheme.colors.common.staticWhite,
-                ),
-            )
-            HackathonButton.Icon(
-                onClick = {},
-                icon = HackathonButtonIcon(
-                    resId = R.drawable.ic_renew_24dp,
-                    sizeDp = 24,
-                    tintColor = HackathonTheme.colors.common.staticWhite,
-                ),
-                buttonColors = hackathonButtonColors(
-                    containerColor = HackathonTheme.colors.common.accent,
-                    contentColor = HackathonTheme.colors.common.staticWhite,
-                ),
-            )
-            HackathonButton.IconAlt(
-                onClick = {},
-                icon = HackathonButtonIcon(
-                    resId = R.drawable.ic_renew_24dp,
-                    sizeDp = 24,
-                    tintColor = HackathonTheme.colors.common.staticWhite,
-                ),
-                buttonColors = hackathonButtonColors(
-                    containerColor = HackathonTheme.colors.common.accent,
-                    contentColor = HackathonTheme.colors.common.staticWhite,
-                ),
-            )
-        }
+        HackathonButton.L(
+            onClick = {},
+            text = "Обновить",
+            buttonColors = hackathonButtonColors(
+                containerColor = HackathonTheme.colors.common.accent,
+                contentColor = HackathonTheme.colors.common.staticWhite,
+            ),
+            icon = HackathonButtonIcon(
+                resId = R.drawable.ic_renew_24dp,
+                sizeDp = 24,
+                tintColor = HackathonTheme.colors.common.staticWhite,
+            ),
+        )
+        HackathonButton.M(
+            onClick = {},
+            text = "Обновить",
+            buttonColors = hackathonButtonColors(
+                containerColor = HackathonTheme.colors.common.accent,
+                contentColor = HackathonTheme.colors.common.staticWhite,
+            ),
+            icon = HackathonButtonIcon(
+                resId = R.drawable.ic_renew_24dp,
+                sizeDp = 24,
+                tintColor = HackathonTheme.colors.common.staticWhite,
+            ),
+        )
+        HackathonButton.S(
+            onClick = {},
+            text = "Обновить",
+            buttonColors = hackathonButtonColors(
+                containerColor = HackathonTheme.colors.common.accent,
+                contentColor = HackathonTheme.colors.common.staticWhite,
+            ),
+        )
+        HackathonButton.XS(
+            onClick = {},
+            text = "Обновить",
+            buttonColors = hackathonButtonColors(
+                containerColor = HackathonTheme.colors.common.accent,
+                contentColor = HackathonTheme.colors.common.staticWhite,
+            ),
+        )
+        HackathonButton.Icon(
+            onClick = {},
+            icon = HackathonButtonIcon(
+                resId = R.drawable.ic_renew_24dp,
+                sizeDp = 24,
+                tintColor = HackathonTheme.colors.common.staticWhite,
+            ),
+            buttonColors = hackathonButtonColors(
+                containerColor = HackathonTheme.colors.common.accent,
+                contentColor = HackathonTheme.colors.common.staticWhite,
+            ),
+        )
+        HackathonButton.IconAlt(
+            onClick = {},
+            icon = HackathonButtonIcon(
+                resId = R.drawable.ic_renew_24dp,
+                sizeDp = 24,
+                tintColor = HackathonTheme.colors.common.staticWhite,
+            ),
+            buttonColors = hackathonButtonColors(
+                containerColor = HackathonTheme.colors.common.accent,
+                contentColor = HackathonTheme.colors.common.staticWhite,
+            ),
+        )
     }
 }
