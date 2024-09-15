@@ -41,37 +41,37 @@ fun OverviewDemoScreen(
         verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
         OverviewElement(
-            elementName = "HackathonButton",
+            elementName = "Button",
             onClick = {
                 navController.navigate(DemoNavDestination.ButtonDemo.baseRoute)
             },
         )
         OverviewElement(
-            elementName = "HackathonLoaderButton",
+            elementName = "LoaderButton",
             onClick = {
                 navController.navigate(DemoNavDestination.LoaderButtonDemo.baseRoute)
             },
         )
         OverviewElement(
-            elementName = "HackathonBlock",
+            elementName = "Block",
             onClick = {
                 navController.navigate(DemoNavDestination.BlockDemo.baseRoute)
             },
         )
         OverviewElement(
-            elementName = "HackathonHeaderBlock",
+            elementName = "HeaderBlock",
             onClick = {
                 navController.navigate(DemoNavDestination.HeaderBlockDemo.baseRoute)
             },
         )
         OverviewElement(
-            elementName = "HackathonCheckbox",
+            elementName = "Checkbox",
             onClick = {
                 navController.navigate(DemoNavDestination.CheckboxDemo.baseRoute)
             },
         )
         OverviewElement(
-            elementName = "HackathonSwitch",
+            elementName = "Switch",
             onClick = {
                 navController.navigate(DemoNavDestination.SwitchDemo.baseRoute)
             },
@@ -87,8 +87,8 @@ private fun OverviewElement(
     Box(
         modifier = Modifier
             .sizeIn(
-                minWidth = 250.dp,
-                minHeight = 100.dp,
+                minWidth = 150.dp,
+                minHeight = 75.dp,
             )
             .clip(RoundedCornerShape(12.dp))
             .background(HackathonTheme.colors.common.staticWhite)
@@ -107,7 +107,7 @@ private fun OverviewElement(
         ) {
             Text(
                 text = elementName,
-                style = HackathonTheme.typography.titles.titleXL,
+                style = HackathonTheme.typography.titles.titleL,
             )
             Row(
                 modifier = Modifier.align(Alignment.Start),
@@ -116,7 +116,7 @@ private fun OverviewElement(
             ) {
                 Text(
                     text = "View",
-                    style = HackathonTheme.typography.titles.titleL,
+                    style = HackathonTheme.typography.titles.titleM,
                     color = HackathonTheme.colors.text.secondary.default,
                 )
                 Icon(
