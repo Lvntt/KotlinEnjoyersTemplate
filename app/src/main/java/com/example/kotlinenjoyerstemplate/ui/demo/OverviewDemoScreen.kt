@@ -36,7 +36,7 @@ fun OverviewDemoScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(HackathonTheme.colors.background.primary)
+            .background(HackathonTheme.colors.background.grey)
             .padding(horizontal = 16.dp, vertical = 32.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
@@ -74,6 +74,12 @@ fun OverviewDemoScreen(
             elementName = "Switch",
             onClick = {
                 navController.navigate(DemoNavDestination.SwitchDemo.baseRoute)
+            },
+        )
+        OverviewElement(
+            elementName = "AlertDialog",
+            onClick = {
+                navController.navigate(DemoNavDestination.AlertDialogDemo.baseRoute)
             },
         )
     }

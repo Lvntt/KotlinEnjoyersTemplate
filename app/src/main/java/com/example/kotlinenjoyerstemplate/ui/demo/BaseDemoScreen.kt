@@ -26,7 +26,7 @@ fun BaseDemoScreen(
     ) { paddings ->
         Box(
             modifier = modifier
-                .background(HackathonTheme.colors.background.primary)
+                .background(HackathonTheme.colors.background.grey)
                 .padding(16.dp)
                 .padding(paddings),
         ) {

@@ -34,7 +34,7 @@ import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 fun hackathonButtonColors(
     containerColor: Color = HackathonTheme.colors.common.staticWhite,
     contentColor: Color = HackathonTheme.colors.text.primary.default,
-    disabledContainerColor: Color = HackathonTheme.colors.background.primary,
+    disabledContainerColor: Color = HackathonTheme.colors.background.grey,
     disabledContentColor: Color = HackathonTheme.colors.text.primary.default,
 ) = ButtonColors(
     containerColor = containerColor,

@@ -6,12 +6,12 @@ import androidx.compose.ui.res.colorResource
 import com.example.kotlinenjoyerstemplate.R
 
 class HackathonBackground(
-    val primary: Color,
+    val grey: Color,
     val white: Color,
 )
 
 @Composable
 fun getHackathonBackground() = HackathonBackground(
-    primary = colorResource(id = R.color.colorsBackgroundPrimary),
+    grey = colorResource(id = R.color.colorsBackgroundGrey),
     white = colorResource(id = R.color.colorsBackgroundWhite),
 )

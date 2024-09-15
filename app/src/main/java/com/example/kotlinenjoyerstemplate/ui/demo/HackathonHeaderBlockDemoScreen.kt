@@ -23,7 +23,7 @@ fun HackathonHeaderBlockDemoScreen(onBack: () -> Unit) = BaseDemoScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(HackathonTheme.colors.background.primary),
+            .background(HackathonTheme.colors.background.grey),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {

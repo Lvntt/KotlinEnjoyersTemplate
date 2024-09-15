@@ -10,7 +10,7 @@
     <color name="colorsIconsSecondary">#9E9E9E</color>
 
     <!--  Background  -->
-    <color name="colorsBackgroundPrimary">#EBEBEB</color>
+    <color name="colorsBackgroundGrey">#EBEBEB</color>
     <color name="colorsBackgroundWhite">#FFFFFF</color>
 
     <!--  Elements  -->
