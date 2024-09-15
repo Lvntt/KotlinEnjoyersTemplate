@@ -58,6 +58,12 @@ fun OverviewDemoScreen(
                 navController.navigate(DemoNavDestination.BlockDemo.baseRoute)
             },
         )
+        OverviewElement(
+            elementName = "HackathonHeaderBlock",
+            onClick = {
+                navController.navigate(DemoNavDestination.HeaderBlockDemo.baseRoute)
+            },
+        )
     }
 }
 

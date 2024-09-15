@@ -7,9 +7,11 @@ import com.example.kotlinenjoyerstemplate.R
 
 class HackathonBackground(
     val primary: Color,
+    val white: Color,
 )
 
 @Composable
 fun getHackathonBackground() = HackathonBackground(
     primary = colorResource(id = R.color.colorsBackgroundPrimary),
+    white = colorResource(id = R.color.colorsBackgroundWhite),
 )

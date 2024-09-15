@@ -37,10 +37,7 @@ fun HackathonBlock(
     partsSpacedByDp: Int = 10,
     shape: Shape = RoundedCornerShape(12.dp),
     isFillMaxWidth: Boolean = false,
-    innerPadding: PaddingValues = PaddingValues(
-        horizontal = 16.dp,
-        vertical = 12.dp,
-    )
+    innerPadding: PaddingValues = PaddingValues(horizontal = 16.dp, vertical = 12.dp)
 ) = Box(modifier = modifier) {
     Row(
         modifier = Modifier
