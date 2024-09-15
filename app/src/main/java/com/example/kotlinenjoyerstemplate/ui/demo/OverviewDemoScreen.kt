@@ -70,6 +70,12 @@ fun OverviewDemoScreen(
                 navController.navigate(DemoNavDestination.CheckboxDemo.baseRoute)
             },
         )
+        OverviewElement(
+            elementName = "HackathonSwitch",
+            onClick = {
+                navController.navigate(DemoNavDestination.SwitchDemo.baseRoute)
+            },
+        )
     }
 }
 

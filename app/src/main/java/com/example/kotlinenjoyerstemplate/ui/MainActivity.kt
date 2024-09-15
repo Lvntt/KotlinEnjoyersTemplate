@@ -13,6 +13,7 @@ import com.example.kotlinenjoyerstemplate.ui.demo.HackathonButtonDemoScreen
 import com.example.kotlinenjoyerstemplate.ui.demo.HackathonCheckboxDemoScreen
 import com.example.kotlinenjoyerstemplate.ui.demo.HackathonHeaderBlockDemoScreen
 import com.example.kotlinenjoyerstemplate.ui.demo.HackathonLoaderButtonDemoScreen
+import com.example.kotlinenjoyerstemplate.ui.demo.HackathonSwitchDemoScreen
 import com.example.kotlinenjoyerstemplate.ui.demo.OverviewDemoScreen
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 
@@ -29,6 +30,8 @@ sealed class DemoNavDestination(val baseRoute: String) {
     data object HeaderBlockDemo : DemoNavDestination("HeaderBlockDemo")
 
     data object CheckboxDemo : DemoNavDestination("CheckboxDemo")
+
+    data object SwitchDemo : DemoNavDestination("SwitchDemo")
 }
 
 class MainActivity : ComponentActivity() {
@@ -61,6 +64,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(route = DemoNavDestination.CheckboxDemo.baseRoute) {
                         HackathonCheckboxDemoScreen(onBack)
+                    }
+                    composable(route = DemoNavDestination.SwitchDemo.baseRoute) {
+                        HackathonSwitchDemoScreen(onBack)
                     }
                 }
             }

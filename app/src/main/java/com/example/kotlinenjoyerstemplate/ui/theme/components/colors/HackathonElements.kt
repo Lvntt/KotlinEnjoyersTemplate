@@ -8,10 +8,12 @@ import com.example.kotlinenjoyerstemplate.R
 class HackathonElements(
     val lightGray: Color,
     val darkGray: Color,
+    val blueGray: Color,
 )
 
 @Composable
 fun getHackathonElements() = HackathonElements(
     lightGray = colorResource(id = R.color.colorsElementsLightGray),
     darkGray = colorResource(id = R.color.colorsElementsDarkGray),
+    blueGray = colorResource(id = R.color.colorsElementsDarkGray),
 )
