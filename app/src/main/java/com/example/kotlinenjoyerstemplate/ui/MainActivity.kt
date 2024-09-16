@@ -3,11 +3,11 @@ package com.example.kotlinenjoyerstemplate.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.remember
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.kotlinenjoyerstemplate.ui.components.error_block.HackathonErrorScreen
 import com.example.kotlinenjoyerstemplate.ui.demo.HackathonAlertDialogDemoScreen
 import com.example.kotlinenjoyerstemplate.ui.demo.HackathonBlockDemoScreen
 import com.example.kotlinenjoyerstemplate.ui.demo.HackathonButtonDemoScreen
@@ -35,6 +35,8 @@ sealed class DemoNavDestination(val baseRoute: String) {
     data object SwitchDemo : DemoNavDestination("SwitchDemo")
 
     data object AlertDialogDemo : DemoNavDestination("AlertDialogDemo")
+
+    data object ErrorScreenDemo : DemoNavDestination("ErrorScreenDemo")
 }
 
 class MainActivity : ComponentActivity() {
@@ -73,6 +75,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(route = DemoNavDestination.AlertDialogDemo.baseRoute) {
                         HackathonAlertDialogDemoScreen(onBack)
+                    }
+                    composable(route = DemoNavDestination.ErrorScreenDemo.baseRoute) {
+                        HackathonErrorScreen(onBack)
                     }
                 }
             }
