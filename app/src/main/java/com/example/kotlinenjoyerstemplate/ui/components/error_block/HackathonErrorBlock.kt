@@ -39,7 +39,7 @@ fun HackathonErrorBlock(onRetry: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Text(
-                text = stringResource(id = R.string.an_error_occurred),
+                text = stringResource(id = R.string.anErrorOccurred),
                 color = HackathonTheme.colors.text.secondary.default,
                 style = HackathonTheme.typography.texts.textL,
             )

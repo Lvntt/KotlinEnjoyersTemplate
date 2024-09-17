@@ -6,13 +6,13 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
@@ -28,69 +28,86 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kotlinenjoyerstemplate.R
-import com.example.kotlinenjoyerstemplate.ui.DemoNavDestination
+import com.example.kotlinenjoyerstemplate.navigation.DemoNavDestination
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 
 @Composable
 fun OverviewDemoScreen(
     navController: NavController,
 ) {
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(HackathonTheme.colors.background.grey)
-            .padding(horizontal = 16.dp, vertical = 32.dp)
-            .verticalScroll(rememberScrollState()),
+            .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp),
+        contentPadding = PaddingValues(vertical = 32.dp),
     ) {
-        OverviewElement(
-            elementName = "Button",
-            onClick = {
-                navController.navigate(DemoNavDestination.ButtonDemo.baseRoute)
-            },
-        )
-        OverviewElement(
-            elementName = "LoaderButton",
-            onClick = {
-                navController.navigate(DemoNavDestination.LoaderButtonDemo.baseRoute)
-            },
-        )
-        OverviewElement(
-            elementName = "Block",
-            onClick = {
-                navController.navigate(DemoNavDestination.BlockDemo.baseRoute)
-            },
-        )
-        OverviewElement(
-            elementName = "HeaderBlock",
-            onClick = {
-                navController.navigate(DemoNavDestination.HeaderBlockDemo.baseRoute)
-            },
-        )
-        OverviewElement(
-            elementName = "Checkbox",
-            onClick = {
-                navController.navigate(DemoNavDestination.CheckboxDemo.baseRoute)
-            },
-        )
-        OverviewElement(
-            elementName = "Switch",
-            onClick = {
-                navController.navigate(DemoNavDestination.SwitchDemo.baseRoute)
-            },
-        )
-        OverviewElement(
-            elementName = "AlertDialog",
-            onClick = {
-                navController.navigate(DemoNavDestination.AlertDialogDemo.baseRoute)
-            },
-        )
-        OverviewElement(
-            elementName = "ErrorScreen",
-            onClick = {
-                navController.navigate(DemoNavDestination.ErrorScreenDemo.baseRoute)
-            },
-        )
+        item {
+            OverviewElement(
+                elementName = "Button",
+                onClick = {
+                    navController.navigate(DemoNavDestination.ButtonDemo.baseRoute)
+                },
+            )
+        }
+        item {
+            OverviewElement(
+                elementName = "LoaderButton",
+                onClick = {
+                    navController.navigate(DemoNavDestination.LoaderButtonDemo.baseRoute)
+                },
+            )
+        }
+        item {
+
+            OverviewElement(
+                elementName = "Block",
+                onClick = {
+                    navController.navigate(DemoNavDestination.BlockDemo.baseRoute)
+                },
+            )
+        }
+        item {
+            OverviewElement(
+                elementName = "HeaderBlock",
+                onClick = {
+                    navController.navigate(DemoNavDestination.HeaderBlockDemo.baseRoute)
+                },
+            )
+        }
+        item {
+            OverviewElement(
+                elementName = "Checkbox",
+                onClick = {
+                    navController.navigate(DemoNavDestination.CheckboxDemo.baseRoute)
+                },
+            )
+        }
+        item {
+            OverviewElement(
+                elementName = "Switch",
+                onClick = {
+                    navController.navigate(DemoNavDestination.SwitchDemo.baseRoute)
+                },
+            )
+        }
+        item {
+            OverviewElement(
+                elementName = "AlertDialog",
+                onClick = {
+                    navController.navigate(DemoNavDestination.AlertDialogDemo.baseRoute)
+                },
+            )
+        }
+        item {
+            OverviewElement(
+                elementName = "ErrorScreen",
+                onClick = {
+                    navController.navigate(DemoNavDestination.ErrorScreenDemo.baseRoute)
+                },
+            )
+        }
     }
 }
 
