@@ -1,5 +1,14 @@
 <resources>
-    <string name="app_name">KotlinEnjoyersTemplate</string>
+    <string name="appName">KotlinEnjoyersTemplate</string>
 
     <string name="back">Назад</string>
+    <string name="anErrorOccurred">Произошла ошибка</string>
+    <string name="refresh">Обновить</string>
+
+    <!--  Bottom Navigation  -->
+    <string name="bottomNavName1">Name 1</string>
+    <string name="bottomNavName2">Name 2</string>
+    <string name="bottomNavName3">Name 3</string>
+    <string name="bottomNavName4">Name 4</string>
+    <string name="demo">Demo</string>
 </resources>
