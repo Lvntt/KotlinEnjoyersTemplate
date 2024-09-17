@@ -12,7 +12,6 @@ import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -31,7 +30,7 @@ fun DemoTopAppBar(
         title = {
             Text(
                 text = title,
-                style = HackathonTheme.typography.titles.titleXL,
+                style = HackathonTheme.typography.titles.title2XL,
                 color = HackathonTheme.colors.text.primary.default,
             )
         },
