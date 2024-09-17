@@ -4,6 +4,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
 
 class HackathonTextStyles(
+    val text2XL: TextStyle,
     val textXL: TextStyle,
     val textL: TextStyle,
     val textM: TextStyle,
@@ -12,6 +13,12 @@ class HackathonTextStyles(
 )
 
 fun getHackathonTextStyles() = HackathonTextStyles(
+    text2XL = TextStyle(
+        fontFamily = getRobotoFlex(400),
+        fontSize = 24.sp,
+        lineHeight = 32.sp,
+        letterSpacing = 0.sp,
+    ),
     textXL = TextStyle(
         fontFamily = getRobotoFlex(400),
         fontSize = 21.sp,
