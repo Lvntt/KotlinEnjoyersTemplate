@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -13,12 +15,15 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.kotlinenjoyerstemplate.map.MapScreen
 
 sealed class RootNavDestination(override val baseRoute: String) : NavDestination {
 
-     data object Onboarding : RootNavDestination("Onboarding")
+    data object Onboarding : RootNavDestination("Onboarding")
 
-     data object Home : RootNavDestination("Home")
+    data object Home : RootNavDestination("Home")
+
+    data object Map : RootNavDestination("Map")
 }
 
 @Composable
@@ -47,6 +52,13 @@ fun RootNavigation(
                     ) {
                         Text(text = "To Bottom Navigation")
                     }
+                    Button(
+                        onClick = {
+                            navController.navigate(RootNavDestination.Map.getNavigationRoute())
+                        }
+                    ) {
+                        Text(text = "To Map")
+                    }
                 }
             }
         }
@@ -55,6 +67,11 @@ fun RootNavigation(
                 rootNavController = navController,
                 onCloseApp = onCloseApp,
             )
+        }
+        composable(route = RootNavDestination.Map.getDestination()) {
+            Scaffold { padding ->
+                MapScreen(modifier = Modifier.padding(padding))
+            }
         }
     }
 }
