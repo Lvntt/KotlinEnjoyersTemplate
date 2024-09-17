@@ -12,6 +12,7 @@ activityCompose = "1.9.2"
 composeBom = "2024.09.01"
 mapboxCompose = "11.6.1"
 navigationCompose = "2.8.0"
+mapboxNavigation = "3.4.0-beta.1"
 
 [libraries]
 mapbox = { module = "com.mapbox.maps:android", version.ref = "mapbox" }
@@ -32,6 +33,7 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 mapbox-compose = { module = "com.mapbox.extension:maps-compose", version.ref = "mapboxCompose" }
+mapbox-navigation = { module = "com.mapbox.navigationcore:navigation", version.ref = "mapboxNavigation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

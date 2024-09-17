@@ -70,4 +70,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.mapbox)
     implementation(libs.mapbox.compose)
+    implementation(libs.mapbox.navigation)
 }
