@@ -23,7 +23,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import com.example.kotlinenjoyerstemplate.ui.common.toPainter
 import com.example.kotlinenjoyerstemplate.ui.components.block.model.HackathonBlockLeftPart
 import com.example.kotlinenjoyerstemplate.ui.components.block.model.HackathonBlockMainPart
@@ -53,8 +52,21 @@ fun HackathonBlock(
         leftPart?.let { leftPart ->
             when (leftPart) {
                 is HackathonBlockLeftPart.Icon -> {
+                    val iconModifier = leftPart.onClick?.let {
+                        Modifier.clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = ripple(
+                                bounded = false,
+                                radius = leftPart.sizeDp.dp,
+                            ),
+                            onClick = leftPart.onClick,
+                        )
+                    } ?: Modifier
+
                     Icon(
-                        modifier = Modifier.size(leftPart.sizeDp.dp),
+                        modifier = Modifier
+                            .size(leftPart.sizeDp.dp)
+                            .then(iconModifier),
                         painter = leftPart.source.toPainter(),
                         contentDescription = leftPart.source.contentDescription,
                         tint = leftPart.source.tint ?: HackathonTheme.colors.icons.primary,

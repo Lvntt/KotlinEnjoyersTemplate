@@ -28,6 +28,8 @@ import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 fun PlanDetails(
     model: List<PlanDetailsItem>,
     topBar: PlanDetailsItem.TopBar,
+    onContractClick: (PlanDetailsItem.Contracts.Contract) -> Unit,
+    onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -54,6 +56,7 @@ fun PlanDetails(
                         contentDescription = null,
                     ),
                     sizeDp = 24,
+                    onClick = onBack,
                 ),
                 shape = RoundedCornerShape(
                     bottomStart = 12.dp,
@@ -70,9 +73,6 @@ fun PlanDetails(
                 .padding(paddings),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            item {
-                Spacer(modifier = Modifier.height(12.dp))
-            }
             items(model) { item ->
                 when (item) {
                     is PlanDetailsItem.Header -> {
@@ -97,7 +97,10 @@ fun PlanDetails(
                     }
 
                     is PlanDetailsItem.Contracts -> {
-                        ContractsItem(model = item)
+                        ContractsItem(
+                            model = item,
+                            onContractClick = onContractClick,
+                        )
                     }
 
                     is PlanDetailsItem.GeneralObjectInfo -> {

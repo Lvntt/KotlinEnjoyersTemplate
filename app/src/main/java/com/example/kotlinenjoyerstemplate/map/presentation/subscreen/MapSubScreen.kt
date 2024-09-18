@@ -14,6 +14,8 @@ interface MapSubScreen<State, Event, Effect> {
 
     val viewModel: MapSubScreenViewModel<State, Event, Effect>
 
+    val isPartiallyExpandable: Boolean
+
     fun onMapClick(point: Point) = Unit
 
     @OptIn(ExperimentalMaterial3Api::class)

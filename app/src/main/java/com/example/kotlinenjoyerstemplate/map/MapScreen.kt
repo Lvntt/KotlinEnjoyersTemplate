@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.MapSubScreenStore
@@ -50,7 +51,7 @@ fun MapScreen(
     val context = LocalContext.current
     val sheetState = rememberBottomSheetScaffoldState(
         bottomSheetState = SheetState(
-            skipPartiallyExpanded = true,
+            skipPartiallyExpanded = !currentSubScreen.isPartiallyExpandable,
             density
         )
     )
@@ -65,6 +66,7 @@ fun MapScreen(
         },
         scaffoldState = sheetState,
         sheetContainerColor = HackathonTheme.colors.background.grey,
+        sheetPeekHeight = 250.dp,
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             MapboxMap(

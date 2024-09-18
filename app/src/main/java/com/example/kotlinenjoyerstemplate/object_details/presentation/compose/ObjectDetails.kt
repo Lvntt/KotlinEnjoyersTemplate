@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -19,6 +18,7 @@ import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 @Composable
 fun ObjectDetails(
     model: List<ObjectDetailsItem>,
+    onPlanClick: (ObjectDetailsItem.Plans.Plan) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -50,7 +50,10 @@ fun ObjectDetails(
                 }
 
                 is ObjectDetailsItem.Plans -> {
-                    PlansItem(model = item)
+                    PlansItem(
+                        model = item,
+                        onPlanClick = onPlanClick,
+                    )
                 }
             }
         }

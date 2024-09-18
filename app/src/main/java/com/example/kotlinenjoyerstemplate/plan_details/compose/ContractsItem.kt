@@ -19,6 +19,7 @@ import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 @Composable
 fun ContractsItem(
     model: PlanDetailsItem.Contracts,
+    onContractClick: (PlanDetailsItem.Contracts.Contract) -> Unit,
     modifier: Modifier = Modifier,
 ) = FrameRounded(
     modifier = modifier,
@@ -51,7 +52,7 @@ fun ContractsItem(
                         contentDescription = null,
                     ),
                     sizeDp = 24,
-                    onClick = { /* TODO */ },
+                    onClick = { onContractClick(contract) },
                 ),
                 isFillMaxWidth = true,
                 innerPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),

@@ -66,6 +66,8 @@ class MapZoneCreationSubScreen(
         ),
     )
 
+    override val isPartiallyExpandable: Boolean = false
+
     override fun onMapClick(point: Point) {
         viewModel.onEvent(MapZoneCreationEvent.PointAdded(point))
     }

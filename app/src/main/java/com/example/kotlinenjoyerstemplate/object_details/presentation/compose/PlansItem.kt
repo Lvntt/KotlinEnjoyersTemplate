@@ -3,7 +3,6 @@ package com.example.kotlinenjoyerstemplate.object_details.presentation.compose
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -21,6 +20,7 @@ import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 @Composable
 fun PlansItem(
     model: ObjectDetailsItem.Plans,
+    onPlanClick: (ObjectDetailsItem.Plans.Plan) -> Unit,
     modifier: Modifier = Modifier,
 ) = FrameRounded(
     modifier = modifier,
@@ -57,7 +57,7 @@ fun PlansItem(
                         contentDescription = null,
                     ),
                     sizeDp = 24,
-                    onClick = { /* TODO */ },
+                    onClick = { onPlanClick(plan) },
                 ),
                 isFillMaxWidth = true,
                 innerPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),

@@ -28,6 +28,7 @@ fun ContractDetails(
     topBar: ObjectContractItem.TopBar,
     model: List<ObjectContractItem>,
     onStageButtonClick: (ObjectContractItem.Stages.Stage) -> Unit,
+    onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -49,6 +50,7 @@ fun ContractDetails(
                         contentDescription = null,
                     ),
                     sizeDp = 24,
+                    onClick = onBack,
                 ),
                 shape = RoundedCornerShape(
                     bottomStart = 12.dp,
@@ -65,9 +67,6 @@ fun ContractDetails(
                 .padding(paddings),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            item {
-                Spacer(modifier = Modifier.height(12.dp))
-            }
             items(model) { item ->
                 when (item) {
                     is ObjectContractItem.Header -> {
