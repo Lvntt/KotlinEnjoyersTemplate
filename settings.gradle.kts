@@ -1,3 +1,5 @@
+import java.util.Properties
+
 pluginManagement {
     repositories {
         google {
@@ -16,6 +18,14 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://api.mapbox.com/downloads/v2/releases/maven")
+            val properties = Properties()
+            properties.load(File(rootProject.projectDir, "local.properties").inputStream())
+            credentials.username = "mapbox"
+            credentials.password = properties.getProperty("mapbox.downloads.token", "")
+            authentication.create<BasicAuthentication>("basic")
+        }
     }
 }
 

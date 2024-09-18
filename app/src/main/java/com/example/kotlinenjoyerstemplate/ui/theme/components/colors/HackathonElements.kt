@@ -9,6 +9,7 @@ class HackathonElements(
     val lightGray: Color,
     val darkGray: Color,
     val blueGray: Color,
+    val mapYellow: Color,
     val link: Color,
 )
 
@@ -18,4 +19,5 @@ fun getHackathonElements() = HackathonElements(
     darkGray = colorResource(id = R.color.colorsElementsDarkGray),
     blueGray = colorResource(id = R.color.colorsElementsDarkGray),
     link = colorResource(id = R.color.colorsElementsLink),
+    mapYellow = colorResource(id = R.color.colorsElementsMapYellow),
 )

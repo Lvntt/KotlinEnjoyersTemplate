@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.navigation.BottomSheetNavigator
 import androidx.compose.material.navigation.ModalBottomSheetLayout
 import androidx.compose.material.navigation.bottomSheet
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -37,10 +39,14 @@ import org.koin.core.component.getScopeId
 
 sealed class RootNavDestination(override val baseRoute: String) : NavDestination {
 
+    data object Onboarding : RootNavDestination("Onboarding")
     data object MapScreen : RootNavDestination("MapScreen")
 
     data object ContractDetailsScreen : RootNavDestination("ContractDetailsScreen")
 
+    data object Home : RootNavDestination("Home")
+
+    data object Map : RootNavDestination("Map")
     data object ObjectDetailsScreen : RootNavDestination("ObjectDetailsScreen")
 
     data object PlanDetailsScreen : RootNavDestination("PlanDetailsScreen")
@@ -86,6 +92,13 @@ fun RootNavigation(
                         ) {
                             Text(text = "Open Bottom Sheet")
                         }
+                    }
+                    Button(
+                        onClick = {
+                            navController.navigate(RootNavDestination.Map.getNavigationRoute())
+                        }
+                    ) {
+                        Text(text = "To Map")
                     }
                 }
             }
@@ -341,6 +354,9 @@ fun RootNavigation(
                     )
                 }
             }
+        }
+        composable(route = RootNavDestination.Map.getDestination()) {
+            MapScreen(navController = navController)
         }
     }
 }
