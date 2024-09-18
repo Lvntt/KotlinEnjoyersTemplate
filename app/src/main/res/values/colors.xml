@@ -17,6 +17,7 @@
     <color name="colorsElementsLightGray">#C1C1C1</color>
     <color name="colorsElementsDarkGray">#888888</color>
     <color name="colorsElementsBlueGray">#47495B</color>
+    <color name="colorsElementsLink">#476CEE</color>
 
     <!--  Common  -->
     <color name="colorsCommonAccent">#34A853</color>

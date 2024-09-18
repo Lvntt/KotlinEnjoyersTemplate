@@ -54,6 +54,7 @@ fun HackathonBlock(
                         modifier = Modifier.size(leftPart.sizeDp.dp),
                         painter = leftPart.source.toPainter(),
                         contentDescription = leftPart.source.contentDescription,
+                        tint = leftPart.source.tint ?: HackathonTheme.colors.icons.primary,
                     )
                 }
                 is HackathonBlockLeftPart.Image -> {
