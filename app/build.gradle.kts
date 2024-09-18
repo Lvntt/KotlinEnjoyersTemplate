@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.retrofit)
     implementation(libs.logging.interceptor)
+    implementation(libs.androidx.material.navigation)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

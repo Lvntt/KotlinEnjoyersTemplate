@@ -20,8 +20,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.example.kotlinenjoyerstemplate.ui.common.toPainter
 import com.example.kotlinenjoyerstemplate.ui.components.block.model.HackathonBlockLeftPart
 import com.example.kotlinenjoyerstemplate.ui.components.block.model.HackathonBlockMainPart
@@ -37,12 +39,13 @@ fun HackathonBlock(
     partsSpacedByDp: Int = 10,
     shape: Shape = RoundedCornerShape(12.dp),
     isFillMaxWidth: Boolean = false,
+    backgroundColor: Color = HackathonTheme.colors.common.staticWhite,
     innerPadding: PaddingValues = PaddingValues(horizontal = 16.dp, vertical = 12.dp)
 ) = Box(modifier = modifier) {
     Row(
         modifier = Modifier
             .clip(shape)
-            .background(HackathonTheme.colors.common.staticWhite)
+            .background(backgroundColor)
             .padding(innerPadding),
         horizontalArrangement = Arrangement.spacedBy(partsSpacedByDp.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -54,6 +57,7 @@ fun HackathonBlock(
                         modifier = Modifier.size(leftPart.sizeDp.dp),
                         painter = leftPart.source.toPainter(),
                         contentDescription = leftPart.source.contentDescription,
+                        tint = leftPart.source.tint ?: HackathonTheme.colors.icons.primary,
                     )
                 }
                 is HackathonBlockLeftPart.Image -> {

@@ -17,6 +17,7 @@
     <color name="colorsElementsLightGray">#C1C1C1</color>
     <color name="colorsElementsDarkGray">#888888</color>
     <color name="colorsElementsBlueGray">#47495B</color>
+    <color name="colorsElementsLink">#476CEE</color>
 
     <!--  Common  -->
     <color name="colorsCommonAccent">#34A853</color>
@@ -25,5 +26,11 @@
 
     <!--  Status  -->
     <color name="colorsStatusSuccess">#64CF62</color>
+    <color name="colorsStatusPlanned">#3FACFC</color>
+    <color name="colorsStatusPaused">#FCC73F</color>
+    <color name="colorsStatusResumed">#FCC73F</color>
+    <color name="colorsStatusInProcess">#FCC73F</color>
+    <color name="colorsStatusCompleted">#64CF62</color>
+    <color name="colorsStatusCancelled">#FC8E3F</color>
 
 </resources>
