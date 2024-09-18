@@ -81,6 +81,7 @@ class MapObjectZonesSubScreen(private val store: MapSubScreenStore) :
                 is MapObjectZonesEffect.NavigateToZoneCreation -> store.navigateWithParams<MapZoneCreationSubScreen>(
                     effect.type
                 )
+                MapObjectZonesEffect.NavigateBack -> store.navigateBack()
             }
         }
     }

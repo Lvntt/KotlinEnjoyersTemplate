@@ -10,4 +10,6 @@ sealed interface MapObjectZonesEffect {
 
     data class NavigateToZoneCreation(val type: ZoneCreationMode) : MapObjectZonesEffect
 
+    data object NavigateBack : MapObjectZonesEffect
+
 }

@@ -40,8 +40,8 @@ fun MapScreen(
     val currentSubScreen by subScreenStore.currentScreen.collectAsStateWithLifecycle()
     val viewPortState = rememberMapViewportState {
         setCameraOptions {
-            zoom(2.0)
-            center(Point.fromLngLat(-98.0, 39.5))
+            zoom(10.0)
+            center(Point.fromLngLat(37.618423, 55.751244))
             pitch(45.0)
             bearing(0.0)
         }

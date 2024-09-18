@@ -30,13 +30,12 @@ class MapObjectZonesViewModel :
     override fun onEvent(event: MapObjectZonesEvent) {
         when (event) {
             MapObjectZonesEvent.CancelClicked -> {
-                //navigate to main
+                _effects.tryEmit(MapObjectZonesEffect.NavigateBack)
             }
             MapObjectZonesEvent.ContinueClicked -> {
                 //navigate to next
             }
             is MapObjectZonesEvent.CreateZoneClicked -> {
-                //navigate to zone creation
                 _effects.tryEmit(MapObjectZonesEffect.CloseBottomSheet)
                 _effects.tryEmit(MapObjectZonesEffect.NavigateToZoneCreation(event.mode))
             }
