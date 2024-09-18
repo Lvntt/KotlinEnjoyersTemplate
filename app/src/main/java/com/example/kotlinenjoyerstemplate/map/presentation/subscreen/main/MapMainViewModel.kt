@@ -23,6 +23,10 @@ class MapMainViewModel : MapSubScreenViewModel<MapMainState, MapMainEvent, MapMa
             MapMainEvent.AddNewObjectClicked -> {
                 _effects.tryEmit(MapMainEffect.NavigateToNewObject)
             }
+
+            is MapMainEvent.ObjectClicked -> {
+                _effects.tryEmit(MapMainEffect.OpenBottomSheet)
+            }
         }
     }
 

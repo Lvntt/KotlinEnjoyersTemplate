@@ -4,4 +4,6 @@ sealed interface MapMainEvent {
 
     data object AddNewObjectClicked : MapMainEvent
 
+    data class ObjectClicked(val id: String) : MapMainEvent
+
 }
