@@ -1,4 +1,4 @@
-package com.example.kotlinenjoyerstemplate.map
+package com.example.kotlinenjoyerstemplate.map.presentation.subscreen.zonecreation
 
 import com.mapbox.geojson.Point
 

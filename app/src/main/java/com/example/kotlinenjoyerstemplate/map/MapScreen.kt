@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -46,6 +47,7 @@ fun MapScreen(
         }
     }
     val density = LocalDensity.current
+    val context = LocalContext.current
     val sheetState = rememberBottomSheetScaffoldState(
         bottomSheetState = SheetState(
             skipPartiallyExpanded = true,
@@ -54,7 +56,7 @@ fun MapScreen(
     )
 
     LaunchedEffect(currentSubScreen, sheetState) {
-        currentSubScreen.handleEffects(sheetState)
+        currentSubScreen.handleEffects(sheetState, context)
     }
 
     BottomSheetScaffold(

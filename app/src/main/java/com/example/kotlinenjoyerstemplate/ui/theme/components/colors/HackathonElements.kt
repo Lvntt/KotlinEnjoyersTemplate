@@ -9,6 +9,7 @@ class HackathonElements(
     val lightGray: Color,
     val darkGray: Color,
     val blueGray: Color,
+    val mapYellow: Color,
 )
 
 @Composable
@@ -16,4 +17,5 @@ fun getHackathonElements() = HackathonElements(
     lightGray = colorResource(id = R.color.colorsElementsLightGray),
     darkGray = colorResource(id = R.color.colorsElementsDarkGray),
     blueGray = colorResource(id = R.color.colorsElementsDarkGray),
+    mapYellow = colorResource(id = R.color.colorsElementsMapYellow),
 )

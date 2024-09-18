@@ -12,4 +12,10 @@ sealed interface MapObjectZonesEvent {
 
     data object CancelClicked : MapObjectZonesEvent
 
+    data class ZoneActionsClicked(val zoneIndex: Int) : MapObjectZonesEvent
+
+    data object ZoneActionsDismissed : MapObjectZonesEvent
+
+    data object ZoneDeleteClicked : MapObjectZonesEvent
+
 }

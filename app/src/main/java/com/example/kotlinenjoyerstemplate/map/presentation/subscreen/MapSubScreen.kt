@@ -1,5 +1,6 @@
 package com.example.kotlinenjoyerstemplate.map.presentation.subscreen
 
+import android.content.Context
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.material3.BottomSheetScaffoldState
@@ -16,7 +17,7 @@ interface MapSubScreen<State, Event, Effect> {
     fun onMapClick(point: Point) = Unit
 
     @OptIn(ExperimentalMaterial3Api::class)
-    suspend fun handleEffects(sheetState: BottomSheetScaffoldState) = Unit
+    suspend fun handleEffects(sheetState: BottomSheetScaffoldState, context: Context) = Unit
 
     @Composable
     fun ColumnScope.BottomSheetContent() = Unit

@@ -1,5 +1,6 @@
 package com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones
 
+import com.example.kotlinenjoyerstemplate.map.presentation.model.zone.Zone
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.MapSubScreenViewModel
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones.model.MapObjectZonesEffect
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones.model.MapObjectZonesEvent
@@ -18,7 +19,13 @@ class MapObjectZonesViewModel :
     private val _effects = MutableSharedFlow<MapObjectZonesEffect>(extraBufferCapacity = 2)
     override val effects = _effects.asSharedFlow()
 
-    override fun acceptNavigationParams(params: Any) {}
+    override fun acceptNavigationParams(params: Any) {
+        if (params is Zone) {
+            _state.update { state -> state.copy(zones = state.zones + params) }
+        } else {
+            _state.update { state -> state.copy(zones = emptyList()) }
+        }
+    }
 
     override fun onEvent(event: MapObjectZonesEvent) {
         when (event) {
@@ -36,6 +43,24 @@ class MapObjectZonesViewModel :
             is MapObjectZonesEvent.MenuOpenClicked -> {
                 _state.update { state -> state.copy(currentZoneMenuType = event.menuType) }
                 _effects.tryEmit(MapObjectZonesEffect.OpenBottomSheet)
+            }
+
+            is MapObjectZonesEvent.ZoneActionsClicked -> {
+                _state.update { state -> state.copy(actionPromptZoneIndex = event.zoneIndex) }
+            }
+            MapObjectZonesEvent.ZoneDeleteClicked -> {
+                _state.value.actionPromptZoneIndex?.let { index ->
+                    _state.update { state ->
+                        state.copy(
+                            zones = state.zones.filterIndexed { i, _ -> i != index },
+                            actionPromptZoneIndex = null
+                        )
+                    }
+                }
+            }
+
+            MapObjectZonesEvent.ZoneActionsDismissed -> {
+                _state.update { state -> state.copy(actionPromptZoneIndex = null) }
             }
         }
     }

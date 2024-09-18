@@ -1,15 +1,17 @@
 package com.example.kotlinenjoyerstemplate.map.presentation.subscreen
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones.MapObjectZonesSubScreen
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.zonecreation.MapZoneCreationSubScreen
+import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.zonecreation.MapZoneCreationViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class MapSubScreenStore : ViewModel() {
 
     val screens = listOf(
         MapObjectZonesSubScreen(this),
-        MapZoneCreationSubScreen(this)
+        MapZoneCreationSubScreen(this, MapZoneCreationViewModel(viewModelScope))
     )
 
     val currentScreen = MutableStateFlow<MapSubScreen<*, *, *>>(screens.first())
@@ -27,6 +29,15 @@ class MapSubScreenStore : ViewModel() {
         if (backStack.size == 1) return false
         backStack.removeLast()
         currentScreen.value = backStack.last()
+        return true
+    }
+
+    fun navigateBackWithParams(params: Any) : Boolean {
+        if (backStack.size == 1) return false
+        backStack.removeLast()
+        val screen = backStack.last()
+        screen.viewModel.acceptNavigationParams(params)
+        currentScreen.value = screen
         return true
     }
 }

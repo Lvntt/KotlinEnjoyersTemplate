@@ -1,5 +1,6 @@
 package com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.kotlinenjoyerstemplate.R
+import com.example.kotlinenjoyerstemplate.map.presentation.model.zone.ZoneRenderMode
 import com.example.kotlinenjoyerstemplate.map.presentation.model.zone.creation.ZoneCreationMode
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.MapSubScreen
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.MapSubScreenStore
@@ -24,11 +26,15 @@ import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones.model.MapObjectZonesMenuType
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones.model.MapObjectZonesState
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.zonecreation.MapZoneCreationSubScreen
+import com.example.kotlinenjoyerstemplate.ui.components.alert_dialog.HackathonAlertDialog
+import com.example.kotlinenjoyerstemplate.ui.components.alert_dialog.model.HackathonAlertDialogButton
 import com.example.kotlinenjoyerstemplate.ui.components.button.HackathonButton
 import com.example.kotlinenjoyerstemplate.ui.components.button.hackathonButtonColors
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 import com.mapbox.maps.extension.compose.MapboxMapComposable
 import com.mapbox.maps.extension.compose.MapboxMapScope
+import com.mapbox.maps.extension.compose.annotation.generated.PolygonAnnotation
+import com.mapbox.maps.extension.compose.annotation.generated.PolylineAnnotation
 
 class MapObjectZonesSubScreen(private val store: MapSubScreenStore) :
     MapSubScreen<MapObjectZonesState, MapObjectZonesEvent, MapObjectZonesEffect> {
@@ -67,7 +73,7 @@ class MapObjectZonesSubScreen(private val store: MapSubScreenStore) :
     )
 
     @OptIn(ExperimentalMaterial3Api::class)
-    override suspend fun handleEffects(sheetState: BottomSheetScaffoldState) {
+    override suspend fun handleEffects(sheetState: BottomSheetScaffoldState, context: Context) {
         viewModel.effects.collect { effect ->
             when (effect) {
                 MapObjectZonesEffect.CloseBottomSheet -> sheetState.bottomSheetState.hide()
@@ -81,6 +87,23 @@ class MapObjectZonesSubScreen(private val store: MapSubScreenStore) :
 
     @Composable
     override fun BoxScope.MapControlsContent() {
+        val state by viewModel.state.collectAsStateWithLifecycle()
+        state.actionPromptZoneIndex?.let { _ ->
+            HackathonAlertDialog(
+                title = "Выберите действие",
+                description = "Что вы хотите сделать с зоной?",
+                confirmButton = HackathonAlertDialogButton(
+                    text = "Удалить",
+                    onClick = { viewModel.onEvent(MapObjectZonesEvent.ZoneDeleteClicked) },
+                ),
+                dismissButton = HackathonAlertDialogButton(
+                    text = "Отмена",
+                    onClick = { viewModel.onEvent(MapObjectZonesEvent.ZoneActionsDismissed) },
+                ),
+                onDismissRequest = { viewModel.onEvent(MapObjectZonesEvent.ZoneActionsDismissed) },
+            )
+        }
+
         Column(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
@@ -114,6 +137,37 @@ class MapObjectZonesSubScreen(private val store: MapSubScreenStore) :
     @Composable
     @MapboxMapComposable
     override fun MapboxMapScope.MapContent() {
+        val state by viewModel.state.collectAsStateWithLifecycle()
+        val yellow = HackathonTheme.colors.elements.mapYellow
+        val darkGray = HackathonTheme.colors.elements.darkGray
+
+        state.zones.forEachIndexed { index, zone ->
+            when (zone.renderMode) {
+                ZoneRenderMode.POLYLINE -> PolylineAnnotation(
+                    points = zone.points,
+                    onClick = {
+                        viewModel.onEvent(MapObjectZonesEvent.ZoneActionsClicked(index))
+                        true
+                    },
+                ) {
+                    lineColor = yellow
+                    lineWidth = 5.0
+                    lineBorderWidth = 1.0
+                    lineBorderColor = darkGray
+                }
+
+                ZoneRenderMode.POLYGON -> PolygonAnnotation(
+                    points = listOf(zone.points),
+                    onClick = {
+                        viewModel.onEvent(MapObjectZonesEvent.ZoneActionsClicked(index))
+                        true
+                    },
+                ) {
+                    fillColor = yellow
+                    fillOutlineColor = darkGray
+                }
+            }
+        }
     }
 
     @Composable
