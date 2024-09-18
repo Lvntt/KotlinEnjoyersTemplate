@@ -1,4 +1,4 @@
-package com.example.kotlinenjoyerstemplate.object_info.presentation.compose
+package com.example.kotlinenjoyerstemplate.object_plan.presentation.compose
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,7 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.kotlinenjoyerstemplate.object_info.presentation.model.ObjectPlanDetailsItem
+import com.example.kotlinenjoyerstemplate.object_plan.presentation.model.ObjectPlanDetailsItem
 import com.example.kotlinenjoyerstemplate.ui.components.header_block.HackathonHeaderBlock
 import com.example.kotlinenjoyerstemplate.ui.components.header_block.model.HackathonHeaderBlockMainPart
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
@@ -19,7 +19,7 @@ import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 fun ObjectPlanDetails(
     model: List<ObjectPlanDetailsItem>,
     // TODO from viewModel
-    onStageButtonClick: (ObjectPlanDetailsItem. Stages. Stage) -> Unit,
+    onStageButtonClick: (ObjectPlanDetailsItem.Stages.Stage) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(

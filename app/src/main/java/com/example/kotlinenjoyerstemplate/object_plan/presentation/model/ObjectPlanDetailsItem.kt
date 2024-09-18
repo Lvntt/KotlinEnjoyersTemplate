@@ -1,4 +1,4 @@
-package com.example.kotlinenjoyerstemplate.object_info.presentation.model
+package com.example.kotlinenjoyerstemplate.object_plan.presentation.model
 
 sealed interface ObjectPlanDetailsItem {
 

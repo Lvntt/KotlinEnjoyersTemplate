@@ -1,4 +1,4 @@
-package com.example.kotlinenjoyerstemplate.object_info.presentation.compose
+package com.example.kotlinenjoyerstemplate.object_plan.presentation.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.kotlinenjoyerstemplate.R
-import com.example.kotlinenjoyerstemplate.object_info.presentation.model.ObjectPlanDetailsItem
+import com.example.kotlinenjoyerstemplate.object_plan.presentation.model.ObjectPlanDetailsItem
 import com.example.kotlinenjoyerstemplate.ui.common.FrameRounded
 import com.example.kotlinenjoyerstemplate.ui.common.ImageSource
 import com.example.kotlinenjoyerstemplate.ui.components.block.HackathonBlock

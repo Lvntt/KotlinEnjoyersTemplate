@@ -1,4 +1,4 @@
-package com.example.kotlinenjoyerstemplate.object_info.presentation.compose
+package com.example.kotlinenjoyerstemplate.object_plan.presentation.compose
 
 import android.app.DownloadManager
 import android.content.Context
@@ -36,7 +36,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.kotlinenjoyerstemplate.R
-import com.example.kotlinenjoyerstemplate.object_info.presentation.model.ObjectPlanDetailsItem
+import com.example.kotlinenjoyerstemplate.object_plan.presentation.model.ObjectPlanDetailsItem
 import com.example.kotlinenjoyerstemplate.ui.common.FrameRounded
 import com.example.kotlinenjoyerstemplate.ui.common.ImageSource
 import com.example.kotlinenjoyerstemplate.ui.components.block.HackathonBlock
