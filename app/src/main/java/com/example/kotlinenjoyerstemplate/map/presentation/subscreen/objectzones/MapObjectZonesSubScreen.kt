@@ -5,13 +5,16 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.kotlinenjoyerstemplate.R
@@ -30,6 +33,7 @@ import com.example.kotlinenjoyerstemplate.ui.components.alert_dialog.HackathonAl
 import com.example.kotlinenjoyerstemplate.ui.components.alert_dialog.model.HackathonAlertDialogButton
 import com.example.kotlinenjoyerstemplate.ui.components.button.HackathonButton
 import com.example.kotlinenjoyerstemplate.ui.components.button.hackathonButtonColors
+import com.example.kotlinenjoyerstemplate.ui.components.button.model.HackathonButtonIcon
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 import com.mapbox.maps.extension.compose.MapboxMapComposable
 import com.mapbox.maps.extension.compose.MapboxMapScope
@@ -108,29 +112,44 @@ class MapObjectZonesSubScreen(private val store: MapSubScreenStore) :
         Column(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(8.dp),
+                .padding(8.dp)
+                .navigationBarsPadding(),
             horizontalAlignment = Alignment.End,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            HackathonButton.S(
+            HackathonButton.M(
                 onClick = {
                     viewModel.onEvent(MapObjectZonesEvent.MenuOpenClicked(MapObjectZonesMenuType.NEW_ZONE))
                 },
                 text = "Добавить зону",
+                modifier = Modifier.shadow(2.dp, shape = RoundedCornerShape(12.dp)),
                 buttonColors = hackathonButtonColors(
-                    containerColor = HackathonTheme.colors.common.accent,
-                    contentColor = HackathonTheme.colors.common.staticWhite,
+                    containerColor = HackathonTheme.colors.common.staticWhite,
+                    contentColor = HackathonTheme.colors.common.staticBlack,
                 ),
+                icon = HackathonButtonIcon(
+                    resId = R.drawable.ic_add_icon_24dp,
+                    sizeDp = 24,
+                    tintColor = HackathonTheme.colors.icons.primary,
+                ),
+                shape = RoundedCornerShape(12.dp),
             )
-            HackathonButton.S(
+            HackathonButton.M(
                 onClick = {
                     viewModel.onEvent(MapObjectZonesEvent.MenuOpenClicked(MapObjectZonesMenuType.GENERAL))
                 },
                 text = "Меню",
+                modifier = Modifier.shadow(2.dp, shape = RoundedCornerShape(12.dp)),
                 buttonColors = hackathonButtonColors(
-                    containerColor = HackathonTheme.colors.common.accent,
-                    contentColor = HackathonTheme.colors.common.staticWhite,
+                    containerColor = HackathonTheme.colors.common.staticWhite,
+                    contentColor = HackathonTheme.colors.common.staticBlack,
                 ),
+                icon = HackathonButtonIcon(
+                    resId = R.drawable.ic_menu_24dp,
+                    sizeDp = 24,
+                    tintColor = HackathonTheme.colors.icons.primary,
+                ),
+                shape = RoundedCornerShape(12.dp),
             )
         }
     }

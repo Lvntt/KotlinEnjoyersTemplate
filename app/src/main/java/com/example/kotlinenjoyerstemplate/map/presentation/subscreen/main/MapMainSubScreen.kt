@@ -7,13 +7,18 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
+import com.example.kotlinenjoyerstemplate.R
 import com.example.kotlinenjoyerstemplate.common.StatusWorkEnum
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.MapSubScreen
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.MapSubScreenStore
@@ -26,6 +31,7 @@ import com.example.kotlinenjoyerstemplate.object_details.presentation.compose.Ob
 import com.example.kotlinenjoyerstemplate.object_details.presentation.model.ObjectDetailsItem
 import com.example.kotlinenjoyerstemplate.ui.components.button.HackathonButton
 import com.example.kotlinenjoyerstemplate.ui.components.button.hackathonButtonColors
+import com.example.kotlinenjoyerstemplate.ui.components.button.model.HackathonButtonIcon
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 
 class MapMainSubScreen(private val store: MapSubScreenStore) :
@@ -47,7 +53,8 @@ class MapMainSubScreen(private val store: MapSubScreenStore) :
     override fun BoxScope.MapControlsContent() {
         Box(modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .statusBarsPadding(),
             contentAlignment = Alignment.TopCenter) {
             SearchTextField(
                 text = "",
@@ -57,19 +64,27 @@ class MapMainSubScreen(private val store: MapSubScreenStore) :
         Column(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(8.dp),
+                .padding(8.dp)
+                .navigationBarsPadding(),
             horizontalAlignment = Alignment.End,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            HackathonButton.S(
+            HackathonButton.M(
                 onClick = {
                     viewModel.onEvent(MapMainEvent.AddNewObjectClicked)
                 },
                 text = "Добавить объект",
+                modifier = Modifier.shadow(2.dp, shape = RoundedCornerShape(12.dp)),
                 buttonColors = hackathonButtonColors(
-                    containerColor = HackathonTheme.colors.common.accent,
-                    contentColor = HackathonTheme.colors.common.staticWhite,
+                    containerColor = HackathonTheme.colors.common.staticWhite,
+                    contentColor = HackathonTheme.colors.common.staticBlack,
                 ),
+                icon = HackathonButtonIcon(
+                    resId = R.drawable.ic_add_icon_24dp,
+                    sizeDp = 24,
+                    tintColor = HackathonTheme.colors.icons.primary,
+                ),
+                shape = RoundedCornerShape(12.dp),
             )
             HackathonButton.S(
                 onClick = {
