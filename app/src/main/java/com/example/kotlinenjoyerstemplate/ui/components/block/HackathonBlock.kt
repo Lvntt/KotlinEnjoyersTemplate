@@ -20,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import com.example.kotlinenjoyerstemplate.ui.common.toPainter
@@ -37,12 +38,13 @@ fun HackathonBlock(
     partsSpacedByDp: Int = 10,
     shape: Shape = RoundedCornerShape(12.dp),
     isFillMaxWidth: Boolean = false,
+    backgroundColor: Color = HackathonTheme.colors.common.staticWhite,
     innerPadding: PaddingValues = PaddingValues(horizontal = 16.dp, vertical = 12.dp)
 ) = Box(modifier = modifier) {
     Row(
         modifier = Modifier
             .clip(shape)
-            .background(HackathonTheme.colors.common.staticWhite)
+            .background(backgroundColor)
             .padding(innerPadding),
         horizontalArrangement = Arrangement.spacedBy(partsSpacedByDp.dp),
         verticalAlignment = Alignment.CenterVertically,

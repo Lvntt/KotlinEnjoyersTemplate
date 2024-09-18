@@ -26,5 +26,11 @@
 
     <!--  Status  -->
     <color name="colorsStatusSuccess">#64CF62</color>
+    <color name="colorsStatusPlanned">#3FACFC</color>
+    <color name="colorsStatusPaused">#FCC73F</color>
+    <color name="colorsStatusResumed">#FCC73F</color>
+    <color name="colorsStatusInProcess">#FCC73F</color>
+    <color name="colorsStatusCompleted">#64CF62</color>
+    <color name="colorsStatusCancelled">#FC8E3F</color>
 
 </resources>

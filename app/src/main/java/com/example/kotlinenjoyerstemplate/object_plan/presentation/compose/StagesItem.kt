@@ -36,7 +36,8 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.kotlinenjoyerstemplate.R
-import com.example.kotlinenjoyerstemplate.object_plan.presentation.model.ObjectPlanDetailsItem
+import com.example.kotlinenjoyerstemplate.common.StatusWorkEnum
+import com.example.kotlinenjoyerstemplate.object_plan.presentation.model.ObjectContractItem
 import com.example.kotlinenjoyerstemplate.ui.common.FrameRounded
 import com.example.kotlinenjoyerstemplate.ui.common.ImageSource
 import com.example.kotlinenjoyerstemplate.ui.components.block.HackathonBlock
@@ -47,8 +48,8 @@ import java.util.UUID
 
 @Composable
 fun StagesItem(
-    model: ObjectPlanDetailsItem.Stages,
-    onStageButtonClick: (ObjectPlanDetailsItem.Stages.Stage) -> Unit,
+    model: ObjectContractItem.Stages,
+    onStageButtonClick: (ObjectContractItem.Stages.Stage) -> Unit,
     modifier: Modifier = Modifier,
 ) = FrameRounded(
     modifier = modifier,
@@ -78,6 +79,63 @@ fun StagesItem(
             modifier = Modifier.padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
+            HackathonBlock(
+                mainPart = HackathonBlockMainPart(
+                    title = HackathonBlockMainPart.Text(
+                        text = model.chosenStage.subExecutorName,
+                    ),
+                    subtitle = HackathonBlockMainPart.Text(
+                        text = "Субподрядчик",
+                    ),
+                ),
+                leftPart = HackathonBlockLeftPart.Icon(
+                    source = ImageSource.FromResource(
+                        resId = R.drawable.ic_build_24dp,
+                        contentDescription = null,
+                        tint = HackathonTheme.colors.icons.secondary,
+                    ),
+                    sizeDp = 24,
+                ),
+                innerPadding = PaddingValues(vertical = 12.dp),
+            )
+            HackathonBlock(
+                mainPart = HackathonBlockMainPart(
+                    title = HackathonBlockMainPart.Text(
+                        text = model.chosenStage.subExecutorPhone,
+                    ),
+                    subtitle = HackathonBlockMainPart.Text(
+                        text = "Телефон субподрядчика",
+                    ),
+                ),
+                leftPart = HackathonBlockLeftPart.Icon(
+                    source = ImageSource.FromResource(
+                        resId = R.drawable.ic_call_24dp,
+                        contentDescription = null,
+                        tint = HackathonTheme.colors.icons.secondary,
+                    ),
+                    sizeDp = 24,
+                ),
+                innerPadding = PaddingValues(vertical = 12.dp),
+            )
+            HackathonBlock(
+                mainPart = HackathonBlockMainPart(
+                    title = HackathonBlockMainPart.Text(
+                        text = model.chosenStage.subExecutorAddress,
+                    ),
+                    subtitle = HackathonBlockMainPart.Text(
+                        text = "Адрес субподрядчика",
+                    ),
+                ),
+                leftPart = HackathonBlockLeftPart.Icon(
+                    source = ImageSource.FromResource(
+                        resId = R.drawable.ic_home_24dp,
+                        contentDescription = null,
+                        tint = HackathonTheme.colors.icons.secondary,
+                    ),
+                    sizeDp = 24,
+                ),
+                innerPadding = PaddingValues(vertical = 12.dp),
+            )
             HackathonBlock(
                 mainPart = HackathonBlockMainPart(
                     title = HackathonBlockMainPart.Text(
@@ -194,9 +252,9 @@ fun StagesItem(
 
 @Composable
 private fun StageButton(
-    model: ObjectPlanDetailsItem.Stages.Stage,
+    model: ObjectContractItem.Stages.Stage,
     isChosen: Boolean,
-    onClick: (ObjectPlanDetailsItem.Stages.Stage) -> Unit,
+    onClick: (ObjectContractItem.Stages.Stage) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val buttonColor = if (isChosen) {
@@ -234,7 +292,7 @@ private fun StageButton(
             color = nameColor,
         )
         Text(
-            text = model.status,
+            text = model.status.text,
             style = HackathonTheme.typography.texts.textS,
             color = statusColor,
         )
@@ -260,60 +318,69 @@ fun tryDownloadDocument(url: String, context: Context, fileName: String) {
 @Composable
 private fun StagesItemPreview() = HackathonTheme {
     val stages = listOf(
-        ObjectPlanDetailsItem.Stages.Stage(
+        ObjectContractItem.Stages.Stage(
             name = "Планирование",
-            status = "Выполнен",
+            status = StatusWorkEnum.COMPLETED,
             plannedStartDate = "10 июля 2019",
             plannedEndDate = "1 октября 2019",
             actualStartDate = "17 июля 2019",
             actualEndDate = "1 октября 2019",
+            subExecutorName = "ООО «Спектр»",
+            subExecutorPhone = "+7 (934) 587-65-09",
+            subExecutorAddress = "г. Москва, ул. Пушкина, д.1 к. 69",
             documents = listOf(
-                ObjectPlanDetailsItem.Stages.Document(
+                ObjectContractItem.Stages.Document(
                     title = "Паспорт объекта",
                     url = "",
                     extension = "",
                 ),
-                ObjectPlanDetailsItem.Stages.Document(
+                ObjectContractItem.Stages.Document(
                     title = "Фото объекта",
                     url = "",
                     extension = "",
                 ),
             ),
         ),
-        ObjectPlanDetailsItem.Stages.Stage(
+        ObjectContractItem.Stages.Stage(
             name = "Название второго этапа",
-            status = "Активный",
+            status = StatusWorkEnum.IN_PROCESS,
             plannedStartDate = "15 сентября 2024",
             plannedEndDate = "15 сентября 2024",
             actualStartDate = "15 сентября 2024",
             actualEndDate = "15 сентября 2024",
+            subExecutorName = "ООО «Спектр»",
+            subExecutorPhone = "+7 (934) 587-65-09",
+            subExecutorAddress = "г. Москва, ул. Пушкина, д.1 к. 69",
             documents = listOf(
-                ObjectPlanDetailsItem.Stages.Document(
+                ObjectContractItem.Stages.Document(
                     title = "Название документа",
                     url = "",
                     extension = "",
                 ),
-                ObjectPlanDetailsItem.Stages.Document(
+                ObjectContractItem.Stages.Document(
                     title = "Другое название документа",
                     url = "",
                     extension = "",
                 ),
             ),
         ),
-        ObjectPlanDetailsItem.Stages.Stage(
+        ObjectContractItem.Stages.Stage(
             name = "Название третьего этапа",
-            status = "Будущий",
+            status = StatusWorkEnum.PLANNED,
             plannedStartDate = "10 июля 2019",
             plannedEndDate = "1 октября 2019",
             actualStartDate = "17 июля 2019",
             actualEndDate = "1 октября 2019",
+            subExecutorName = "ООО «Спектр»",
+            subExecutorPhone = "+7 (934) 587-65-09",
+            subExecutorAddress = "г. Москва, ул. Пушкина, д.1 к. 69",
             documents = listOf(
-                ObjectPlanDetailsItem.Stages.Document(
+                ObjectContractItem.Stages.Document(
                     title = "Паспорт объекта",
                     url = "",
                     extension = "",
                 ),
-                ObjectPlanDetailsItem.Stages.Document(
+                ObjectContractItem.Stages.Document(
                     title = "Фото объекта",
                     url = "",
                     extension = "",
@@ -322,7 +389,7 @@ private fun StagesItemPreview() = HackathonTheme {
         ),
     )
     var chosenStage by remember { mutableStateOf(stages[0]) }
-    val model = ObjectPlanDetailsItem.Stages(
+    val model = ObjectContractItem.Stages(
         stages = stages,
         chosenStage = chosenStage,
     )

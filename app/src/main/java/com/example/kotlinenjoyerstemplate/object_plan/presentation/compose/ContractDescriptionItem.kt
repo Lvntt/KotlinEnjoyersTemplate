@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.kotlinenjoyerstemplate.R
-import com.example.kotlinenjoyerstemplate.object_plan.presentation.model.ObjectPlanDetailsItem
+import com.example.kotlinenjoyerstemplate.object_plan.presentation.model.ObjectContractItem
 import com.example.kotlinenjoyerstemplate.ui.common.FrameRounded
 import com.example.kotlinenjoyerstemplate.ui.common.ImageSource
 import com.example.kotlinenjoyerstemplate.ui.components.block.HackathonBlock
@@ -16,8 +16,8 @@ import com.example.kotlinenjoyerstemplate.ui.components.block.model.HackathonBlo
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 
 @Composable
-fun ObjectDescription(
-    model: ObjectPlanDetailsItem.ObjectPlanDescription,
+fun ContractDescriptionItem(
+    model: ObjectContractItem.ContractDescription,
     modifier: Modifier = Modifier,
 ) = FrameRounded(modifier) {
     Column(
@@ -26,45 +26,7 @@ fun ObjectDescription(
         HackathonBlock(
             mainPart = HackathonBlockMainPart(
                 title = HackathonBlockMainPart.Text(
-                    text = model.budget,
-                ),
-                subtitle = HackathonBlockMainPart.Text(
-                    text = "Стоимость",
-                ),
-            ),
-            leftPart = HackathonBlockLeftPart.Icon(
-                source = ImageSource.FromResource(
-                    resId = R.drawable.ic_paid_24dp,
-                    contentDescription = null,
-                    tint = HackathonTheme.colors.icons.secondary,
-                ),
-                sizeDp = 24,
-            ),
-            innerPadding = PaddingValues(vertical = 12.dp),
-        )
-        HackathonBlock(
-            mainPart = HackathonBlockMainPart(
-                title = HackathonBlockMainPart.Text(
-                    text = model.customer,
-                ),
-                subtitle = HackathonBlockMainPart.Text(
-                    text = "Заказчик",
-                ),
-            ),
-            leftPart = HackathonBlockLeftPart.Icon(
-                source = ImageSource.FromResource(
-                    resId = R.drawable.ic_person_24dp,
-                    contentDescription = null,
-                    tint = HackathonTheme.colors.icons.secondary,
-                ),
-                sizeDp = 24,
-            ),
-            innerPadding = PaddingValues(vertical = 12.dp),
-        )
-        HackathonBlock(
-            mainPart = HackathonBlockMainPart(
-                title = HackathonBlockMainPart.Text(
-                    text = model.contractor,
+                    text = model.generalExecutorName,
                 ),
                 subtitle = HackathonBlockMainPart.Text(
                     text = "Генеральный подрядчик",
@@ -83,15 +45,15 @@ fun ObjectDescription(
         HackathonBlock(
             mainPart = HackathonBlockMainPart(
                 title = HackathonBlockMainPart.Text(
-                    text = model.plannedStartDate,
+                    text = model.customerName,
                 ),
                 subtitle = HackathonBlockMainPart.Text(
-                    text = "Начало работ, запланированное",
+                    text = "Заказчик",
                 ),
             ),
             leftPart = HackathonBlockLeftPart.Icon(
                 source = ImageSource.FromResource(
-                    resId = R.drawable.ic_event_24dp,
+                    resId = R.drawable.ic_person_24dp,
                     contentDescription = null,
                     tint = HackathonTheme.colors.icons.secondary,
                 ),
@@ -102,10 +64,10 @@ fun ObjectDescription(
         HackathonBlock(
             mainPart = HackathonBlockMainPart(
                 title = HackathonBlockMainPart.Text(
-                    text = model.actualStartDate,
+                    text = model.plannedStartDate,
                 ),
                 subtitle = HackathonBlockMainPart.Text(
-                    text = "Начало работ, фактическое",
+                    text = "Начало работ, запланированное",
                 ),
             ),
             leftPart = HackathonBlockLeftPart.Icon(
@@ -140,15 +102,15 @@ fun ObjectDescription(
         HackathonBlock(
             mainPart = HackathonBlockMainPart(
                 title = HackathonBlockMainPart.Text(
-                    text = model.actualEndDate,
+                    text = model.warrantyEndDate,
                 ),
                 subtitle = HackathonBlockMainPart.Text(
-                    text = "Окончание работ, фактическое",
+                    text = "Гарантийный срок, до",
                 ),
             ),
             leftPart = HackathonBlockLeftPart.Icon(
                 source = ImageSource.FromResource(
-                    resId = R.drawable.ic_event_available_24dp,
+                    resId = R.drawable.ic_verified_user_24dp,
                     contentDescription = null,
                     tint = HackathonTheme.colors.icons.secondary,
                 ),
@@ -159,15 +121,15 @@ fun ObjectDescription(
         HackathonBlock(
             mainPart = HackathonBlockMainPart(
                 title = HackathonBlockMainPart.Text(
-                    text = model.warrantyEndDate,
+                    text = model.budget,
                 ),
                 subtitle = HackathonBlockMainPart.Text(
-                    text = "Гарантийный срок, до",
+                    text = "Стоимость",
                 ),
             ),
             leftPart = HackathonBlockLeftPart.Icon(
                 source = ImageSource.FromResource(
-                    resId = R.drawable.ic_verified_user_24dp,
+                    resId = R.drawable.ic_paid_24dp,
                     contentDescription = null,
                     tint = HackathonTheme.colors.icons.secondary,
                 ),

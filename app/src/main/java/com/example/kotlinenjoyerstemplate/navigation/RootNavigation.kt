@@ -25,8 +25,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.kotlinenjoyerstemplate.object_plan.presentation.compose.ObjectPlanDetails
-import com.example.kotlinenjoyerstemplate.object_plan.presentation.model.ObjectPlanDetailsItem
+import com.example.kotlinenjoyerstemplate.common.StatusWorkEnum
+import com.example.kotlinenjoyerstemplate.object_plan.presentation.compose.ContractDetails
+import com.example.kotlinenjoyerstemplate.object_plan.presentation.model.ObjectContractItem
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 
 sealed class RootNavDestination(override val baseRoute: String) : NavDestination {
@@ -90,60 +91,69 @@ fun RootNavigation(
                     containerColor = HackathonTheme.colors.background.grey,
                 ) {
                     val stages = listOf(
-                        ObjectPlanDetailsItem.Stages.Stage(
+                        ObjectContractItem.Stages.Stage(
                             name = "Планирование",
-                            status = "Выполнен",
+                            status = StatusWorkEnum.COMPLETED,
                             plannedStartDate = "10 июля 2019",
                             plannedEndDate = "1 октября 2019",
                             actualStartDate = "17 июля 2019",
                             actualEndDate = "1 октября 2019",
+                            subExecutorName = "ООО «Спектр»",
+                            subExecutorPhone = "+7 (934) 587-65-09",
+                            subExecutorAddress = "г. Москва, ул. Пушкина, д.1 к. 69",
                             documents = listOf(
-                                ObjectPlanDetailsItem.Stages.Document(
+                                ObjectContractItem.Stages.Document(
                                     title = "Паспорт объекта",
                                     url = "https://storage.yandexcloud.net/hackathon-its/Reliability.docx?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=YCAJEPpK5UVZoEUcVh9UgRy79/20240918/ru-central1/s3/aws4_request&X-Amz-Date=20240918T085204Z&X-Amz-Expires=223200&X-Amz-Signature=ADE2164BBC96818C6080302CB37E1CCF6B7343C93184BD80CE86A00FF194C33C&X-Amz-SignedHeaders=host",
                                     extension = "docx",
                                 ),
-                                ObjectPlanDetailsItem.Stages.Document(
+                                ObjectContractItem.Stages.Document(
                                     title = "Фото объекта",
                                     url = "https://storage.yandexcloud.net/hackathon-its/Reliability.docx?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=YCAJEPpK5UVZoEUcVh9UgRy79/20240918/ru-central1/s3/aws4_request&X-Amz-Date=20240918T085204Z&X-Amz-Expires=223200&X-Amz-Signature=ADE2164BBC96818C6080302CB37E1CCF6B7343C93184BD80CE86A00FF194C33C&X-Amz-SignedHeaders=host",
                                     extension = "docx",
                                 ),
                             ),
                         ),
-                        ObjectPlanDetailsItem.Stages.Stage(
+                        ObjectContractItem.Stages.Stage(
                             name = "Название второго этапа",
-                            status = "Активный",
+                            status = StatusWorkEnum.COMPLETED,
                             plannedStartDate = "15 сентября 2024",
                             plannedEndDate = "15 сентября 2024",
                             actualStartDate = "15 сентября 2024",
                             actualEndDate = "15 сентября 2024",
+                            subExecutorName = "ООО «Спектр»",
+                            subExecutorPhone = "+7 (934) 587-65-09",
+                            subExecutorAddress = "г. Москва, ул. Пушкина, д.1 к. 69",
                             documents = listOf(
-                                ObjectPlanDetailsItem.Stages.Document(
+                                ObjectContractItem.Stages.Document(
                                     title = "Название документа",
                                     url = "",
                                     extension = "",
                                 ),
-                                ObjectPlanDetailsItem.Stages.Document(
+                                ObjectContractItem.Stages.Document(
                                     title = "Другое название документа",
                                     url = "",
                                     extension = "",
                                 ),
                             ),
                         ),
-                        ObjectPlanDetailsItem.Stages.Stage(
+                        ObjectContractItem.Stages.Stage(
                             name = "Название третьего этапа",
-                            status = "Будущий",
+                            status = StatusWorkEnum.PLANNED,
                             plannedStartDate = "10 июля 2019",
                             plannedEndDate = "1 октября 2019",
                             actualStartDate = "17 июля 2019",
                             actualEndDate = "1 октября 2019",
+                            subExecutorName = "ООО «Спектр»",
+                            subExecutorPhone = "+7 (934) 587-65-09",
+                            subExecutorAddress = "г. Москва, ул. Пушкина, д.1 к. 69",
                             documents = listOf(
-                                ObjectPlanDetailsItem.Stages.Document(
+                                ObjectContractItem.Stages.Document(
                                     title = "Паспорт объекта",
                                     url = "",
                                     extension = "",
                                 ),
-                                ObjectPlanDetailsItem.Stages.Document(
+                                ObjectContractItem.Stages.Document(
                                     title = "Фото объекта",
                                     url = "",
                                     extension = "",
@@ -152,32 +162,54 @@ fun RootNavigation(
                         ),
                     )
                     var chosenStage by remember { mutableStateOf(stages[0]) }
-                    val stageModel = ObjectPlanDetailsItem.Stages(
+                    val stageModel = ObjectContractItem.Stages(
                         stages = stages,
                         chosenStage = chosenStage,
                     )
-                    val generalInfoModel = ObjectPlanDetailsItem.GeneralInfoObject(
+                    val generalInfoModel = ObjectContractItem.GeneralObjectInfo(
                         name = "ул. Комарова - ул. Белобородова",
                         address = "МО, г. Мытищи",
-                        percentageComplete = "75%",
                     )
-                    val objectDescription = ObjectPlanDetailsItem.ObjectPlanDescription(
+                    val contractDescriptionModel = ObjectContractItem.ContractDescription(
                         budget = "300.000 ₽ ",
-                        customer = "Муниципальное казенное учреждение «УКС ЖКХ»",
-                        contractor = "ООО «Спектр»",
+                        customerName = "Муниципальное казенное учреждение «УКС ЖКХ»",
+                        generalExecutorName = "ООО «Спектр»",
                         plannedStartDate = "10 июля 2019",
                         plannedEndDate = "1 октября 2019",
-                        actualStartDate = "17 июля 2019",
-                        actualEndDate = "1 октября 2019",
                         warrantyEndDate = "1 октября 2019",
                     )
-                    ObjectPlanDetails(
+                    val contactsModel = ObjectContractItem.Contacts(
+                        generalExecutorPhone = "+7 (934) 587-65-09",
+                        customerPhone = "+7 (912) 680-00-50",
+                    )
+                    val stagesHeader = ObjectContractItem.Header(
+                        title = "Этапы работ"
+                    )
+                    val contractDescriptionHeader = ObjectContractItem.Header(
+                        title = "Описание контракта"
+                    )
+                    val contactsHeader = ObjectContractItem.Header(
+                        title = "Контакты"
+                    )
+                    val generalInfoHeader = ObjectContractItem.Header(
+                        title = "Информация об объекте"
+                    )
+                    ContractDetails(
                         model = listOf(
-                            generalInfoModel,
+                            stagesHeader,
                             stageModel,
-                            objectDescription,
+                            contractDescriptionHeader,
+                            contractDescriptionModel,
+                            contactsHeader,
+                            contactsModel,
+                            generalInfoHeader,
+                            generalInfoModel,
                         ),
-                        onStageButtonClick = { chosenStage = it }
+                        onStageButtonClick = { chosenStage = it },
+                        topBar = ObjectContractItem.TopBar(
+                            contractName = "Устройство транспортной развязки",
+                            generalExecutorName = "ООО «Спектр»",
+                        )
                     )
                 }
             }
