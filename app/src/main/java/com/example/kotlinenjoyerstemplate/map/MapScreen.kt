@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusManager
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 import com.mapbox.geojson.Point
 import com.mapbox.maps.extension.compose.MapboxMap
@@ -14,7 +15,10 @@ import com.mapbox.maps.extension.compose.animation.viewport.rememberMapViewportS
 import com.mapbox.maps.extension.compose.annotation.generated.PolylineAnnotation
 
 @Composable
-fun MapScreen(modifier: Modifier = Modifier) {
+fun MapScreen(
+    modifier: Modifier = Modifier,
+    focusManager: FocusManager
+) {
     val accentColor = HackathonTheme.colors.common.accent
     val viewPortState = rememberMapViewportState {
         setCameraOptions {
@@ -30,6 +34,7 @@ fun MapScreen(modifier: Modifier = Modifier) {
         modifier.fillMaxSize(),
         mapViewportState = viewPortState,
         onMapClickListener = { point ->
+            focusManager.clearFocus()
             points = listOf(*points.toTypedArray() + point)
             true
         }
