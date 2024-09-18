@@ -21,13 +21,14 @@ import com.mapbox.maps.Style
 import com.mapbox.maps.extension.compose.MapboxMap
 import com.mapbox.maps.extension.compose.animation.viewport.rememberMapViewportState
 import com.mapbox.maps.extension.compose.style.MapStyle
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MapScreen(
-    subScreenStore: MapSubScreenStore,
     navController: NavController,
     modifier: Modifier = Modifier,
+    subScreenStore: MapSubScreenStore = koinViewModel(),
 ) {
     BackHandler {
         if (!subScreenStore.navigateBack()) {
@@ -52,7 +53,7 @@ fun MapScreen(
         )
     )
 
-    LaunchedEffect(currentSubScreen) {
+    LaunchedEffect(currentSubScreen, sheetState) {
         currentSubScreen.handleEffects(sheetState)
     }
 

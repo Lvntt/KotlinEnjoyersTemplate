@@ -15,7 +15,7 @@ class MapObjectZonesViewModel :
     private val _state = MutableStateFlow(MapObjectZonesState())
     override val state = _state.asStateFlow()
 
-    private val _effects = MutableSharedFlow<MapObjectZonesEffect>(extraBufferCapacity = 1)
+    private val _effects = MutableSharedFlow<MapObjectZonesEffect>(extraBufferCapacity = 2)
     override val effects = _effects.asSharedFlow()
 
     override fun acceptNavigationParams(params: Any) {}
