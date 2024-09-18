@@ -70,7 +70,7 @@ fun RootNavigation(
         }
         composable(route = RootNavDestination.Map.getDestination()) {
             Scaffold { padding ->
-                MapScreen(modifier = Modifier.padding(padding))
+                MapScreen(navController = navController, modifier = Modifier.padding(padding))
             }
         }
     }
