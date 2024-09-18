@@ -1,6 +1,7 @@
 [versions]
 adaptive = "1.0.0"
 agp = "8.5.2"
+mapbox = "11.6.1"
 coilCompose = "2.7.0"
 koinAndroid = "3.3.2"
 koinAndroidxCompose = "3.4.1"
@@ -13,15 +14,16 @@ espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.5"
 activityCompose = "1.9.2"
 composeBom = "2024.09.01"
-materialNavigation = "1.7.0-beta01"
+mapboxCompose = "11.6.1"
 loggingInterceptor = "4.11.0"
 navigationCompose = "2.8.0"
+mapboxNavigation = "3.4.0-beta.1"
 retrofit = "2.9.0"
 
 [libraries]
+mapbox = { module = "com.mapbox.maps:android", version.ref = "mapbox" }
 androidx-adaptive = { module = "androidx.compose.material3.adaptive:adaptive", version.ref = "adaptive" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-material-navigation = { module = "androidx.compose.material:material-navigation", version.ref = "materialNavigation" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -37,6 +39,8 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+mapbox-compose = { module = "com.mapbox.extension:maps-compose", version.ref = "mapboxCompose" }
+mapbox-navigation = { module = "com.mapbox.navigationcore:navigation", version.ref = "mapboxNavigation" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
