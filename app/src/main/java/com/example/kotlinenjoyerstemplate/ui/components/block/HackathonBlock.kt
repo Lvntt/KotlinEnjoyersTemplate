@@ -23,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.example.kotlinenjoyerstemplate.ui.common.toPainter
 import com.example.kotlinenjoyerstemplate.ui.components.block.model.HackathonBlockLeftPart
 import com.example.kotlinenjoyerstemplate.ui.components.block.model.HackathonBlockMainPart
