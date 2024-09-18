@@ -9,20 +9,19 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.example.kotlinenjoyerstemplate.R
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateTopAppBar(
-    expandedHeight: Dp,
     title: String,
     navigationIconOnClick: () -> Unit,
     actionIconOnClick: () -> Unit,
 ) {
     CenterAlignedTopAppBar(
-        expandedHeight = expandedHeight,
+        expandedHeight = 56.dp,
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = HackathonTheme.colors.background.white,
             titleContentColor = HackathonTheme.colors.text.primary.default,
