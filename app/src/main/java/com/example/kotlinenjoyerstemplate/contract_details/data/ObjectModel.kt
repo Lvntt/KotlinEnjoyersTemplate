@@ -1,4 +1,4 @@
-package com.example.kotlinenjoyerstemplate.object_plan.data
+package com.example.kotlinenjoyerstemplate.contract_details.data
 
 data class ObjectModel(
     val name: String,

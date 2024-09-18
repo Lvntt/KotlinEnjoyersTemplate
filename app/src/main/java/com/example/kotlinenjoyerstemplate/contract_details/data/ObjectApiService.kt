@@ -1,4 +1,4 @@
-package com.example.kotlinenjoyerstemplate.object_plan.data
+package com.example.kotlinenjoyerstemplate.contract_details.data
 
 import retrofit2.http.GET
 import retrofit2.http.Path

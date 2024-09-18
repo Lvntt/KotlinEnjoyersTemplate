@@ -1,6 +1,6 @@
-package com.example.kotlinenjoyerstemplate.object_plan
+package com.example.kotlinenjoyerstemplate.contract_details
 
-import com.example.kotlinenjoyerstemplate.object_plan.presentation.model.ObjectContractItem
+import com.example.kotlinenjoyerstemplate.contract_details.presentation.model.ObjectContractItem
 
 sealed interface ObjectContractUiState {
 

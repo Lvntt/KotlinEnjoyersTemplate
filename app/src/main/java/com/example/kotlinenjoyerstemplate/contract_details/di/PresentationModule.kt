@@ -1,4 +1,4 @@
-package com.example.kotlinenjoyerstemplate.object_plan.di
+package com.example.kotlinenjoyerstemplate.contract_details.di
 
 import org.koin.dsl.module
 

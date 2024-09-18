@@ -1,4 +1,4 @@
-package com.example.kotlinenjoyerstemplate.object_plan.presentation.model
+package com.example.kotlinenjoyerstemplate.contract_details.presentation.model
 
 import com.example.kotlinenjoyerstemplate.common.StatusWorkEnum
 

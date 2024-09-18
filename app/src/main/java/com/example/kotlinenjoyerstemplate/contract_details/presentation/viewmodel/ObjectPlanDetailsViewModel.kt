@@ -1,8 +1,8 @@
-package com.example.kotlinenjoyerstemplate.object_plan.presentation.viewmodel
+package com.example.kotlinenjoyerstemplate.contract_details.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kotlinenjoyerstemplate.object_plan.ObjectContractUiState
+import com.example.kotlinenjoyerstemplate.contract_details.ObjectContractUiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

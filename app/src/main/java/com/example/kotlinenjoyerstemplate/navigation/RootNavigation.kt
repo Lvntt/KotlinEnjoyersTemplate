@@ -26,8 +26,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.kotlinenjoyerstemplate.common.StatusWorkEnum
-import com.example.kotlinenjoyerstemplate.object_plan.presentation.compose.ContractDetails
-import com.example.kotlinenjoyerstemplate.object_plan.presentation.model.ObjectContractItem
+import com.example.kotlinenjoyerstemplate.contract_details.presentation.compose.ContractDetails
+import com.example.kotlinenjoyerstemplate.contract_details.presentation.model.ObjectContractItem
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 
 sealed class RootNavDestination(override val baseRoute: String) : NavDestination {

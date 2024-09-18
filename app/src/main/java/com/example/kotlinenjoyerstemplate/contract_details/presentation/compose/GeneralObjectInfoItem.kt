@@ -1,13 +1,14 @@
-package com.example.kotlinenjoyerstemplate.object_plan.presentation.compose
+package com.example.kotlinenjoyerstemplate.contract_details.presentation.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.kotlinenjoyerstemplate.R
-import com.example.kotlinenjoyerstemplate.object_plan.presentation.model.ObjectContractItem
+import com.example.kotlinenjoyerstemplate.contract_details.presentation.model.ObjectContractItem
 import com.example.kotlinenjoyerstemplate.ui.common.FrameRounded
 import com.example.kotlinenjoyerstemplate.ui.common.ImageSource
 import com.example.kotlinenjoyerstemplate.ui.components.block.HackathonBlock
@@ -16,9 +17,9 @@ import com.example.kotlinenjoyerstemplate.ui.components.block.model.HackathonBlo
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 
 @Composable
-fun ContactsItem(
-    model: ObjectContractItem.Contacts,
-    modifier: Modifier = Modifier,
+fun GeneralObjectInfoItem(
+    model: ObjectContractItem.GeneralObjectInfo,
+    modifier: Modifier = Modifier
 ) = FrameRounded(modifier) {
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -26,15 +27,15 @@ fun ContactsItem(
         HackathonBlock(
             mainPart = HackathonBlockMainPart(
                 title = HackathonBlockMainPart.Text(
-                    text = model.generalExecutorPhone,
+                    text = model.name,
                 ),
                 subtitle = HackathonBlockMainPart.Text(
-                    text = "Генеральный подрядчик",
+                    text = "Наименование объекта",
                 ),
             ),
             leftPart = HackathonBlockLeftPart.Icon(
                 source = ImageSource.FromResource(
-                    resId = R.drawable.ic_call_24dp,
+                    resId = R.drawable.ic_id_card_24dp,
                     contentDescription = null,
                     tint = HackathonTheme.colors.icons.secondary,
                 ),
@@ -45,15 +46,15 @@ fun ContactsItem(
         HackathonBlock(
             mainPart = HackathonBlockMainPart(
                 title = HackathonBlockMainPart.Text(
-                    text = model.customerPhone,
+                    text = model.address,
                 ),
                 subtitle = HackathonBlockMainPart.Text(
-                    text = "Заказчик",
+                    text = "Адрес объекта",
                 ),
             ),
             leftPart = HackathonBlockLeftPart.Icon(
                 source = ImageSource.FromResource(
-                    resId = R.drawable.ic_call_24dp,
+                    resId = R.drawable.ic_location_on_24dp,
                     contentDescription = null,
                     tint = HackathonTheme.colors.icons.secondary,
                 ),
@@ -62,4 +63,15 @@ fun ContactsItem(
             innerPadding = PaddingValues(vertical = 12.dp),
         )
     }
+}
+
+@Preview
+@Composable
+private fun GeneralInfoItemPreview() = HackathonTheme {
+    GeneralObjectInfoItem(
+        model = ObjectContractItem.GeneralObjectInfo(
+            name = "ул. Комарова - ул. Белобородова",
+            address = "МО, г. Мытищи",
+        )
+    )
 }
