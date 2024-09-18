@@ -1,15 +1,13 @@
-package com.example.kotlinenjoyerstemplate.object_details.presentation.compose
+package com.example.kotlinenjoyerstemplate.plan_details.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.example.kotlinenjoyerstemplate.R
-import com.example.kotlinenjoyerstemplate.object_details.presentation.model.ObjectDetailsItem
+import com.example.kotlinenjoyerstemplate.plan_details.model.PlanDetailsItem
 import com.example.kotlinenjoyerstemplate.ui.common.FrameRounded
 import com.example.kotlinenjoyerstemplate.ui.common.ImageSource
 import com.example.kotlinenjoyerstemplate.ui.components.block.HackathonBlock
@@ -19,8 +17,8 @@ import com.example.kotlinenjoyerstemplate.ui.components.block.model.HackathonBlo
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 
 @Composable
-fun PlansItem(
-    model: ObjectDetailsItem.Plans,
+fun ContractsItem(
+    model: PlanDetailsItem.Contracts,
     modifier: Modifier = Modifier,
 ) = FrameRounded(
     modifier = modifier,
@@ -29,23 +27,19 @@ fun PlansItem(
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        model.plans.forEach { plan ->
+        model.contracts.forEach { contract ->
             HackathonBlock(
                 mainPart = HackathonBlockMainPart(
                     title = HackathonBlockMainPart.Text(
-                        text = plan.name,
+                        text = contract.name,
                     ),
                     subtitle = HackathonBlockMainPart.Text(
-                        text = plan.description,
-                    ),
-                    status = HackathonBlockMainPart.Text(
-                        text = plan.status.text,
-                        color = colorResource(id = plan.status.colorId),
+                        text = contract.generalExecutorName,
                     ),
                 ),
                 leftPart = HackathonBlockLeftPart.Icon(
                     source = ImageSource.FromResource(
-                        resId = R.drawable.ic_event_24dp,
+                        resId = R.drawable.ic_contract_24dp,
                         contentDescription = null,
                         tint = HackathonTheme.colors.icons.secondary,
                     ),

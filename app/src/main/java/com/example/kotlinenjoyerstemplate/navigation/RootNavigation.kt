@@ -30,7 +30,10 @@ import com.example.kotlinenjoyerstemplate.contract_details.presentation.compose.
 import com.example.kotlinenjoyerstemplate.contract_details.presentation.model.ObjectContractItem
 import com.example.kotlinenjoyerstemplate.object_details.presentation.compose.ObjectDetails
 import com.example.kotlinenjoyerstemplate.object_details.presentation.model.ObjectDetailsItem
+import com.example.kotlinenjoyerstemplate.plan_details.compose.PlanDetails
+import com.example.kotlinenjoyerstemplate.plan_details.model.PlanDetailsItem
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
+import org.koin.core.component.getScopeId
 
 sealed class RootNavDestination(override val baseRoute: String) : NavDestination {
 
@@ -39,6 +42,8 @@ sealed class RootNavDestination(override val baseRoute: String) : NavDestination
     data object ContractDetailsScreen : RootNavDestination("ContractDetailsScreen")
 
     data object ObjectDetailsScreen : RootNavDestination("ObjectDetailsScreen")
+
+    data object PlanDetailsScreen : RootNavDestination("PlanDetailsScreen")
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -76,7 +81,7 @@ fun RootNavigation(
                         Text(text = RootNavDestination.MapScreen.getDestination())
                         Button(
                             onClick = {
-                                navController.navigate(RootNavDestination.ObjectDetailsScreen.getNavigationRoute())
+                                navController.navigate(RootNavDestination.PlanDetailsScreen.getNavigationRoute())
                             }
                         ) {
                             Text(text = "Open Bottom Sheet")
@@ -84,6 +89,68 @@ fun RootNavigation(
                     }
                 }
             }
+            bottomSheet(route = RootNavDestination.PlanDetailsScreen.getDestination()) {
+                val sheetState = rememberModalBottomSheetState(
+                    skipPartiallyExpanded = false,
+                )
+                ModalBottomSheet(
+                    modifier = Modifier.fillMaxHeight(),
+                    sheetState = sheetState,
+                    onDismissRequest = { navController.popBackStack() },
+                    containerColor = HackathonTheme.colors.background.grey,
+                ) {
+                    val topBarModel = PlanDetailsItem.TopBar(
+                        planName = "Срочный ремонт дороги",
+                        planDescription = "Ремонт ямы",
+                        planStatus = StatusWorkEnum.IN_PROCESS,
+                    )
+                    val planStatusHeader = PlanDetailsItem.Header(
+                        title = "Статус плана",
+                    )
+                    val planStatusModel = PlanDetailsItem.PlanStatus(
+                        completePercentage = "75%",
+                        creationDate = "18 сентября 2024",
+                    )
+                    val contractsHeader = PlanDetailsItem.Header(
+                        title = "Контракты",
+                    )
+                    val contractsModel = PlanDetailsItem.Contracts(
+                        contracts = listOf(
+                            PlanDetailsItem.Contracts.Contract(
+                                id = "",
+                                name = "Устройство транспортной развязки",
+                                generalExecutorName = "ООО «Спектр»",
+                            ),
+                            PlanDetailsItem.Contracts.Contract(
+                                id = "",
+                                name = "Устройство транспортной развязки",
+                                generalExecutorName = "ООО «Спектр»",
+                            ),
+                        )
+                    )
+                    val generalInfoHeader = PlanDetailsItem.Header(
+                        title = "Информация об объекте",
+                    )
+                    val generalInfoModel = PlanDetailsItem.GeneralObjectInfo(
+                        name = "ул. Комарова - ул. Белобородова",
+                        address = "МО, г. Мытищи",
+                    )
+                    val model = listOf(
+                        planStatusHeader,
+                        planStatusModel,
+                        contractsHeader,
+                        contractsModel,
+                        generalInfoHeader,
+                        generalInfoModel,
+                    )
+
+                    PlanDetails(
+                        model = model,
+                        topBar = topBarModel,
+                    )
+                }
+            }
+
             bottomSheet(route = RootNavDestination.ObjectDetailsScreen.getDestination()) {
                 val sheetState = rememberModalBottomSheetState(
                     skipPartiallyExpanded = false,

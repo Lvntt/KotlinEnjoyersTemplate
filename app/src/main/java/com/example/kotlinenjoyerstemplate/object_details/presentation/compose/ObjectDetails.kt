@@ -3,6 +3,8 @@ package com.example.kotlinenjoyerstemplate.object_details.presentation.compose
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -51,6 +53,9 @@ fun ObjectDetails(
                     PlansItem(model = item)
                 }
             }
+        }
+        item {
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }
