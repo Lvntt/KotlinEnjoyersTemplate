@@ -1,4 +1,4 @@
-package com.example.kotlinenjoyerstemplate.create_screens.create_object
+package com.example.kotlinenjoyerstemplate.create_screens.create_plan
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,13 +23,13 @@ import com.example.kotlinenjoyerstemplate.ui.components.create_topappbar.CreateT
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 
 @Composable
-fun CreateObjectScreen(
+fun CreatePlanScreen(
 
 ) {
     Scaffold(
         topBar = {
             CreateTopAppBar(
-                title = "Объект",
+                title = "План",
                 navigationIconOnClick = { /*TO DO*/ },
                 actionIconOnClick = { /*TO DO*/ }
             )
@@ -52,6 +52,7 @@ fun CreateObjectScreen(
                     Column {
                         var name by remember { mutableStateOf("") }
                         var address by remember { mutableStateOf("") }
+                        var date by remember { mutableStateOf("") }
                         MainCard(
                             text = name,
                             onValueChange = { newName ->
@@ -68,11 +69,22 @@ fun CreateObjectScreen(
                             onValueChange = { newAddress ->
                                 address = newAddress
                             },
-                            supportingText = "Адрес",
+                            supportingText = "Краткое описание",
                             modifier = Modifier.padding(
                                 vertical = 6.dp
                             ),
-                            iconID = R.drawable.ic_addres_24dp
+                            iconID = R.drawable.ic_description_24dp
+                        )
+                        MainCard(
+                            text = date,
+                            onValueChange = { newDate ->
+                                date = newDate
+                            },
+                            supportingText = "Дата начала работ",
+                            modifier = Modifier.padding(
+                                vertical = 6.dp
+                            ),
+                            iconID = R.drawable.ic_start_date_24dp
                         )
                     }
                     Column(
@@ -82,9 +94,9 @@ fun CreateObjectScreen(
                         )
                     ) {
                         val plans = remember { mutableStateListOf<String>(
-                            "План 1",
-                            "План 2",
-                            "План 3"
+                            "Контракт 1",
+                            "Контракт 2",
+                            "Контракт 3"
                         ) }
 
                         LazyColumn() {
@@ -104,7 +116,7 @@ fun CreateObjectScreen(
                         }
                         HackathonButton.L(
                             onClick = { /*TO DO*/ },
-                            text = "Добавить план",
+                            text = "Добавить контракт",
                             icon = HackathonButtonIcon(
                                 resId = R.drawable.ic_add_24db,
                                 sizeDp = 24,
