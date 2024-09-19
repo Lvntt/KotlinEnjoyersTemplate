@@ -37,7 +37,6 @@ private val tempZone = ObjectSummary(
 class ObjectRepository {
 
     suspend fun getAllObjectSummaries() : List<ObjectSummary> {
-        delay(5000)
         return listOf(tempZone)
     }
 
