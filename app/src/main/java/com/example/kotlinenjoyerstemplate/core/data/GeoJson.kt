@@ -1,4 +1,4 @@
-package com.example.kotlinenjoyerstemplate.contract_details.data
+package com.example.kotlinenjoyerstemplate.core.data
 
 data class GeoJson(
     val type: String,

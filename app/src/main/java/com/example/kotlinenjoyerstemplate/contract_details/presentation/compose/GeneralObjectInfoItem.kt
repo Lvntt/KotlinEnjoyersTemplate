@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.kotlinenjoyerstemplate.R
-import com.example.kotlinenjoyerstemplate.contract_details.presentation.model.ObjectContractItem
+import com.example.kotlinenjoyerstemplate.contract_details.presentation.model.ContractDetailsItem
 import com.example.kotlinenjoyerstemplate.ui.common.FrameRounded
 import com.example.kotlinenjoyerstemplate.ui.common.ImageSource
 import com.example.kotlinenjoyerstemplate.ui.components.block.HackathonBlock
@@ -18,7 +18,7 @@ import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 
 @Composable
 fun GeneralObjectInfoItem(
-    model: ObjectContractItem.GeneralObjectInfo,
+    model: ContractDetailsItem.GeneralInfoDetails,
     modifier: Modifier = Modifier
 ) = FrameRounded(modifier) {
     Column(
@@ -69,7 +69,7 @@ fun GeneralObjectInfoItem(
 @Composable
 private fun GeneralInfoItemPreview() = HackathonTheme {
     GeneralObjectInfoItem(
-        model = ObjectContractItem.GeneralObjectInfo(
+        model = ContractDetailsItem.GeneralInfoDetails(
             name = "ул. Комарова - ул. Белобородова",
             address = "МО, г. Мытищи",
         )

@@ -35,9 +35,11 @@ fun PlansItem(
                     title = HackathonBlockMainPart.Text(
                         text = plan.name,
                     ),
-                    subtitle = HackathonBlockMainPart.Text(
-                        text = plan.description,
-                    ),
+                    subtitle = plan.description?.let {
+                        HackathonBlockMainPart.Text(
+                            text = plan.description,
+                        )
+                    },
                     status = HackathonBlockMainPart.Text(
                         text = plan.status.text,
                         color = colorResource(id = plan.status.colorId),

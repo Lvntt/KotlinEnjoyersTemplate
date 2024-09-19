@@ -2,26 +2,26 @@ package com.example.kotlinenjoyerstemplate.contract_details.presentation.model
 
 import com.example.kotlinenjoyerstemplate.common.StatusWorkEnum
 
-sealed interface ObjectContractItem {
+sealed interface ContractDetailsItem {
 
     data class Header(
         val title: String,
-    ) : ObjectContractItem
+    ) : ContractDetailsItem
 
     data class TopBar(
         val contractName: String,
         val generalExecutorName: String,
-    ) : ObjectContractItem
+    ) : ContractDetailsItem
 
-    data class GeneralObjectInfo(
+    data class GeneralInfoDetails(
         val name: String,
         val address: String,
-    ) : ObjectContractItem
+    ) : ContractDetailsItem
 
     data class Stages(
         val stages: List<Stage>,
-        val chosenStage: Stage,
-    ) : ObjectContractItem {
+        val chosenStage: Stage?,
+    ) : ContractDetailsItem {
 
         data class Stage(
             val name: String,
@@ -46,14 +46,14 @@ sealed interface ObjectContractItem {
     data class Contacts(
         val generalExecutorPhone: String,
         val customerPhone: String,
-    ) : ObjectContractItem
+    ) : ContractDetailsItem
 
-    data class ContractDescription(
+    data class ContractDetailsDescription(
         val customerName: String,
         val generalExecutorName: String,
         val plannedStartDate: String,
         val plannedEndDate: String,
         val warrantyEndDate: String,
         val budget: String,
-    ) : ObjectContractItem
+    ) : ContractDetailsItem
 }

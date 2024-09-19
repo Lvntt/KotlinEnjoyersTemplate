@@ -11,9 +11,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.MapSubScreen
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.MapSubScreenStore
@@ -87,6 +89,8 @@ class MapMainSubScreen(private val store: MapSubScreenStore) :
 
     @Composable
     override fun ColumnScope.BottomSheetContent() {
+        val state by viewModel.state.collectAsStateWithLifecycle()
+
         val navController = rememberNavController()
         ObjectDetailsNavigation(navController)
     }

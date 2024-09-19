@@ -2,29 +2,44 @@ package com.example.kotlinenjoyerstemplate.navigation
 
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.kotlinenjoyerstemplate.common.StatusWorkEnum
 import com.example.kotlinenjoyerstemplate.contract_details.presentation.compose.ContractDetails
-import com.example.kotlinenjoyerstemplate.contract_details.presentation.model.ObjectContractItem
+import com.example.kotlinenjoyerstemplate.contract_details.presentation.viewmodel.ContractDetailsViewModel
+import com.example.kotlinenjoyerstemplate.navigation.ObjectDetailsNavDestination.ContractDetailsScreen.CONTRACT_ID_KEY
+import com.example.kotlinenjoyerstemplate.navigation.ObjectDetailsNavDestination.ObjectDetailsScreen.OBJECT_ID_KEY
+import com.example.kotlinenjoyerstemplate.navigation.ObjectDetailsNavDestination.PlanDetailsScreen.PLAN_ID_KEY
 import com.example.kotlinenjoyerstemplate.object_details.presentation.compose.ObjectDetails
-import com.example.kotlinenjoyerstemplate.object_details.presentation.model.ObjectDetailsItem
+import com.example.kotlinenjoyerstemplate.object_details.presentation.viewmodel.ObjectDetailsViewModel
 import com.example.kotlinenjoyerstemplate.plan_details.compose.PlanDetails
-import com.example.kotlinenjoyerstemplate.plan_details.model.PlanDetailsItem
+import com.example.kotlinenjoyerstemplate.plan_details.viewmodel.PlanDetailsViewModel
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 sealed interface ObjectDetailsNavDestination : NavDestination {
 
-    data object ObjectDetailsScreen : RootNavDestination("ObjectDetailsScreen")
+    data object ObjectDetailsScreen : RootNavDestination("ObjectDetailsScreen") {
 
-    data object ContractDetailsScreen : RootNavDestination("ContractDetailsScreen")
+        const val OBJECT_ID_KEY = "OBJECT_ID_KEY"
 
-    data object PlanDetailsScreen : RootNavDestination("PlanDetailsScreen")
+        override val arguments = listOf(OBJECT_ID_KEY)
+    }
+
+    data object PlanDetailsScreen : RootNavDestination("PlanDetailsScreen") {
+
+        const val PLAN_ID_KEY = "PLAN_ID_KEY"
+
+        override val arguments = listOf(PLAN_ID_KEY)
+    }
+
+    data object ContractDetailsScreen : RootNavDestination("ContractDetailsScreen") {
+
+        const val CONTRACT_ID_KEY = "CONTRACT_ID_KEY"
+
+        override val arguments = listOf(CONTRACT_ID_KEY)
+    }
 }
 
 @Composable
@@ -34,112 +49,27 @@ fun ObjectDetailsNavigation(navController: NavHostController) {
         navController = navController,
         startDestination = ObjectDetailsNavDestination.ObjectDetailsScreen.getDestination(),
     ) {
-        composable(route = ObjectDetailsNavDestination.ObjectDetailsScreen.getDestination()) {
-            val generalInfoHeader = ObjectDetailsItem.Header(
-                title = "Информация об объекте",
-            )
-            val generalInfoModel = ObjectDetailsItem.GeneralObjectInfo(
-                name = "ул. Комарова - ул. Белобородова",
-                address = "МО, г. Мытищи",
-            )
-            val plansHeader = ObjectDetailsItem.Header(
-                title = "Планы",
-            )
-            val plansModel = ObjectDetailsItem.Plans(
-                plans = listOf(
-                    ObjectDetailsItem.Plans.Plan(
-                        id = "",
-                        name = "Плановый ремонт дороги",
-                        description = "Ежегодный ремонт 2024",
-                        status = StatusWorkEnum.CANCELLED,
-                    ),
-                    ObjectDetailsItem.Plans.Plan(
-                        id = "",
-                        name = "Срочный ремонт дороги",
-                        description = "Ремонт ямы",
-                        status = StatusWorkEnum.IN_PROCESS,
-                    ),
-                    ObjectDetailsItem.Plans.Plan(
-                        id = "",
-                        name = "Плановый ремонт дороги",
-                        description = "Ежегодный ремонт 2025",
-                        status = StatusWorkEnum.COMPLETED,
-                    ),
-                    ObjectDetailsItem.Plans.Plan(
-                        id = "",
-                        name = "Плановый ремонт дороги",
-                        description = "Ежегодный ремонт 2026",
-                        status = StatusWorkEnum.PLANNED,
-                    ),
-                )
-            )
-            val model = listOf(
-                generalInfoHeader,
-                generalInfoModel,
-                plansHeader,
-                plansModel,
-            )
+        composable(route = ObjectDetailsNavDestination.ObjectDetailsScreen.getDestination()) { backStackEntry ->
+            val objectId = backStackEntry.arguments?.getLong(OBJECT_ID_KEY)
+            // TODO может быть просто передавать в конструктор навхоста айдишник и убрать параметры в навигации
+            val viewModel: ObjectDetailsViewModel = koinViewModel(parameters = { parametersOf(objectId) })
+
             ObjectDetails(
-                model = model,
+                viewModel = viewModel,
                 onPlanClick = { plan ->
-                    // TODO getNavigationRoute with plan.id
-                    navController.navigate(ObjectDetailsNavDestination.PlanDetailsScreen.getDestination())
+                    navController.navigate(ObjectDetailsNavDestination.PlanDetailsScreen.getNavigationRoute(plan.id))
                 }
             )
         }
 
-        composable(route = ObjectDetailsNavDestination.PlanDetailsScreen.getDestination()) {
-            val topBarModel = PlanDetailsItem.TopBar(
-                planName = "Срочный ремонт дороги",
-                planDescription = "Ремонт ямы",
-                planStatus = StatusWorkEnum.IN_PROCESS,
-            )
-            val planStatusHeader = PlanDetailsItem.Header(
-                title = "Статус плана",
-            )
-            val planStatusModel = PlanDetailsItem.PlanStatus(
-                completePercentage = "75%",
-                creationDate = "18 сентября 2024",
-            )
-            val contractsHeader = PlanDetailsItem.Header(
-                title = "Контракты",
-            )
-            val contractsModel = PlanDetailsItem.Contracts(
-                contracts = listOf(
-                    PlanDetailsItem.Contracts.Contract(
-                        id = "",
-                        name = "Устройство транспортной развязки",
-                        generalExecutorName = "ООО «Спектр»",
-                    ),
-                    PlanDetailsItem.Contracts.Contract(
-                        id = "",
-                        name = "Устройство транспортной развязки",
-                        generalExecutorName = "ООО «Спектр»",
-                    ),
-                )
-            )
-            val generalInfoHeader = PlanDetailsItem.Header(
-                title = "Информация об объекте",
-            )
-            val generalInfoModel = PlanDetailsItem.GeneralObjectInfo(
-                name = "ул. Комарова - ул. Белобородова",
-                address = "МО, г. Мытищи",
-            )
-            val model = listOf(
-                planStatusHeader,
-                planStatusModel,
-                contractsHeader,
-                contractsModel,
-                generalInfoHeader,
-                generalInfoModel,
-            )
+        composable(route = ObjectDetailsNavDestination.PlanDetailsScreen.getDestination()) { backStackEntry ->
+            val planId = backStackEntry.arguments?.getLong(PLAN_ID_KEY)
+            val viewModel: PlanDetailsViewModel = koinViewModel(parameters = { parametersOf(planId) })
 
             PlanDetails(
-                model = model,
-                topBar = topBarModel,
+                viewModel = viewModel,
                 onContractClick = { contract ->
-                    // TODO getNavigationRoute with contract.id
-                    navController.navigate(ObjectDetailsNavDestination.ContractDetailsScreen.getDestination())
+                    navController.navigate(ObjectDetailsNavDestination.ContractDetailsScreen.getNavigationRoute(contract.id))
                 },
                 onBack = {
                     navController.popBackStack()
@@ -147,127 +77,13 @@ fun ObjectDetailsNavigation(navController: NavHostController) {
             )
         }
 
-        composable(route = ObjectDetailsNavDestination.ContractDetailsScreen.getDestination()) {
-            val stages = listOf(
-                ObjectContractItem.Stages.Stage(
-                    name = "Планирование",
-                    status = StatusWorkEnum.COMPLETED,
-                    plannedStartDate = "10 июля 2019",
-                    plannedEndDate = "1 октября 2019",
-                    actualStartDate = "17 июля 2019",
-                    actualEndDate = "1 октября 2019",
-                    subExecutorName = "ООО «Спектр»",
-                    subExecutorPhone = "+7 (934) 587-65-09",
-                    subExecutorAddress = "г. Москва, ул. Пушкина, д.1 к. 69",
-                    documents = listOf(
-                        ObjectContractItem.Stages.Document(
-                            title = "Паспорт объекта",
-                            url = "https://storage.yandexcloud.net/hackathon-its/Reliability.docx?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=YCAJEPpK5UVZoEUcVh9UgRy79/20240918/ru-central1/s3/aws4_request&X-Amz-Date=20240918T085204Z&X-Amz-Expires=223200&X-Amz-Signature=ADE2164BBC96818C6080302CB37E1CCF6B7343C93184BD80CE86A00FF194C33C&X-Amz-SignedHeaders=host",
-                            extension = "docx",
-                        ),
-                        ObjectContractItem.Stages.Document(
-                            title = "Фото объекта",
-                            url = "https://storage.yandexcloud.net/hackathon-its/Reliability.docx?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=YCAJEPpK5UVZoEUcVh9UgRy79/20240918/ru-central1/s3/aws4_request&X-Amz-Date=20240918T085204Z&X-Amz-Expires=223200&X-Amz-Signature=ADE2164BBC96818C6080302CB37E1CCF6B7343C93184BD80CE86A00FF194C33C&X-Amz-SignedHeaders=host",
-                            extension = "docx",
-                        ),
-                    ),
-                ),
-                ObjectContractItem.Stages.Stage(
-                    name = "Название второго этапа",
-                    status = StatusWorkEnum.COMPLETED,
-                    plannedStartDate = "15 сентября 2024",
-                    plannedEndDate = "15 сентября 2024",
-                    actualStartDate = "15 сентября 2024",
-                    actualEndDate = "15 сентября 2024",
-                    subExecutorName = "ООО «Спектр»",
-                    subExecutorPhone = "+7 (934) 587-65-09",
-                    subExecutorAddress = "г. Москва, ул. Пушкина, д.1 к. 69",
-                    documents = listOf(
-                        ObjectContractItem.Stages.Document(
-                            title = "Название документа",
-                            url = "",
-                            extension = "",
-                        ),
-                        ObjectContractItem.Stages.Document(
-                            title = "Другое название документа",
-                            url = "",
-                            extension = "",
-                        ),
-                    ),
-                ),
-                ObjectContractItem.Stages.Stage(
-                    name = "Название третьего этапа",
-                    status = StatusWorkEnum.PLANNED,
-                    plannedStartDate = "10 июля 2019",
-                    plannedEndDate = "1 октября 2019",
-                    actualStartDate = "17 июля 2019",
-                    actualEndDate = "1 октября 2019",
-                    subExecutorName = "ООО «Спектр»",
-                    subExecutorPhone = "+7 (934) 587-65-09",
-                    subExecutorAddress = "г. Москва, ул. Пушкина, д.1 к. 69",
-                    documents = listOf(
-                        ObjectContractItem.Stages.Document(
-                            title = "Паспорт объекта",
-                            url = "",
-                            extension = "",
-                        ),
-                        ObjectContractItem.Stages.Document(
-                            title = "Фото объекта",
-                            url = "",
-                            extension = "",
-                        ),
-                    ),
-                ),
-            )
-            var chosenStage by remember { mutableStateOf(stages[0]) }
-            val stageModel = ObjectContractItem.Stages(
-                stages = stages,
-                chosenStage = chosenStage,
-            )
-            val generalInfoModel = ObjectContractItem.GeneralObjectInfo(
-                name = "ул. Комарова - ул. Белобородова",
-                address = "МО, г. Мытищи",
-            )
-            val contractDescriptionModel = ObjectContractItem.ContractDescription(
-                budget = "300.000 ₽ ",
-                customerName = "Муниципальное казенное учреждение «УКС ЖКХ»",
-                generalExecutorName = "ООО «Спектр»",
-                plannedStartDate = "10 июля 2019",
-                plannedEndDate = "1 октября 2019",
-                warrantyEndDate = "1 октября 2019",
-            )
-            val contactsModel = ObjectContractItem.Contacts(
-                generalExecutorPhone = "+7 (934) 587-65-09",
-                customerPhone = "+7 (912) 680-00-50",
-            )
-            val stagesHeader = ObjectContractItem.Header(
-                title = "Этапы работ"
-            )
-            val contractDescriptionHeader = ObjectContractItem.Header(
-                title = "Описание контракта"
-            )
-            val contactsHeader = ObjectContractItem.Header(
-                title = "Контакты"
-            )
-            val generalInfoHeader = ObjectContractItem.Header(
-                title = "Информация об объекте"
-            )
+        composable(route = ObjectDetailsNavDestination.ContractDetailsScreen.getDestination()) { backStackEntry ->
+            val contractId = backStackEntry.arguments?.getLong(CONTRACT_ID_KEY)
+            val viewModel: ContractDetailsViewModel = koinViewModel(parameters = { parametersOf(contractId) })
+
             ContractDetails(
-                model = listOf(
-                    stagesHeader,
-                    stageModel,
-                    contractDescriptionHeader,
-                    contractDescriptionModel,
-                    contactsHeader,
-                    contactsModel,
-                    generalInfoHeader,
-                    generalInfoModel,
-                ),
-                onStageButtonClick = { chosenStage = it },
-                topBar = ObjectContractItem.TopBar(
-                    contractName = "Устройство транспортной развязки",
-                    generalExecutorName = "ООО «Спектр»",
-                ),
+                viewModel = viewModel,
+                onStageButtonClick = viewModel::onChooseStage,
                 onBack = {
                     navController.popBackStack()
                 },
