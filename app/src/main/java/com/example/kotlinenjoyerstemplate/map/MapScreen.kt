@@ -24,6 +24,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.MapSubScreenStore
@@ -43,10 +44,11 @@ fun MapScreen(
     modifier: Modifier = Modifier,
     subScreenStore: MapSubScreenStore = koinViewModel(),
 ) {
+    val currentSubScreen by subScreenStore.currentScreen.collectAsStateWithLifecycle()
     val density = LocalDensity.current
     val sheetState = rememberBottomSheetScaffoldState(
         bottomSheetState = SheetState(
-            skipPartiallyExpanded = true,
+            skipPartiallyExpanded = !currentSubScreen.isPartiallyExpandable,
             density
         )
     )
@@ -63,10 +65,9 @@ fun MapScreen(
         }
     }
 
-    val currentSubScreen by subScreenStore.currentScreen.collectAsStateWithLifecycle()
     val viewPortState = rememberMapViewportState {
         setCameraOptions {
-            zoom(15.0)
+            zoom(10.0)
             center(Point.fromLngLat(37.618423, 55.751244))
             pitch(45.0)
             bearing(0.0)
@@ -91,6 +92,7 @@ fun MapScreen(
         },
         scaffoldState = sheetState,
         sheetContainerColor = HackathonTheme.colors.background.grey,
+        sheetPeekHeight = 250.dp,
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             MapboxMap(
@@ -111,7 +113,7 @@ fun MapScreen(
                 label = "mapControlsAnimation",
                 transitionSpec = {
                     fadeIn() togetherWith fadeOut()
-                }
+                },
             ) { subScreen ->
                 Box(modifier = Modifier.fillMaxSize()) {
                     with(subScreen) { MapControlsContent() }

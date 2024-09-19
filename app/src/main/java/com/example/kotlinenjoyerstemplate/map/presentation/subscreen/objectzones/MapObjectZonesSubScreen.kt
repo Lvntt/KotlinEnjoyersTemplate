@@ -46,6 +46,8 @@ class MapObjectZonesSubScreen(private val store: MapSubScreenStore) :
 
     override val viewModel = MapObjectZonesViewModel()
 
+    override val isPartiallyExpandable: Boolean = false
+
     private val menuSheetItems = listOf(
         BottomSheetItem(
             iconResId = R.drawable.ic_arrow_right_24dp,

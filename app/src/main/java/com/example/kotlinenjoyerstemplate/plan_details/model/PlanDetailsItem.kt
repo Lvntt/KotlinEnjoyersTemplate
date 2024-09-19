@@ -15,7 +15,7 @@ sealed interface PlanDetailsItem {
 
     data class TopBar(
         val planName: String,
-        val planDescription: String,
+        val planDescription: String?,
         val planStatus: StatusWorkEnum,
     ) : PlanDetailsItem
 
@@ -29,7 +29,7 @@ sealed interface PlanDetailsItem {
     ) : PlanDetailsItem {
 
         data class Contract(
-            val id: String,
+            val id: Long,
             val name: String,
             val generalExecutorName: String,
         )

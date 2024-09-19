@@ -1,4 +1,4 @@
-package com.example.kotlinenjoyerstemplate.contract_details.data
+package com.example.kotlinenjoyerstemplate.core.data
 
 data class ObjectModel(
     val name: String,
@@ -8,7 +8,7 @@ data class ObjectModel(
 
 data class ObjectPlanModel(
     val name: String,
-    val description: String,
+    val description: String?,
     val firstPlannedStartDate: String,
     val percentageComplete: Int,
     val contracts: List<ObjectContractModel>,
@@ -31,7 +31,7 @@ data class ObjectContractModel(
 )
 
 data class Organization(
-    val organizationId: String,
+    val organizationId: Long,
     val name: String,
     val phone: String,
     val address: String,

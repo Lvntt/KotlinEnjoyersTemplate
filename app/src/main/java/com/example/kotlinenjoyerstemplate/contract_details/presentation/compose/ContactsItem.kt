@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.kotlinenjoyerstemplate.R
-import com.example.kotlinenjoyerstemplate.contract_details.presentation.model.ObjectContractItem
+import com.example.kotlinenjoyerstemplate.contract_details.presentation.model.ContractDetailsItem
 import com.example.kotlinenjoyerstemplate.ui.common.FrameRounded
 import com.example.kotlinenjoyerstemplate.ui.common.ImageSource
 import com.example.kotlinenjoyerstemplate.ui.components.block.HackathonBlock
@@ -17,7 +17,7 @@ import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 
 @Composable
 fun ContactsItem(
-    model: ObjectContractItem.Contacts,
+    model: ContractDetailsItem.Contacts,
     modifier: Modifier = Modifier,
 ) = FrameRounded(modifier) {
     Column(

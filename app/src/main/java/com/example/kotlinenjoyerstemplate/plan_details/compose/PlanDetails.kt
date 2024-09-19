@@ -11,23 +11,60 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.kotlinenjoyerstemplate.R
 import com.example.kotlinenjoyerstemplate.plan_details.model.PlanDetailsItem
+import com.example.kotlinenjoyerstemplate.plan_details.viewmodel.PlanDetailsUiState
+import com.example.kotlinenjoyerstemplate.plan_details.viewmodel.PlanDetailsViewModel
 import com.example.kotlinenjoyerstemplate.ui.common.ImageSource
 import com.example.kotlinenjoyerstemplate.ui.components.block.HackathonBlock
 import com.example.kotlinenjoyerstemplate.ui.components.block.model.HackathonBlockLeftPart
 import com.example.kotlinenjoyerstemplate.ui.components.block.model.HackathonBlockMainPart
+import com.example.kotlinenjoyerstemplate.ui.components.error_block.HackathonErrorScreen
 import com.example.kotlinenjoyerstemplate.ui.components.header_block.HackathonHeaderBlock
 import com.example.kotlinenjoyerstemplate.ui.components.header_block.model.HackathonHeaderBlockMainPart
+import com.example.kotlinenjoyerstemplate.ui.components.loader_block.HackathonLoaderScreen
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
+
+@Composable
+fun PlanDetails(
+    viewModel: PlanDetailsViewModel,
+    onContractClick: (PlanDetailsItem.Contracts.Contract) -> Unit,
+    onBack: () -> Unit,
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    when (uiState) {
+        PlanDetailsUiState.Loading -> HackathonLoaderScreen()
+
+        is PlanDetailsUiState.Content -> {
+            val model = (uiState as PlanDetailsUiState.Content).model
+            val topBar = (uiState as PlanDetailsUiState.Content).topBar
+
+            PlanDetails(
+                model = model,
+                topBar = topBar,
+                onContractClick = onContractClick,
+                onBack = onBack,
+            )
+        }
+
+        PlanDetailsUiState.Error -> HackathonErrorScreen(
+            onRetry = viewModel::loadData,
+        )
+    }
+}
 
 @Composable
 fun PlanDetails(
     model: List<PlanDetailsItem>,
     topBar: PlanDetailsItem.TopBar,
+    onContractClick: (PlanDetailsItem.Contracts.Contract) -> Unit,
+    onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -38,10 +75,12 @@ fun PlanDetails(
                         text = topBar.planName,
                         style = HackathonTheme.typography.titles.titleL,
                     ),
-                    subtitle = HackathonBlockMainPart.Text(
-                        text = topBar.planDescription,
-                        style = HackathonTheme.typography.titles.titleS,
-                    ),
+                    subtitle = topBar.planDescription?.let {
+                        HackathonBlockMainPart.Text(
+                            text = topBar.planDescription,
+                            style = HackathonTheme.typography.titles.titleS,
+                        )
+                    },
                     status = HackathonBlockMainPart.Text(
                         text = topBar.planStatus.text,
                         style = HackathonTheme.typography.titles.titleS,
@@ -54,6 +93,7 @@ fun PlanDetails(
                         contentDescription = null,
                     ),
                     sizeDp = 24,
+                    onClick = onBack,
                 ),
                 shape = RoundedCornerShape(
                     bottomStart = 12.dp,
@@ -70,9 +110,6 @@ fun PlanDetails(
                 .padding(paddings),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            item {
-                Spacer(modifier = Modifier.height(12.dp))
-            }
             items(model) { item ->
                 when (item) {
                     is PlanDetailsItem.Header -> {
@@ -97,7 +134,10 @@ fun PlanDetails(
                     }
 
                     is PlanDetailsItem.Contracts -> {
-                        ContractsItem(model = item)
+                        ContractsItem(
+                            model = item,
+                            onContractClick = onContractClick,
+                        )
                     }
 
                     is PlanDetailsItem.GeneralObjectInfo -> {

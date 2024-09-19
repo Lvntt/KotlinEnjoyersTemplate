@@ -31,4 +31,8 @@ enum class StatusWorkEnum(
         text = "Отменено",
         colorId = R.color.colorsStatusCancelled,
     ),
+    NONE(
+        text = "",
+        colorId = R.color.colorsStatusCancelled,
+    )
 }

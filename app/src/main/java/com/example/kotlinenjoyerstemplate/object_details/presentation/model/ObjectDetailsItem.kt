@@ -18,9 +18,9 @@ sealed interface ObjectDetailsItem {
     ) : ObjectDetailsItem {
 
         data class Plan(
-            val id: String,
+            val id: Long,
             val name: String,
-            val description: String,
+            val description: String?,
             val status: StatusWorkEnum,
         )
     }

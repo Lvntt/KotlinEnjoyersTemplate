@@ -7,6 +7,7 @@ sealed interface HackathonBlockLeftPart {
     data class Icon(
         val source: ImageSource,
         val sizeDp: Int,
+        val onClick: (() -> Unit)? = null,
     ) : HackathonBlockLeftPart
 
     data class Image(

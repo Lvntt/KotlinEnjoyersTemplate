@@ -37,7 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.kotlinenjoyerstemplate.R
 import com.example.kotlinenjoyerstemplate.common.StatusWorkEnum
-import com.example.kotlinenjoyerstemplate.contract_details.presentation.model.ObjectContractItem
+import com.example.kotlinenjoyerstemplate.contract_details.presentation.model.ContractDetailsItem
 import com.example.kotlinenjoyerstemplate.ui.common.FrameRounded
 import com.example.kotlinenjoyerstemplate.ui.common.ImageSource
 import com.example.kotlinenjoyerstemplate.ui.components.block.HackathonBlock
@@ -48,8 +48,8 @@ import java.util.UUID
 
 @Composable
 fun StagesItem(
-    model: ObjectContractItem.Stages,
-    onStageButtonClick: (ObjectContractItem.Stages.Stage) -> Unit,
+    model: ContractDetailsItem.Stages,
+    onStageButtonClick: (ContractDetailsItem.Stages.Stage) -> Unit,
     modifier: Modifier = Modifier,
 ) = FrameRounded(
     modifier = modifier,
@@ -57,204 +57,207 @@ fun StagesItem(
 ) {
     val context = LocalContext.current
 
-    Column {
-        LazyRow(
-            contentPadding = PaddingValues(
-                start = 16.dp,
-                end = 16.dp,
-                top = 16.dp,
-                bottom = 12.dp,
-            ),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            items(model.stages) { stage ->
-                StageButton(
-                    model = stage,
-                    isChosen = model.chosenStage == stage,
-                    onClick = onStageButtonClick,
-                )
-            }
-        }
-        Column(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            HackathonBlock(
-                mainPart = HackathonBlockMainPart(
-                    title = HackathonBlockMainPart.Text(
-                        text = model.chosenStage.subExecutorName,
-                    ),
-                    subtitle = HackathonBlockMainPart.Text(
-                        text = "Субподрядчик",
-                    ),
+    model.chosenStage?.let {
+        Column {
+            LazyRow(
+                contentPadding = PaddingValues(
+                    start = 16.dp,
+                    end = 16.dp,
+                    top = 16.dp,
+                    bottom = 12.dp,
                 ),
-                leftPart = HackathonBlockLeftPart.Icon(
-                    source = ImageSource.FromResource(
-                        resId = R.drawable.ic_build_24dp,
-                        contentDescription = null,
-                        tint = HackathonTheme.colors.icons.secondary,
-                    ),
-                    sizeDp = 24,
-                ),
-                innerPadding = PaddingValues(vertical = 12.dp),
-            )
-            HackathonBlock(
-                mainPart = HackathonBlockMainPart(
-                    title = HackathonBlockMainPart.Text(
-                        text = model.chosenStage.subExecutorPhone,
-                    ),
-                    subtitle = HackathonBlockMainPart.Text(
-                        text = "Телефон субподрядчика",
-                    ),
-                ),
-                leftPart = HackathonBlockLeftPart.Icon(
-                    source = ImageSource.FromResource(
-                        resId = R.drawable.ic_call_24dp,
-                        contentDescription = null,
-                        tint = HackathonTheme.colors.icons.secondary,
-                    ),
-                    sizeDp = 24,
-                ),
-                innerPadding = PaddingValues(vertical = 12.dp),
-            )
-            HackathonBlock(
-                mainPart = HackathonBlockMainPart(
-                    title = HackathonBlockMainPart.Text(
-                        text = model.chosenStage.subExecutorAddress,
-                    ),
-                    subtitle = HackathonBlockMainPart.Text(
-                        text = "Адрес субподрядчика",
-                    ),
-                ),
-                leftPart = HackathonBlockLeftPart.Icon(
-                    source = ImageSource.FromResource(
-                        resId = R.drawable.ic_home_24dp,
-                        contentDescription = null,
-                        tint = HackathonTheme.colors.icons.secondary,
-                    ),
-                    sizeDp = 24,
-                ),
-                innerPadding = PaddingValues(vertical = 12.dp),
-            )
-            HackathonBlock(
-                mainPart = HackathonBlockMainPart(
-                    title = HackathonBlockMainPart.Text(
-                        text = model.chosenStage.plannedStartDate,
-                    ),
-                    subtitle = HackathonBlockMainPart.Text(
-                        text = "Начало работ, запланированное",
-                    ),
-                ),
-                leftPart = HackathonBlockLeftPart.Icon(
-                    source = ImageSource.FromResource(
-                        resId = R.drawable.ic_event_24dp,
-                        contentDescription = null,
-                        tint = HackathonTheme.colors.icons.secondary,
-                    ),
-                    sizeDp = 24,
-                ),
-                innerPadding = PaddingValues(vertical = 12.dp),
-            )
-            HackathonBlock(
-                mainPart = HackathonBlockMainPart(
-                    title = HackathonBlockMainPart.Text(
-                        text = model.chosenStage.actualStartDate,
-                    ),
-                    subtitle = HackathonBlockMainPart.Text(
-                        text = "Начало работ, фактическое",
-                    ),
-                ),
-                leftPart = HackathonBlockLeftPart.Icon(
-                    source = ImageSource.FromResource(
-                        resId = R.drawable.ic_event_24dp,
-                        contentDescription = null,
-                        tint = HackathonTheme.colors.icons.secondary,
-                    ),
-                    sizeDp = 24,
-                ),
-                innerPadding = PaddingValues(vertical = 12.dp),
-            )
-            HackathonBlock(
-                mainPart = HackathonBlockMainPart(
-                    title = HackathonBlockMainPart.Text(
-                        text = model.chosenStage.plannedEndDate,
-                    ),
-                    subtitle = HackathonBlockMainPart.Text(
-                        text = "Окончание работ, запланированное",
-                    ),
-                ),
-                leftPart = HackathonBlockLeftPart.Icon(
-                    source = ImageSource.FromResource(
-                        resId = R.drawable.ic_event_available_24dp,
-                        contentDescription = null,
-                        tint = HackathonTheme.colors.icons.secondary,
-                    ),
-                    sizeDp = 24,
-                ),
-                innerPadding = PaddingValues(vertical = 12.dp),
-            )
-            HackathonBlock(
-                mainPart = HackathonBlockMainPart(
-                    title = HackathonBlockMainPart.Text(
-                        text = model.chosenStage.actualEndDate,
-                    ),
-                    subtitle = HackathonBlockMainPart.Text(
-                        text = "Окончание работ, фактическое",
-                    ),
-                ),
-                leftPart = HackathonBlockLeftPart.Icon(
-                    source = ImageSource.FromResource(
-                        resId = R.drawable.ic_event_available_24dp,
-                        contentDescription = null,
-                        tint = HackathonTheme.colors.icons.secondary,
-                    ),
-                    sizeDp = 24,
-                ),
-                innerPadding = PaddingValues(vertical = 12.dp),
-            )
-        }
-        Spacer(modifier = Modifier.height(8.dp))
-        HorizontalDivider(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            thickness = 1.dp,
-            color = HackathonTheme.colors.elements.lightGray,
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        model.chosenStage.documents.forEach { document ->
-            Row(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                horizontalArrangement = Arrangement.spacedBy(10.dp),
-                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_description_24dp),
-                    contentDescription = null,
-                    tint = HackathonTheme.colors.icons.primary,
+                items(model.stages) { stage ->
+                    StageButton(
+                        model = stage,
+                        isChosen = model.chosenStage == stage,
+                        onClick = onStageButtonClick,
+                    )
+                }
+            }
+            Column(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                HackathonBlock(
+                    mainPart = HackathonBlockMainPart(
+                        title = HackathonBlockMainPart.Text(
+                            text = model.chosenStage.subExecutorName,
+                        ),
+                        subtitle = HackathonBlockMainPart.Text(
+                            text = "Субподрядчик",
+                        ),
+                    ),
+                    leftPart = HackathonBlockLeftPart.Icon(
+                        source = ImageSource.FromResource(
+                            resId = R.drawable.ic_build_24dp,
+                            contentDescription = null,
+                            tint = HackathonTheme.colors.icons.secondary,
+                        ),
+                        sizeDp = 24,
+                    ),
+                    innerPadding = PaddingValues(vertical = 12.dp),
                 )
-                Text(
-                    modifier = Modifier.clickable {
-                        val fileName = "${UUID.randomUUID()}.${document.extension}"
-                        tryDownloadDocument(
-                            url = document.url,
-                            context = context,
-                            fileName = fileName,
-                        )
-                    },
-                    text = document.title,
-                    color = HackathonTheme.colors.elements.link,
-                    style = HackathonTheme.typography.texts.textM,
+                HackathonBlock(
+                    mainPart = HackathonBlockMainPart(
+                        title = HackathonBlockMainPart.Text(
+                            text = model.chosenStage.subExecutorPhone,
+                        ),
+                        subtitle = HackathonBlockMainPart.Text(
+                            text = "Телефон субподрядчика",
+                        ),
+                    ),
+                    leftPart = HackathonBlockLeftPart.Icon(
+                        source = ImageSource.FromResource(
+                            resId = R.drawable.ic_call_24dp,
+                            contentDescription = null,
+                            tint = HackathonTheme.colors.icons.secondary,
+                        ),
+                        sizeDp = 24,
+                    ),
+                    innerPadding = PaddingValues(vertical = 12.dp),
+                )
+                HackathonBlock(
+                    mainPart = HackathonBlockMainPart(
+                        title = HackathonBlockMainPart.Text(
+                            text = model.chosenStage.subExecutorAddress,
+                        ),
+                        subtitle = HackathonBlockMainPart.Text(
+                            text = "Адрес субподрядчика",
+                        ),
+                    ),
+                    leftPart = HackathonBlockLeftPart.Icon(
+                        source = ImageSource.FromResource(
+                            resId = R.drawable.ic_home_24dp,
+                            contentDescription = null,
+                            tint = HackathonTheme.colors.icons.secondary,
+                        ),
+                        sizeDp = 24,
+                    ),
+                    innerPadding = PaddingValues(vertical = 12.dp),
+                )
+                HackathonBlock(
+                    mainPart = HackathonBlockMainPart(
+                        title = HackathonBlockMainPart.Text(
+                            text = model.chosenStage.plannedStartDate,
+                        ),
+                        subtitle = HackathonBlockMainPart.Text(
+                            text = "Начало работ, запланированное",
+                        ),
+                    ),
+                    leftPart = HackathonBlockLeftPart.Icon(
+                        source = ImageSource.FromResource(
+                            resId = R.drawable.ic_event_24dp,
+                            contentDescription = null,
+                            tint = HackathonTheme.colors.icons.secondary,
+                        ),
+                        sizeDp = 24,
+                    ),
+                    innerPadding = PaddingValues(vertical = 12.dp),
+                )
+                HackathonBlock(
+                    mainPart = HackathonBlockMainPart(
+                        title = HackathonBlockMainPart.Text(
+                            text = model.chosenStage.actualStartDate,
+                        ),
+                        subtitle = HackathonBlockMainPart.Text(
+                            text = "Начало работ, фактическое",
+                        ),
+                    ),
+                    leftPart = HackathonBlockLeftPart.Icon(
+                        source = ImageSource.FromResource(
+                            resId = R.drawable.ic_event_24dp,
+                            contentDescription = null,
+                            tint = HackathonTheme.colors.icons.secondary,
+                        ),
+                        sizeDp = 24,
+                    ),
+                    innerPadding = PaddingValues(vertical = 12.dp),
+                )
+                HackathonBlock(
+                    mainPart = HackathonBlockMainPart(
+                        title = HackathonBlockMainPart.Text(
+                            text = model.chosenStage.plannedEndDate,
+                        ),
+                        subtitle = HackathonBlockMainPart.Text(
+                            text = "Окончание работ, запланированное",
+                        ),
+                    ),
+                    leftPart = HackathonBlockLeftPart.Icon(
+                        source = ImageSource.FromResource(
+                            resId = R.drawable.ic_event_available_24dp,
+                            contentDescription = null,
+                            tint = HackathonTheme.colors.icons.secondary,
+                        ),
+                        sizeDp = 24,
+                    ),
+                    innerPadding = PaddingValues(vertical = 12.dp),
+                )
+                HackathonBlock(
+                    mainPart = HackathonBlockMainPart(
+                        title = HackathonBlockMainPart.Text(
+                            text = model.chosenStage.actualEndDate,
+                        ),
+                        subtitle = HackathonBlockMainPart.Text(
+                            text = "Окончание работ, фактическое",
+                        ),
+                    ),
+                    leftPart = HackathonBlockLeftPart.Icon(
+                        source = ImageSource.FromResource(
+                            resId = R.drawable.ic_event_available_24dp,
+                            contentDescription = null,
+                            tint = HackathonTheme.colors.icons.secondary,
+                        ),
+                        sizeDp = 24,
+                    ),
+                    innerPadding = PaddingValues(vertical = 12.dp),
                 )
             }
+            Spacer(modifier = Modifier.height(8.dp))
+            HorizontalDivider(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                thickness = 1.dp,
+                color = HackathonTheme.colors.elements.lightGray,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            model.chosenStage.documents.forEach { document ->
+                Row(
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_description_24dp),
+                        contentDescription = null,
+                        tint = HackathonTheme.colors.icons.primary,
+                    )
+                    Text(
+                        modifier = Modifier.clickable {
+                            val fileName = "${UUID.randomUUID()}.${document.extension}"
+                            tryDownloadDocument(
+                                url = document.url,
+                                context = context,
+                                fileName = fileName,
+                            )
+                        },
+                        text = document.title,
+                        color = HackathonTheme.colors.elements.link,
+                        style = HackathonTheme.typography.texts.textM,
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(12.dp))
         }
-        Spacer(modifier = Modifier.height(12.dp))
     }
+
 }
 
 @Composable
 private fun StageButton(
-    model: ObjectContractItem.Stages.Stage,
+    model: ContractDetailsItem.Stages.Stage,
     isChosen: Boolean,
-    onClick: (ObjectContractItem.Stages.Stage) -> Unit,
+    onClick: (ContractDetailsItem.Stages.Stage) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val buttonColor = if (isChosen) {
@@ -318,7 +321,7 @@ fun tryDownloadDocument(url: String, context: Context, fileName: String) {
 @Composable
 private fun StagesItemPreview() = HackathonTheme {
     val stages = listOf(
-        ObjectContractItem.Stages.Stage(
+        ContractDetailsItem.Stages.Stage(
             name = "Планирование",
             status = StatusWorkEnum.COMPLETED,
             plannedStartDate = "10 июля 2019",
@@ -329,19 +332,19 @@ private fun StagesItemPreview() = HackathonTheme {
             subExecutorPhone = "+7 (934) 587-65-09",
             subExecutorAddress = "г. Москва, ул. Пушкина, д.1 к. 69",
             documents = listOf(
-                ObjectContractItem.Stages.Document(
+                ContractDetailsItem.Stages.Document(
                     title = "Паспорт объекта",
                     url = "",
                     extension = "",
                 ),
-                ObjectContractItem.Stages.Document(
+                ContractDetailsItem.Stages.Document(
                     title = "Фото объекта",
                     url = "",
                     extension = "",
                 ),
             ),
         ),
-        ObjectContractItem.Stages.Stage(
+        ContractDetailsItem.Stages.Stage(
             name = "Название второго этапа",
             status = StatusWorkEnum.IN_PROCESS,
             plannedStartDate = "15 сентября 2024",
@@ -352,19 +355,19 @@ private fun StagesItemPreview() = HackathonTheme {
             subExecutorPhone = "+7 (934) 587-65-09",
             subExecutorAddress = "г. Москва, ул. Пушкина, д.1 к. 69",
             documents = listOf(
-                ObjectContractItem.Stages.Document(
+                ContractDetailsItem.Stages.Document(
                     title = "Название документа",
                     url = "",
                     extension = "",
                 ),
-                ObjectContractItem.Stages.Document(
+                ContractDetailsItem.Stages.Document(
                     title = "Другое название документа",
                     url = "",
                     extension = "",
                 ),
             ),
         ),
-        ObjectContractItem.Stages.Stage(
+        ContractDetailsItem.Stages.Stage(
             name = "Название третьего этапа",
             status = StatusWorkEnum.PLANNED,
             plannedStartDate = "10 июля 2019",
@@ -375,12 +378,12 @@ private fun StagesItemPreview() = HackathonTheme {
             subExecutorPhone = "+7 (934) 587-65-09",
             subExecutorAddress = "г. Москва, ул. Пушкина, д.1 к. 69",
             documents = listOf(
-                ObjectContractItem.Stages.Document(
+                ContractDetailsItem.Stages.Document(
                     title = "Паспорт объекта",
                     url = "",
                     extension = "",
                 ),
-                ObjectContractItem.Stages.Document(
+                ContractDetailsItem.Stages.Document(
                     title = "Фото объекта",
                     url = "",
                     extension = "",
@@ -389,7 +392,7 @@ private fun StagesItemPreview() = HackathonTheme {
         ),
     )
     var chosenStage by remember { mutableStateOf(stages[0]) }
-    val model = ObjectContractItem.Stages(
+    val model = ContractDetailsItem.Stages(
         stages = stages,
         chosenStage = chosenStage,
     )

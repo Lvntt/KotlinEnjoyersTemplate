@@ -11,23 +11,59 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.kotlinenjoyerstemplate.R
-import com.example.kotlinenjoyerstemplate.contract_details.presentation.model.ObjectContractItem
+import com.example.kotlinenjoyerstemplate.contract_details.ContractDetailsUiState
+import com.example.kotlinenjoyerstemplate.contract_details.presentation.model.ContractDetailsItem
+import com.example.kotlinenjoyerstemplate.contract_details.presentation.viewmodel.ContractDetailsViewModel
 import com.example.kotlinenjoyerstemplate.ui.common.ImageSource
 import com.example.kotlinenjoyerstemplate.ui.components.block.HackathonBlock
 import com.example.kotlinenjoyerstemplate.ui.components.block.model.HackathonBlockLeftPart
 import com.example.kotlinenjoyerstemplate.ui.components.block.model.HackathonBlockMainPart
+import com.example.kotlinenjoyerstemplate.ui.components.error_block.HackathonErrorScreen
 import com.example.kotlinenjoyerstemplate.ui.components.header_block.HackathonHeaderBlock
 import com.example.kotlinenjoyerstemplate.ui.components.header_block.model.HackathonHeaderBlockMainPart
+import com.example.kotlinenjoyerstemplate.ui.components.loader_block.HackathonLoaderScreen
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 
 @Composable
 fun ContractDetails(
-    topBar: ObjectContractItem.TopBar,
-    model: List<ObjectContractItem>,
-    onStageButtonClick: (ObjectContractItem.Stages.Stage) -> Unit,
+    viewModel: ContractDetailsViewModel,
+    onStageButtonClick: (ContractDetailsItem.Stages.Stage) -> Unit,
+    onBack: () -> Unit,
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    when (uiState) {
+        ContractDetailsUiState.Loading -> HackathonLoaderScreen()
+
+        is ContractDetailsUiState.Content -> {
+            val model = (uiState as ContractDetailsUiState.Content).model
+            val topBar = (uiState as ContractDetailsUiState.Content).topBar
+
+            ContractDetails(
+                model = model,
+                topBar = topBar,
+                onStageButtonClick = onStageButtonClick,
+                onBack = onBack,
+            )
+        }
+
+        ContractDetailsUiState.Error -> HackathonErrorScreen(
+            onRetry = viewModel::loadData,
+        )
+    }
+}
+
+@Composable
+fun ContractDetails(
+    topBar: ContractDetailsItem.TopBar,
+    model: List<ContractDetailsItem>,
+    onStageButtonClick: (ContractDetailsItem.Stages.Stage) -> Unit,
+    onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -49,6 +85,7 @@ fun ContractDetails(
                         contentDescription = null,
                     ),
                     sizeDp = 24,
+                    onClick = onBack,
                 ),
                 shape = RoundedCornerShape(
                     bottomStart = 12.dp,
@@ -65,12 +102,9 @@ fun ContractDetails(
                 .padding(paddings),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            item {
-                Spacer(modifier = Modifier.height(12.dp))
-            }
             items(model) { item ->
                 when (item) {
-                    is ObjectContractItem.Header -> {
+                    is ContractDetailsItem.Header -> {
                         HackathonHeaderBlock(
                             mainPart = HackathonHeaderBlockMainPart(
                                 title = HackathonHeaderBlockMainPart.Text(
@@ -87,26 +121,26 @@ fun ContractDetails(
                         )
                     }
 
-                    is ObjectContractItem.GeneralObjectInfo -> {
+                    is ContractDetailsItem.GeneralInfoDetails -> {
                         GeneralObjectInfoItem(model = item)
                     }
 
-                    is ObjectContractItem.ContractDescription -> {
+                    is ContractDetailsItem.ContractDetailsDescription -> {
                         ContractDescriptionItem(model = item)
                     }
 
-                    is ObjectContractItem.Stages -> {
+                    is ContractDetailsItem.Stages -> {
                         StagesItem(
                             model = item,
                             onStageButtonClick = onStageButtonClick,
                         )
                     }
 
-                    is ObjectContractItem.Contacts -> {
+                    is ContractDetailsItem.Contacts -> {
                         ContactsItem(model = item)
                     }
 
-                    is ObjectContractItem.TopBar -> Unit
+                    is ContractDetailsItem.TopBar -> Unit
                 }
             }
             item {
