@@ -65,6 +65,31 @@ object HackathonButton {
     )
 
     @Composable
+    fun Added(
+        onClick: () -> Unit,
+        text: String,
+        modifier: Modifier = Modifier,
+        icon: HackathonButtonIcon? = null,
+        textStyle: TextStyle = HackathonTheme.typography.titles.titleL,
+        buttonColors: ButtonColors = hackathonButtonColors(),
+        contentPadding: PaddingValues = PaddingValues(horizontal = 20.dp, vertical = 12.dp),
+        shape: Shape = RoundedCornerShape(8.dp),
+        isEnabled: Boolean = true,
+        isFillMaxWidth: Boolean = false,
+    ) = HackathonButton(
+        onClick = onClick,
+        text = text,
+        modifier = modifier,
+        icon = icon,
+        textStyle = textStyle,
+        buttonColors = buttonColors,
+        contentPadding = contentPadding,
+        shape = shape,
+        isEnabled = isEnabled,
+        isFillMaxWidth = isFillMaxWidth,
+    )
+
+    @Composable
     fun S(
         onClick: () -> Unit,
         text: String,
