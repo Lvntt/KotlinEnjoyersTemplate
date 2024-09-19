@@ -8,4 +8,6 @@ sealed interface MapMainEvent {
 
     data object ObjectUnselected : MapMainEvent
 
+    data object BottomSheetOpened : MapMainEvent
+
 }

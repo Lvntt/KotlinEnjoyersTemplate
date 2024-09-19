@@ -27,6 +27,7 @@ import androidx.compose.ui.util.fastForEachIndexed
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.example.kotlinenjoyerstemplate.R
+import com.example.kotlinenjoyerstemplate.company_list.compose.CompanyList
 import com.example.kotlinenjoyerstemplate.map.presentation.model.zone.ZoneRenderMode
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.MapSubScreen
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.MapSubScreenStore
@@ -104,7 +105,7 @@ class MapMainSubScreen(
                 .padding(8.dp)
                 .navigationBarsPadding(),
             horizontalAlignment = Alignment.End,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             HackathonButton.M(
                 onClick = {
@@ -123,6 +124,23 @@ class MapMainSubScreen(
                 ),
                 shape = RoundedCornerShape(12.dp),
             )
+            HackathonButton.M(
+                onClick = {
+                    viewModel.onEvent(MapMainEvent.BottomSheetOpened)
+                },
+                text = "Список компаний",
+                modifier = Modifier.shadow(2.dp, shape = RoundedCornerShape(12.dp)),
+                buttonColors = hackathonButtonColors(
+                    containerColor = HackathonTheme.colors.common.staticWhite,
+                    contentColor = HackathonTheme.colors.common.staticBlack,
+                ),
+                icon = HackathonButtonIcon(
+                    resId = R.drawable.ic_list_24dp,
+                    sizeDp = 24,
+                    tintColor = HackathonTheme.colors.icons.primary,
+                ),
+                shape = RoundedCornerShape(12.dp),
+            )
         }
     }
 
@@ -134,7 +152,7 @@ class MapMainSubScreen(
             val objectId = state.objectInfos[index].id
             val navController = rememberNavController()
             ObjectDetailsNavigation(navController, objectId)
-        }
+        } ?: CompanyList()
     }
 
     @Composable

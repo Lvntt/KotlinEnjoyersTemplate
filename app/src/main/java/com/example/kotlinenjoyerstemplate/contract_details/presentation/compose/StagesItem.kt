@@ -330,7 +330,7 @@ private fun StagesItemPreview() = HackathonTheme {
             actualEndDate = "1 октября 2019",
             subExecutorName = "ООО «Спектр»",
             subExecutorPhone = "+7 (934) 587-65-09",
-            subExecutorAddress = "г. Москва, ул. Пушкина, д.1 к. 69",
+            subExecutorAddress = "г. Москва, ул. Пушкина, д. 1 к. 69",
             documents = listOf(
                 ContractDetailsItem.Stages.Document(
                     title = "Паспорт объекта",
@@ -353,7 +353,7 @@ private fun StagesItemPreview() = HackathonTheme {
             actualEndDate = "15 сентября 2024",
             subExecutorName = "ООО «Спектр»",
             subExecutorPhone = "+7 (934) 587-65-09",
-            subExecutorAddress = "г. Москва, ул. Пушкина, д.1 к. 69",
+            subExecutorAddress = "г. Москва, ул. Пушкина, д. 1 к. 69",
             documents = listOf(
                 ContractDetailsItem.Stages.Document(
                     title = "Название документа",
@@ -376,7 +376,7 @@ private fun StagesItemPreview() = HackathonTheme {
             actualEndDate = "1 октября 2019",
             subExecutorName = "ООО «Спектр»",
             subExecutorPhone = "+7 (934) 587-65-09",
-            subExecutorAddress = "г. Москва, ул. Пушкина, д.1 к. 69",
+            subExecutorAddress = "г. Москва, ул. Пушкина, д. 1 к. 69",
             documents = listOf(
                 ContractDetailsItem.Stages.Document(
                     title = "Паспорт объекта",

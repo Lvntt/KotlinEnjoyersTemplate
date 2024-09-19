@@ -71,6 +71,10 @@ class MapMainViewModel(
             MapMainEvent.ObjectUnselected -> {
                 _state.value = _state.value.copy(selectedObjectInfoIndex = null)
             }
+
+            MapMainEvent.BottomSheetOpened -> {
+                _effects.tryEmit(MapMainEffect.OpenBottomSheet)
+            }
         }
     }
 
