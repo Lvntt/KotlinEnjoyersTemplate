@@ -1,5 +1,6 @@
 package com.example.kotlinenjoyerstemplate.plan_details.viewmodel
 
+import com.example.kotlinenjoyerstemplate.common.ExecutionProbabilityEnum
 import com.example.kotlinenjoyerstemplate.core.data.ObjectPlanView
 import com.example.kotlinenjoyerstemplate.core.util.toStatusWorkEnum
 import com.example.kotlinenjoyerstemplate.plan_details.model.PlanDetailsItem
@@ -42,6 +43,7 @@ class PlanDetailsFactory {
             PlanDetailsItem.Contracts.Contract(
                 id = contractModel.contractId,
                 name = contractModel.contractName,
+                executionProbability = ExecutionProbabilityEnum.entries.toTypedArray().random(),
                 generalExecutorName = contractModel.executorName,
             )
         }

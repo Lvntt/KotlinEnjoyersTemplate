@@ -30,7 +30,7 @@ class PlanDetailsViewModel(
     fun loadData() {
         _uiState.update { PlanDetailsUiState.Loading }
         viewModelScope.launch(Dispatchers.IO + handler) {
-            val detailsResponse = objectRepository.getPlanDetails(planId)
+            val detailsResponse = objectRepository.getPlanDetails(planId, isMock = true)
             val detailsUi = factory.getPlanDetailsUi(detailsResponse)
             val topBar = factory.getPlanDetailsTopBar(detailsResponse)
             _uiState.update {

@@ -5,6 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.example.kotlinenjoyerstemplate.R
 import com.example.kotlinenjoyerstemplate.plan_details.model.PlanDetailsItem
@@ -29,8 +33,20 @@ fun ContractsItem(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         model.contracts.forEach { contract ->
+            val statusAnnotatedText = buildAnnotatedString {
+                withStyle(style = SpanStyle(color = HackathonTheme.colors.text.secondary.default)) {
+                    append("Вероятность исполнения: ")
+                }
+                withStyle(style = SpanStyle(color = colorResource(id = contract.executionProbability.colorId))) {
+                    append(contract.executionProbability.text)
+                }
+            }
             HackathonBlock(
                 mainPart = HackathonBlockMainPart(
+                    status = HackathonBlockMainPart.Text(
+                        annotatedText = statusAnnotatedText,
+                        text = contract.executionProbability.text,
+                    ),
                     title = HackathonBlockMainPart.Text(
                         text = contract.name,
                     ),

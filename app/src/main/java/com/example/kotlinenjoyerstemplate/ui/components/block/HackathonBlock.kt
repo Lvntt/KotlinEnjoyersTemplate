@@ -92,7 +92,13 @@ fun HackathonBlock(
             },
         ) {
             mainPart.status?.let { status ->
-                Text(
+                status.annotatedText?.let {
+                    Text(
+                        text = it,
+                        color = status.color ?: HackathonTheme.colors.status.success,
+                        style = status.style ?: HackathonTheme.typography.texts.textS,
+                    )
+                } ?: Text(
                     text = status.text,
                     color = status.color ?: HackathonTheme.colors.status.success,
                     style = status.style ?: HackathonTheme.typography.texts.textS,

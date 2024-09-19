@@ -129,7 +129,7 @@ fun StagesItem(
                     ),
                     leftPart = HackathonBlockLeftPart.Icon(
                         source = ImageSource.FromResource(
-                            resId = R.drawable.ic_home_24dp,
+                            resId = R.drawable.ic_home_fill_24dp,
                             contentDescription = null,
                             tint = HackathonTheme.colors.icons.secondary,
                         ),

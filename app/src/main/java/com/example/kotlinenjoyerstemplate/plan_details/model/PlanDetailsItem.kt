@@ -1,5 +1,6 @@
 package com.example.kotlinenjoyerstemplate.plan_details.model
 
+import com.example.kotlinenjoyerstemplate.common.ExecutionProbabilityEnum
 import com.example.kotlinenjoyerstemplate.common.StatusWorkEnum
 
 sealed interface PlanDetailsItem {
@@ -30,6 +31,7 @@ sealed interface PlanDetailsItem {
 
         data class Contract(
             val id: Long,
+            val executionProbability: ExecutionProbabilityEnum,
             val name: String,
             val generalExecutorName: String,
         )
