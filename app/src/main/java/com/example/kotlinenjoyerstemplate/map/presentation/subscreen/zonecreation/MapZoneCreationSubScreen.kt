@@ -41,6 +41,7 @@ import com.example.kotlinenjoyerstemplate.ui.components.button.hackathonButtonCo
 import com.example.kotlinenjoyerstemplate.ui.components.button.model.HackathonButtonIcon
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 import com.mapbox.geojson.Point
+import com.mapbox.maps.CameraState
 import com.mapbox.maps.extension.compose.MapboxMapComposable
 import com.mapbox.maps.extension.compose.MapboxMapScope
 import com.mapbox.maps.extension.compose.annotation.generated.PointAnnotation
@@ -113,7 +114,7 @@ class MapZoneCreationSubScreen(
 
     @Composable
     @MapboxMapComposable
-    override fun MapboxMapScope.MapContent() {
+    override fun MapboxMapScope.MapContent(cameraState: CameraState?) {
         val state by viewModel.state.collectAsStateWithLifecycle()
         val marker =
             rememberIconImage(key = null, painter = painterResource(R.drawable.ic_map_point_48dp))
