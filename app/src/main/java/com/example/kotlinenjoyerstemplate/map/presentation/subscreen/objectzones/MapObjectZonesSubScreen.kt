@@ -1,6 +1,7 @@
 package com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import com.example.kotlinenjoyerstemplate.R
 import com.example.kotlinenjoyerstemplate.map.presentation.model.zone.ZoneRenderMode
 import com.example.kotlinenjoyerstemplate.map.presentation.model.zone.creation.ZoneCreationMode
@@ -29,6 +31,7 @@ import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones.model.MapObjectZonesMenuType
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones.model.MapObjectZonesState
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.zonecreation.MapZoneCreationSubScreen
+import com.example.kotlinenjoyerstemplate.navigation.RootNavDestination
 import com.example.kotlinenjoyerstemplate.ui.components.alert_dialog.HackathonAlertDialog
 import com.example.kotlinenjoyerstemplate.ui.components.alert_dialog.model.HackathonAlertDialogButton
 import com.example.kotlinenjoyerstemplate.ui.components.button.HackathonButton
@@ -80,7 +83,11 @@ class MapObjectZonesSubScreen(private val store: MapSubScreenStore) :
     )
 
     @OptIn(ExperimentalMaterial3Api::class)
-    override suspend fun handleEffects(sheetState: BottomSheetScaffoldState, context: Context) {
+    override suspend fun handleEffects(
+        sheetState: BottomSheetScaffoldState,
+        context: Context,
+        navController: NavController,
+    ) {
         viewModel.effects.collect { effect ->
             when (effect) {
                 MapObjectZonesEffect.CloseBottomSheet -> sheetState.bottomSheetState.hide()
@@ -88,7 +95,18 @@ class MapObjectZonesSubScreen(private val store: MapSubScreenStore) :
                 is MapObjectZonesEffect.NavigateToZoneCreation -> store.navigateWithParams<MapZoneCreationSubScreen>(
                     effect.type
                 )
+
                 MapObjectZonesEffect.NavigateBack -> store.navigateBack()
+                is MapObjectZonesEffect.Continue -> {
+                    navController.navigate(RootNavDestination.ObjectCreation.getNavigationRoute(effect.arg))
+                }
+
+                MapObjectZonesEffect.ShowNoZonesError -> Toast.makeText(
+                    context,
+                    "Для продолжения укажите зоны",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
             }
         }
     }

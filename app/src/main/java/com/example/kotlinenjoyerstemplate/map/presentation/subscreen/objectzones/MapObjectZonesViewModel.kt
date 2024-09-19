@@ -1,10 +1,12 @@
 package com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones
 
+import com.example.kotlinenjoyerstemplate.map.data.model.ZoneList
 import com.example.kotlinenjoyerstemplate.map.presentation.model.zone.Zone
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.MapSubScreenViewModel
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones.model.MapObjectZonesEffect
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones.model.MapObjectZonesEvent
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones.model.MapObjectZonesState
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -33,7 +35,24 @@ class MapObjectZonesViewModel :
                 _effects.tryEmit(MapObjectZonesEffect.NavigateBack)
             }
             MapObjectZonesEvent.ContinueClicked -> {
-                //navigate to next
+                if (_state.value.zones.isEmpty()) {
+                    _effects.tryEmit(MapObjectZonesEffect.ShowNoZonesError)
+                } else {
+                    val converted = ZoneList(_state.value.zones.map { zone ->
+                        com.example.kotlinenjoyerstemplate.map.data.model.Zone(
+                            points = zone.points.map { point ->
+                                com.example.kotlinenjoyerstemplate.map.data.model.Point(
+                                    latitude = point.latitude(),
+                                    longitude = point.longitude()
+                                )
+                            },
+                            renderMode = zone.renderMode
+                        )
+                    })
+                    _effects.tryEmit(MapObjectZonesEffect.Continue(
+                        Gson().toJson(converted)
+                    ))
+                }
             }
             is MapObjectZonesEvent.CreateZoneClicked -> {
                 _effects.tryEmit(MapObjectZonesEffect.CloseBottomSheet)

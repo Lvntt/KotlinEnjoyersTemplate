@@ -77,7 +77,7 @@ fun MapScreen(
     val context = LocalContext.current
 
     LaunchedEffect(currentSubScreen, sheetState) {
-        currentSubScreen.handleEffects(sheetState, context)
+        currentSubScreen.handleEffects(sheetState, context, navController)
     }
     LaunchedEffect(currentSubScreen) {
         snapshotFlow { sheetState.bottomSheetState.currentValue }.collect { sheetValue ->
