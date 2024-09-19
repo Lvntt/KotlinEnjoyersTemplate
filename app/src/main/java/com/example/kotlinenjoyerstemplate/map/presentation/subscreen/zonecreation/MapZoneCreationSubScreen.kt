@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import com.example.kotlinenjoyerstemplate.R
 import com.example.kotlinenjoyerstemplate.map.presentation.model.zone.ZoneRenderMode
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.MapSubScreen
@@ -79,7 +80,11 @@ class MapZoneCreationSubScreen(
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
-    override suspend fun handleEffects(sheetState: BottomSheetScaffoldState, context: Context) {
+    override suspend fun handleEffects(
+        sheetState: BottomSheetScaffoldState,
+        context: Context,
+        navController: NavController,
+    ) {
         viewModel.effects.collect { effect ->
             when (effect) {
                 MapZoneCreationEffect.CloseBottomSheet -> sheetState.bottomSheetState.hide()
@@ -89,6 +94,7 @@ class MapZoneCreationSubScreen(
                 is MapZoneCreationEffect.NavigateWithNewZone -> store.navigateBackWithParams(
                     effect.zone,
                 )
+
                 MapZoneCreationEffect.OpenBottomSheet -> sheetState.bottomSheetState.show()
 
                 MapZoneCreationEffect.ShowRouteError -> Toast.makeText(

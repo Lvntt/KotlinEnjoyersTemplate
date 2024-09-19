@@ -3,6 +3,7 @@ package com.example.kotlinenjoyerstemplate
 import android.app.Application
 import com.example.kotlinenjoyerstemplate.contract_details.di.contractDetailsPresentationModule
 import com.example.kotlinenjoyerstemplate.core.di.coreDataModule
+import com.example.kotlinenjoyerstemplate.create_screens.provideCreateScreensModule
 import com.example.kotlinenjoyerstemplate.map.di.provideMapPresentationModule
 import com.example.kotlinenjoyerstemplate.object_details.di.objectDetailsPresentationModule
 import com.example.kotlinenjoyerstemplate.plan_details.di.planDetailsPresentationModule
@@ -22,6 +23,7 @@ class HackathonApplication : Application() {
                 objectDetailsPresentationModule(),
                 planDetailsPresentationModule(),
                 contractDetailsPresentationModule(),
+                provideCreateScreensModule()
             )
         }
     }

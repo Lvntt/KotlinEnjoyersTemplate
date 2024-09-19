@@ -12,4 +12,8 @@ sealed interface MapObjectZonesEffect {
 
     data object NavigateBack : MapObjectZonesEffect
 
+    data object ShowNoZonesError : MapObjectZonesEffect
+
+    data class Continue(val arg: String) : MapObjectZonesEffect
+
 }

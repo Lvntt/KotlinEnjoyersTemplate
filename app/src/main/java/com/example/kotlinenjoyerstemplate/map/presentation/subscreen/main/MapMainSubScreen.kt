@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import androidx.compose.ui.util.fastForEachIndexed
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kotlinenjoyerstemplate.R
 import com.example.kotlinenjoyerstemplate.company_list.compose.CompanyList
@@ -61,7 +62,11 @@ class MapMainSubScreen(
     override val isPartiallyExpandable: Boolean = true
 
     @OptIn(ExperimentalMaterial3Api::class)
-    override suspend fun handleEffects(sheetState: BottomSheetScaffoldState, context: Context) {
+    override suspend fun handleEffects(
+        sheetState: BottomSheetScaffoldState,
+        context: Context,
+        navController: NavController,
+    ) {
         viewModel.effects.collect { effect ->
             when (effect) {
                 MapMainEffect.NavigateToNewObject -> store.navigateWithParams<MapObjectZonesSubScreen>(
