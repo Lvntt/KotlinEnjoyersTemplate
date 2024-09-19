@@ -2,10 +2,12 @@ package com.example.kotlinenjoyerstemplate.navigation
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
 import androidx.navigation.navArgument
 import com.example.kotlinenjoyerstemplate.create_screens.presentation.CreationScreen
 import com.example.kotlinenjoyerstemplate.map.MapScreen
@@ -43,14 +45,14 @@ fun RootNavigation(
         navController = navController,
         startDestination = RootNavDestination.MapScreen.getDestination(),
     ) {
-        composable(route = RootNavDestination.MapScreen.getDestination()) {
+        composable(route = RootNavDestination.MapScreen.getDestination()) { backStackEntry ->
             MapScreen(navController = navController)
         }
-        composable(route = RootNavDestination.ObjectCreation.getDestination(), arguments = listOf(
+        dialog(route = RootNavDestination.ObjectCreation.getDestination(), arguments = listOf(
             navArgument("zonesArg") {
                 type = NavType.StringType
             }
-        )) {
+        ), dialogProperties = DialogProperties(usePlatformDefaultWidth = false)) {
             val zones = Gson().fromJson(it.arguments?.getString("zonesArg"), ZoneList::class.java)
             CreationScreen(
                 viewModel = koinViewModel(parameters = { parametersOf(zones.zones) }),

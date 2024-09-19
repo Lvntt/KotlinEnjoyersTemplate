@@ -17,7 +17,7 @@ class MapSubScreenStore : ViewModel() {
 
     val screens = listOf(
         MapMainSubScreen(this, MapMainViewModel(objectRepo, viewModelScope)),
-        MapObjectZonesSubScreen(this),
+        MapObjectZonesSubScreen(this, viewModelScope),
         MapZoneCreationSubScreen(this, MapZoneCreationViewModel(viewModelScope))
     )
 

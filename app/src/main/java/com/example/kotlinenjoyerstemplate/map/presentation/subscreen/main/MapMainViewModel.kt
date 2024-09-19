@@ -8,6 +8,7 @@ import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.main.model.
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.main.model.MapMainEvent
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.main.model.MapMainState
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.main.model.ObjectInfo
+import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.objectzones.ZoneList
 import com.mapbox.geojson.Point
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +17,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 class MapMainViewModel(
     private val repository: ObjectRepository,
@@ -28,7 +30,16 @@ class MapMainViewModel(
     private val _effects = MutableSharedFlow<MapMainEffect>(extraBufferCapacity = 1)
     override val effects = _effects.asSharedFlow()
 
-    override fun acceptNavigationParams(params: Any) {}
+    override fun acceptNavigationParams(params: Any) {
+        if (params is ZoneList) {
+            _state.value = _state.value.copy(objectInfos = _state.value.objectInfos + ObjectInfo(
+                id = Random.nextLong(),
+                planProgressions = emptyList(),
+                viewPoint = getObjectMarkerPosition(params.zones),
+                zones = params.zones
+            ))
+        }
+    }
 
     init {
         viewModelScope.launch(Dispatchers.IO) {

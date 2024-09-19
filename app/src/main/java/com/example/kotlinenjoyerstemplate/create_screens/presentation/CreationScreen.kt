@@ -7,6 +7,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.example.kotlinenjoyerstemplate.Marker
 import com.example.kotlinenjoyerstemplate.create_screens.presentation.create_object.CreateObjectScreen
 import com.example.kotlinenjoyerstemplate.create_screens.presentation.create_plan.CreatePlanScreen
 import com.example.kotlinenjoyerstemplate.create_screens.presentation.model.ObjectCreationEffect
@@ -23,6 +24,7 @@ fun CreationScreen(
         if (state.currentPlanIndex != null) {
             viewModel.onEvent(ObjectCreationEvent.BackClicked)
         } else {
+            Marker.markerFlow.value = null
             navController.popBackStack()
         }
     }
@@ -30,7 +32,20 @@ fun CreationScreen(
     LaunchedEffect(Unit) {
         viewModel.effects.collect { effect ->
             when (effect) {
-                ObjectCreationEffect.CloseScreen -> navController.popBackStack()
+                ObjectCreationEffect.CloseScreen -> {
+                    Marker.markerFlow.value = false
+                    navController.popBackStack()
+                }
+
+                ObjectCreationEffect.SaveObject -> {
+                    Marker.markerFlow.value = true
+                    navController.popBackStack()
+                }
+
+                ObjectCreationEffect.NavigateBack -> {
+                    Marker.markerFlow.value = null
+                    navController.popBackStack()
+                }
             }
         }
     }

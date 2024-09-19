@@ -41,7 +41,7 @@ class CreationViewModel(
                         )
                     }
                 } else {
-                    _effects.tryEmit(ObjectCreationEffect.CloseScreen)
+                    _effects.tryEmit(ObjectCreationEffect.NavigateBack)
                 }
             }
 
@@ -136,7 +136,7 @@ class CreationViewModel(
                         )
                     }
                 } else {
-                    // TODO
+                    _effects.tryEmit(ObjectCreationEffect.SaveObject)
                 }
             }
         }

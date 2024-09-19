@@ -30,6 +30,7 @@ fun CreateObjectScreen(
     onEvent: (ObjectCreationEvent) -> Unit,
 ) {
     Scaffold(
+        modifier = Modifier.fillMaxSize(),
         topBar = {
             CreateTopAppBar(
                 title = "Объект",

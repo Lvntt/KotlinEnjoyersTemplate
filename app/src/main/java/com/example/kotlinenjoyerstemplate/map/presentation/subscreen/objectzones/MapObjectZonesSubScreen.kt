@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.example.kotlinenjoyerstemplate.Marker
 import com.example.kotlinenjoyerstemplate.R
 import com.example.kotlinenjoyerstemplate.map.presentation.model.zone.ZoneRenderMode
 import com.example.kotlinenjoyerstemplate.map.presentation.model.zone.creation.ZoneCreationMode
@@ -43,8 +44,10 @@ import com.mapbox.maps.extension.compose.MapboxMapComposable
 import com.mapbox.maps.extension.compose.MapboxMapScope
 import com.mapbox.maps.extension.compose.annotation.generated.PolygonAnnotation
 import com.mapbox.maps.extension.compose.annotation.generated.PolylineAnnotation
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
-class MapObjectZonesSubScreen(private val store: MapSubScreenStore) :
+class MapObjectZonesSubScreen(private val store: MapSubScreenStore, private val viewModelScope: CoroutineScope) :
     MapSubScreen<MapObjectZonesState, MapObjectZonesEvent, MapObjectZonesEffect> {
 
     override val viewModel = MapObjectZonesViewModel()
@@ -82,6 +85,18 @@ class MapObjectZonesSubScreen(private val store: MapSubScreenStore) :
         ),
     )
 
+    init {
+        viewModelScope.launch {
+            Marker.markerFlow.collect {
+                if (it == true) {
+                    store.navigateBackWithParams(ZoneList(viewModel.state.value.zones))
+                } else if (it == false) {
+                    store.navigateBack()
+                }
+            }
+        }
+    }
+
     @OptIn(ExperimentalMaterial3Api::class)
     override suspend fun handleEffects(
         sheetState: BottomSheetScaffoldState,
@@ -98,7 +113,12 @@ class MapObjectZonesSubScreen(private val store: MapSubScreenStore) :
 
                 MapObjectZonesEffect.NavigateBack -> store.navigateBack()
                 is MapObjectZonesEffect.Continue -> {
-                    navController.navigate(RootNavDestination.ObjectCreation.getNavigationRoute(effect.arg))
+                    Marker.markerFlow.value = null
+                    navController.navigate(
+                        RootNavDestination.ObjectCreation.getNavigationRoute(
+                            effect.arg
+                        )
+                    )
                 }
 
                 MapObjectZonesEffect.ShowNoZonesError -> Toast.makeText(
