@@ -30,7 +30,7 @@ class PlanDetailsFactory {
 
     private fun getPlanStatusModel(model: ObjectPlanView) = PlanDetailsItem.PlanStatus(
         completePercentage = "${model.percentageComplete}%",
-        creationDate = model.creationDate.toRussianFormattedDate(),
+        creationDate = model.firstPlannedStartDate.toRussianFormattedDate(),
     )
 
     private fun getContractsHeader() = PlanDetailsItem.Header(

@@ -22,7 +22,7 @@ data class ObjectPlanView(
     val `object`: ObjectShortInfoView,
     val plan: PlanShortInfoView,
     val percentageComplete: Int,
-    val creationDate: String,
+    val firstPlannedStartDate: String,
     val contracts: List<ContractShortInfoView>,
 )
 
@@ -47,7 +47,6 @@ data class ContractView(
     val phoneCustomer: String,
     val nameGeneralExecutor: String,
     val phoneGeneralExecutor: String,
-    val status: String,
     val generalExecutorOrganization: Organization,
     val customerOrganization: Organization,
     val stages: List<ObjectStageModel>,
