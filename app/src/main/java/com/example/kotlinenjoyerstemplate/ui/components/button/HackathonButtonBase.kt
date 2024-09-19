@@ -100,6 +100,63 @@ fun HackathonButtonBase(
     }
 }
 
+@Composable
+fun HackathonButton(
+    onClick: () -> Unit,
+    text: String?,
+    modifier: Modifier = Modifier,
+    icon: HackathonButtonIcon? = null,
+    textStyle: TextStyle = HackathonTheme.typography.titles.titleL,
+    buttonColors: ButtonColors = hackathonButtonColors(),
+    contentPadding: PaddingValues = PaddingValues(horizontal = 20.dp, vertical = 12.dp),
+    shape: Shape = RoundedCornerShape(8.dp),
+    isEnabled: Boolean = true,
+    isFillMaxWidth: Boolean = false,
+) = Box(modifier) {
+    Box(
+        modifier = Modifier
+            .clip(shape)
+            .background(buttonColors.containerColor)
+            .then(
+                if (isEnabled)
+                    Modifier.clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = ripple(),
+                        onClick = onClick,
+                    )
+                else Modifier
+            )
+            .then(
+                if (isFillMaxWidth)
+                    Modifier.fillMaxWidth()
+                else Modifier
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        Row(
+            modifier = Modifier.padding(contentPadding),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+        ) {
+            text?.let { text ->
+                Text(
+                    text = text,
+                    style = textStyle,
+                    color = buttonColors.contentColor,
+                )
+            }
+            icon?.let { icon ->
+                Icon(
+                    modifier = Modifier.size(icon.sizeDp.dp),
+                    imageVector = ImageVector.vectorResource(id = icon.resId),
+                    contentDescription = null,
+                    tint = icon.tintColor ?: HackathonTheme.colors.icons.primary,
+                )
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 private fun HackathonButtonBasePreview() = HackathonTheme {
