@@ -1,4 +1,4 @@
-package com.example.kotlinenjoyerstemplate.create_screens.create_contract
+package com.example.kotlinenjoyerstemplate.create_screens.create_stage
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -39,11 +39,11 @@ import com.example.kotlinenjoyerstemplate.ui.components.create_topappbar.CreateT
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 
 @Composable
-fun CreateContractScreen() {
+fun CreateStageScreen() {
     Scaffold(
         topBar = {
             CreateTopAppBar(
-                title = "План",
+                title = "Стадия",
                 navigationIconOnClick = { /* TO DO */ },
                 actionIconOnClick = { /* TO DO */ }
             )
@@ -72,22 +72,13 @@ fun CreateContractScreen() {
                 // Основные элементы формы
                 item {
                     var name by remember { mutableStateOf("") }
-                    var budget by remember { mutableStateOf(0) }
+                    var subExecutor by remember { mutableStateOf("") }
+                    var phoneSubExecutor by remember { mutableStateOf("") }
+                    var addressSubExecutor by remember { mutableStateOf("") }
                     var plannedStartDate by remember { mutableStateOf("") }
                     var plannedEndDate by remember { mutableStateOf("") }
-                    var warrantyEndDate by remember { mutableStateOf("") }
-
-                    var nameCustomer by remember { mutableStateOf("") }
-                    var phoneCustomer by remember { mutableStateOf("") }
-                    var nameOrganizationCustomer by remember { mutableStateOf("") }
-                    var phoneOrganizationCustomer by remember { mutableStateOf("") }
-                    var addressOrganizationCustomer by remember { mutableStateOf("") }
-
-                    var nameGeneralExecutor by remember { mutableStateOf("") }
-                    var phoneGeneralExecutor by remember { mutableStateOf("") }
-                    var nameOrganizationGeneralExecutor by remember { mutableStateOf("") }
-                    var phoneOrganizationGeneralExecutor by remember { mutableStateOf("") }
-                    var addressOrganizationGeneralExecutor by remember { mutableStateOf("") }
+                    var actualStartDate by remember { mutableStateOf("") }
+                    var actualEndDate by remember { mutableStateOf("") }
 
                     MainCard(
                         text = name,
@@ -98,15 +89,32 @@ fun CreateContractScreen() {
                         modifier = Modifier.padding(vertical = 6.dp),
                         iconID = R.drawable.ic_name_24dp
                     )
-
                     MainCard(
-                        text = budget.toString(),
-                        onValueChange = { newBudget ->
-                            budget = newBudget.toInt()
+                        text = subExecutor,
+                        onValueChange = { newSubExecutor ->
+                            subExecutor = newSubExecutor
                         },
-                        supportingText = "Стоимость",
+                        supportingText = "Наименование субподрядчика",
                         modifier = Modifier.padding(vertical = 6.dp),
-                        iconID = R.drawable.ic_budget_24dp
+                        iconID = R.drawable.ic_name_general_executor_24dp
+                    )
+                    MainCard(
+                        text = phoneSubExecutor,
+                        onValueChange = { newPhoneSubExecutor ->
+                            phoneSubExecutor = newPhoneSubExecutor
+                        },
+                        supportingText = "Телефон субподрядчика",
+                        modifier = Modifier.padding(vertical = 6.dp),
+                        iconID = R.drawable.ic_phone_customer_24dp
+                    )
+                    MainCard(
+                        text = addressSubExecutor,
+                        onValueChange = { newAddressSubExecutor ->
+                            addressSubExecutor = newAddressSubExecutor
+                        },
+                        supportingText = "Адрес субподрядчика",
+                        modifier = Modifier.padding(vertical = 6.dp),
+                        iconID = R.drawable.ic_addres_24dp
                     )
                     MainCard(
                         text = plannedStartDate,
@@ -127,105 +135,24 @@ fun CreateContractScreen() {
                         iconID = R.drawable.ic_planned_end_date_24dp
                     )
                     MainCard(
-                        text = warrantyEndDate,
-                        onValueChange = { newWarrantyEndDate ->
-                            warrantyEndDate = newWarrantyEndDate
+                        text = actualStartDate,
+                        onValueChange = { newActualStartDate ->
+                            actualStartDate = newActualStartDate
                         },
-                        supportingText = "Гарантийный срок до...",
+                        supportingText = "Фактическая дата начала",
                         modifier = Modifier.padding(vertical = 6.dp),
-                        iconID = R.drawable.ic_warranty_end_date_24dp
+                        iconID = R.drawable.ic_start_date_24dp
                     )
                     MainCard(
-                        text = nameCustomer,
-                        onValueChange = { newNameCustomer ->
-                            nameCustomer = newNameCustomer
+                        text = actualEndDate,
+                        onValueChange = { newActualEndDate ->
+                            actualEndDate = newActualEndDate
                         },
-                        supportingText = "Заказчик",
+                        supportingText = "Фактическая дата окончания",
                         modifier = Modifier.padding(vertical = 6.dp),
-                        iconID = R.drawable.ic_name_customer_24dp
+                        iconID = R.drawable.ic_planned_end_date_24dp
                     )
-                    MainCard(
-                        text = phoneCustomer,
-                        onValueChange = { newPhoneCustomer ->
-                            phoneCustomer = newPhoneCustomer
-                        },
-                        supportingText = "Телефон заказчика",
-                        modifier = Modifier.padding(vertical = 6.dp),
-                        iconID = R.drawable.ic_phone_customer_24dp
-                    )
-                    MainCard(
-                        text = nameOrganizationCustomer,
-                        onValueChange = { newNameOrganizationCustomer ->
-                            nameOrganizationCustomer = newNameOrganizationCustomer
-                        },
-                        supportingText = "Организация заказчика",
-                        modifier = Modifier.padding(vertical = 6.dp),
-                        iconID = R.drawable.ic_name_24dp
-                    )
-                    MainCard(
-                        text = phoneOrganizationCustomer,
-                        onValueChange = { newPhoneOrganizationCustomer ->
-                            phoneOrganizationCustomer = newPhoneOrganizationCustomer
-                        },
-                        supportingText = "Телефон орг. заказчика",
-                        modifier = Modifier.padding(vertical = 6.dp),
-                        iconID = R.drawable.ic_phone_customer_24dp
-                    )
-                    MainCard(
-                        text = addressOrganizationCustomer,
-                        onValueChange = { newAddressOrganizationCustomer ->
-                            addressOrganizationCustomer = newAddressOrganizationCustomer
-                        },
-                        supportingText = "Адрес орг. заказчика",
-                        modifier = Modifier.padding(vertical = 6.dp),
-                        iconID = R.drawable.ic_addres_24dp
-                    )
-                    MainCard(
-                        text = nameGeneralExecutor,
-                        onValueChange = { newNameGeneralExecutor ->
-                            nameGeneralExecutor = newNameGeneralExecutor
-                        },
-                        supportingText = "Генеральный подрядчик",
-                        modifier = Modifier.padding(vertical = 6.dp),
-                        iconID = R.drawable.ic_name_general_executor_24dp
-                    )
-                    MainCard(
-                        text = phoneGeneralExecutor,
-                        onValueChange = { newPhoneGeneralExecutor ->
-                            phoneGeneralExecutor = newPhoneGeneralExecutor
-                        },
-                        supportingText = "Телефон ген. подрядчика",
-                        modifier = Modifier.padding(vertical = 6.dp),
-                        iconID = R.drawable.ic_phone_customer_24dp
-                    )
-                    MainCard(
-                        text = nameOrganizationGeneralExecutor,
-                        onValueChange = { newNameOrganizationGeneralExecutor ->
-                            nameOrganizationGeneralExecutor = newNameOrganizationGeneralExecutor
-                        },
-                        supportingText = "Организация ген. подрядчика",
-                        modifier = Modifier.padding(vertical = 6.dp),
-                        iconID = R.drawable.ic_name_24dp
-                    )
-                    MainCard(
-                        text = phoneOrganizationGeneralExecutor,
-                        onValueChange = { newPhoneOrganizationGeneralExecutor ->
-                            phoneOrganizationGeneralExecutor = newPhoneOrganizationGeneralExecutor
-                        },
-                        supportingText = "Телефон организации ген. подрядчика",
-                        modifier = Modifier.padding(vertical = 6.dp),
-                        iconID = R.drawable.ic_phone_customer_24dp
-                    )
-                    MainCard(
-                        text = addressOrganizationGeneralExecutor,
-                        onValueChange = { newAddressOrganizationGeneralExecutor ->
-                            addressOrganizationGeneralExecutor =
-                                newAddressOrganizationGeneralExecutor
-                        },
-                        supportingText = "Адрес организации ген. подрядчика",
-                        modifier = Modifier.padding(vertical = 6.dp),
-                        iconID = R.drawable.ic_addres_24dp
-                    )
+
                     Card(
                         colors = CardDefaults.cardColors(
                             containerColor = HackathonTheme.colors.background.white,
@@ -296,7 +223,7 @@ fun CreateContractScreen() {
                 item {
                     val plans = remember {
                         mutableStateListOf<String>(
-                            "Стадия 1", "Стадия 2", "Стадия 3"
+                            "Документ 1", "Документ 2", "Документ 3"
                         )
                     }
 
@@ -315,7 +242,7 @@ fun CreateContractScreen() {
 
                     HackathonButton.L(
                         onClick = { /* TO DO */ },
-                        text = "Добавить стадию",
+                        text = "Добавить документ",
                         icon = HackathonButtonIcon(
                             resId = R.drawable.ic_add_24db,
                             sizeDp = 24,
