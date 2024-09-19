@@ -25,11 +25,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import androidx.compose.ui.util.fastForEachIndexed
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.kotlinenjoyerstemplate.R
-import com.example.kotlinenjoyerstemplate.common.StatusWorkEnum
-import com.example.kotlinenjoyerstemplate.map.presentation.model.zone.ZoneRenderMode
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
+import com.example.kotlinenjoyerstemplate.R
+import com.example.kotlinenjoyerstemplate.map.presentation.model.zone.ZoneRenderMode
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.MapSubScreen
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.MapSubScreenStore
 import com.example.kotlinenjoyerstemplate.map.presentation.subscreen.main.components.ObjectMarker
@@ -132,8 +130,11 @@ class MapMainSubScreen(
     override fun ColumnScope.BottomSheetContent() {
         val state by viewModel.state.collectAsStateWithLifecycle()
 
-        val navController = rememberNavController()
-        ObjectDetailsNavigation(navController)
+        state.selectedObjectInfoIndex?.let { index ->
+            val objectId = state.objectInfos[index].id
+            val navController = rememberNavController()
+            ObjectDetailsNavigation(navController, objectId)
+        }
     }
 
     @Composable

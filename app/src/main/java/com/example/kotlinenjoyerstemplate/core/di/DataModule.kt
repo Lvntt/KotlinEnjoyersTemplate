@@ -2,6 +2,7 @@ package com.example.kotlinenjoyerstemplate.core.di
 
 import com.example.kotlinenjoyerstemplate.common.Constants
 import com.example.kotlinenjoyerstemplate.core.data.ObjectApiService
+import com.example.kotlinenjoyerstemplate.core.data.ObjectRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.module.dsl.singleOf
@@ -40,6 +41,11 @@ fun provideObjectApiService(
 ): ObjectApiService =
     retrofit.create(ObjectApiService::class.java)
 
+fun provideObjectRepository(
+    apiService: ObjectApiService,
+): ObjectRepository =
+    ObjectRepository(apiService)
+
 fun coreDataModule() = module {
 
     singleOf(::provideLoggingInterceptor)
@@ -48,4 +54,5 @@ fun coreDataModule() = module {
         provideRetrofit(get(), Constants.BASE_URL)
     }
     singleOf(::provideObjectApiService)
+    singleOf(::provideObjectRepository)
 }

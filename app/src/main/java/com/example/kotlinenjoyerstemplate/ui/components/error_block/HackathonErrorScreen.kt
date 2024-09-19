@@ -18,7 +18,7 @@ fun HackathonErrorScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(backgroundColor),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.TopCenter,
     ) {
         HackathonErrorBlock(onRetry = onRetry)
     }
