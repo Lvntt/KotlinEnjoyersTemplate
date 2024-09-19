@@ -1,3 +1,6 @@
 package com.example.kotlinenjoyerstemplate.map.presentation.subscreen.main.model
 
-class MapMainState {}
+data class MapMainState(
+    val objectInfos: List<ObjectInfo> = emptyList(),
+    val selectedObjectInfoIndex: Int? = null,
+)

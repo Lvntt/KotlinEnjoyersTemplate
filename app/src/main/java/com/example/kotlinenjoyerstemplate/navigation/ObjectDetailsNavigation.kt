@@ -43,14 +43,13 @@ sealed interface ObjectDetailsNavDestination : NavDestination {
 }
 
 @Composable
-fun ObjectDetailsNavigation(navController: NavHostController) {
+fun ObjectDetailsNavigation(navController: NavHostController, objectId: Long) {
     NavHost(
         modifier = Modifier.fillMaxHeight(),
         navController = navController,
         startDestination = ObjectDetailsNavDestination.ObjectDetailsScreen.getDestination(),
     ) {
         composable(route = ObjectDetailsNavDestination.ObjectDetailsScreen.getDestination()) { backStackEntry ->
-            val objectId = backStackEntry.arguments?.getLong(OBJECT_ID_KEY)
             // TODO может быть просто передавать в конструктор навхоста айдишник и убрать параметры в навигации
             val viewModel: ObjectDetailsViewModel = koinViewModel(parameters = { parametersOf(objectId) })
 

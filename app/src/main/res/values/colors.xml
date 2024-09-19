@@ -33,5 +33,7 @@
     <color name="colorsStatusInProcess">#FCC73F</color>
     <color name="colorsStatusCompleted">#64CF62</color>
     <color name="colorsStatusCancelled">#FC8E3F</color>
-
+    <color name="colorsStatusMapSuccess">#80CE7E</color>
+    <color name="colorsStatusMapInProgress">#FCC73F</color>
+    <color name="colorsStatusMapPlanned">#FC8E3F</color>
 </resources>

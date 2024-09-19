@@ -6,4 +6,6 @@ sealed interface MapMainEffect {
 
     data object OpenBottomSheet : MapMainEffect
 
+    data object ShowLoadingError : MapMainEffect
+
 }
