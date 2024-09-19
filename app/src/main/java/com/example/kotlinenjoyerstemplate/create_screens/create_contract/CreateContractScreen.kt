@@ -51,8 +51,15 @@ fun CreateContractScreen() {
         containerColor = HackathonTheme.colors.background.grey,
         content = { paddingValues ->
             var expanded by remember { mutableStateOf(false) }
-            var selectedStage by remember { mutableStateOf("Выберите стадию") }
-            val stages = listOf("Стадия 1", "Стадия 2", "Стадия 3")
+            var selectedStatus by remember { mutableStateOf("Выберите статус") }
+            val status = listOf(
+                "Запланирован",
+                "В процессе",
+                "Отменен",
+                "Завершён",
+                "Приостановлен",
+                "Возобнавлён"
+            )
 
             LazyColumn(
                 contentPadding = PaddingValues(
@@ -242,7 +249,7 @@ fun CreateContractScreen() {
                             Column(modifier = Modifier.fillMaxWidth()) {
                                 Box {
                                     Text(
-                                        text = selectedStage,
+                                        text = selectedStatus,
                                         modifier = Modifier
                                             .fillMaxWidth()
                                             .clickable { expanded = true },
@@ -253,10 +260,10 @@ fun CreateContractScreen() {
                                         onDismissRequest = { expanded = false },
                                         containerColor = HackathonTheme.colors.background.white,
                                     ) {
-                                        stages.forEach { stage ->
+                                        status.forEach { stage ->
                                             DropdownMenuItem(
                                                 onClick = {
-                                                    selectedStage = stage
+                                                    selectedStatus = stage
                                                     expanded = false
                                                 },
                                                 text = {
