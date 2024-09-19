@@ -34,7 +34,7 @@ fun CreatePlanScreen(
                 actionIconOnClick = { /*TO DO*/ }
             )
         },
-        containerColor = HackathonTheme.colors.common.staticWhite,
+        containerColor = HackathonTheme.colors.background.grey,
         content = {
             Column(
                 Modifier
@@ -93,11 +93,13 @@ fun CreatePlanScreen(
                             bottom = 16.dp
                         )
                     ) {
-                        val plans = remember { mutableStateListOf<String>(
-                            "Контракт 1",
-                            "Контракт 2",
-                            "Контракт 3"
-                        ) }
+                        val plans = remember {
+                            mutableStateListOf<String>(
+                                "Контракт 1",
+                                "Контракт 2",
+                                "Контракт 3"
+                            )
+                        }
 
                         LazyColumn() {
                             items(plans.size) { plan ->

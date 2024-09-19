@@ -34,7 +34,7 @@ fun CreateObjectScreen(
                 actionIconOnClick = { /*TO DO*/ }
             )
         },
-        containerColor = HackathonTheme.colors.common.staticWhite,
+        containerColor = HackathonTheme.colors.background.grey,
         content = {
             Column(
                 Modifier
