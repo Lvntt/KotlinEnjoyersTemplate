@@ -32,7 +32,7 @@ class ContractDetailsViewModel(
 
     fun loadData() {
         viewModelScope.launch(Dispatchers.IO + handler) {
-            val detailsResponse = objectRepository.getContractDetails(contractId)
+            val detailsResponse = objectRepository.getContractDetails(contractId, isMock = true)
             val detailsUi = factory.getContractDetailsUi(detailsResponse)
             val topBar = factory.getContractTopBar(detailsResponse)
             _uiState.update {
@@ -52,9 +52,9 @@ class ContractDetailsViewModel(
                     item is ContractDetailsItem.Stages
                 } as ContractDetailsItem.Stages
             val newStages = stages.copy(chosenStage = stage)
-            content.copy(
-                model = content.model - stages + newStages
-            )
+            val newModel = (content.model - stages).toMutableList()
+            newModel.add(index = 1, element = newStages)
+            content.copy(model = newModel)
         }
     }
 }

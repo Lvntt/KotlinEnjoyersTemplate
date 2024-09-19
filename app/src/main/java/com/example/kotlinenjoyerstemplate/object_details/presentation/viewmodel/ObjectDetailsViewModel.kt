@@ -30,7 +30,7 @@ class ObjectDetailsViewModel(
     fun loadData() {
         _uiState.update { ObjectDetailsUiState.Loading }
         viewModelScope.launch(Dispatchers.IO + handler) {
-            val detailsResponse = objectRepository.getObjectDetails(objectId)
+            val detailsResponse = objectRepository.getObjectDetails(objectId, isMock = true)
             val detailsUi = factory.getObjectDetailsUi(detailsResponse)
             _uiState.update {
                 ObjectDetailsUiState.Content(model = detailsUi)

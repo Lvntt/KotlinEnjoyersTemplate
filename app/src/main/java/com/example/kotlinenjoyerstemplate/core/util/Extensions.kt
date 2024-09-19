@@ -17,8 +17,8 @@ fun String.toStatusWorkEnum() = when (this) {
 
 fun Int.toMoneyFormat(): String {
     val symbols = DecimalFormatSymbols(Locale("ru")).apply {
-        groupingSeparator = ' '
+        groupingSeparator = '.'
     }
     val formatter = DecimalFormat("#,###", symbols)
-    return formatter.format(this)
+    return "${formatter.format(this)} ₽"
 }

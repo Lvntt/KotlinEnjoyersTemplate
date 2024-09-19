@@ -5,14 +5,12 @@ import retrofit2.http.Path
 
 interface ObjectApiService {
 
-    @GET("object/{objectId}")
+    @GET("object/{objectId}/matvey")
     suspend fun getObjectDetails(@Path("objectId") objectId: Long): ObjectView
 
-    // TODO актуализировать путь
-    @GET()
+    @GET("plans/{planId}/matvey")
     suspend fun getPlanDetails(@Path("planId") planId: Long): ObjectPlanView
 
-    // TODO актуализировать путь
-    @GET()
+    @GET("contracts/{contractId}/matvey")
     suspend fun getContractDetails(@Path("contractId") contractId: Long): ObjectContractView
 }

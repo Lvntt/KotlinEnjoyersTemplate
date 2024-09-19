@@ -9,7 +9,6 @@ import androidx.navigation.compose.composable
 import com.example.kotlinenjoyerstemplate.contract_details.presentation.compose.ContractDetails
 import com.example.kotlinenjoyerstemplate.contract_details.presentation.viewmodel.ContractDetailsViewModel
 import com.example.kotlinenjoyerstemplate.navigation.ObjectDetailsNavDestination.ContractDetailsScreen.CONTRACT_ID_KEY
-import com.example.kotlinenjoyerstemplate.navigation.ObjectDetailsNavDestination.ObjectDetailsScreen.OBJECT_ID_KEY
 import com.example.kotlinenjoyerstemplate.navigation.ObjectDetailsNavDestination.PlanDetailsScreen.PLAN_ID_KEY
 import com.example.kotlinenjoyerstemplate.object_details.presentation.compose.ObjectDetails
 import com.example.kotlinenjoyerstemplate.object_details.presentation.viewmodel.ObjectDetailsViewModel
@@ -20,12 +19,7 @@ import org.koin.core.parameter.parametersOf
 
 sealed interface ObjectDetailsNavDestination : NavDestination {
 
-    data object ObjectDetailsScreen : RootNavDestination("ObjectDetailsScreen") {
-
-        const val OBJECT_ID_KEY = "OBJECT_ID_KEY"
-
-        override val arguments = listOf(OBJECT_ID_KEY)
-    }
+    data object ObjectDetailsScreen : RootNavDestination("ObjectDetailsScreen")
 
     data object PlanDetailsScreen : RootNavDestination("PlanDetailsScreen") {
 
@@ -50,7 +44,6 @@ fun ObjectDetailsNavigation(navController: NavHostController, objectId: Long) {
         startDestination = ObjectDetailsNavDestination.ObjectDetailsScreen.getDestination(),
     ) {
         composable(route = ObjectDetailsNavDestination.ObjectDetailsScreen.getDestination()) { backStackEntry ->
-            // TODO может быть просто передавать в конструктор навхоста айдишник и убрать параметры в навигации
             val viewModel: ObjectDetailsViewModel = koinViewModel(parameters = { parametersOf(objectId) })
 
             ObjectDetails(
