@@ -1,4 +1,4 @@
-package com.example.kotlinenjoyerstemplate.create_screens.create_contract
+package com.example.kotlinenjoyerstemplate.create_screens.presentation.create_contract
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

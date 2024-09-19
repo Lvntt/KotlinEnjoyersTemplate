@@ -7,9 +7,12 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.kotlinenjoyerstemplate.create_screens.presentation.CreationScreen
 import com.example.kotlinenjoyerstemplate.map.MapScreen
 import com.example.kotlinenjoyerstemplate.map.data.model.ZoneList
 import com.google.gson.Gson
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 sealed class RootNavDestination(override val baseRoute: String) : NavDestination {
 
@@ -49,7 +52,10 @@ fun RootNavigation(
             }
         )) {
             val zones = Gson().fromJson(it.arguments?.getString("zonesArg"), ZoneList::class.java)
-
+            CreationScreen(
+                viewModel = koinViewModel(parameters = { parametersOf(zones.zones) }),
+                navController
+            )
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.kotlinenjoyerstemplate.create_screens.create_plan
+package com.example.kotlinenjoyerstemplate.create_screens.presentation.create_object
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,6 +15,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.kotlinenjoyerstemplate.R
+import com.example.kotlinenjoyerstemplate.create_screens.presentation.model.ObjectCreationEvent
+import com.example.kotlinenjoyerstemplate.create_screens.presentation.model.ObjectCreationState
 import com.example.kotlinenjoyerstemplate.ui.components.button.HackathonButton
 import com.example.kotlinenjoyerstemplate.ui.components.button.hackathonButtonColors
 import com.example.kotlinenjoyerstemplate.ui.components.button.model.HackathonButtonIcon
@@ -23,15 +25,16 @@ import com.example.kotlinenjoyerstemplate.ui.components.create_topappbar.CreateT
 import com.example.kotlinenjoyerstemplate.ui.theme.HackathonTheme
 
 @Composable
-fun CreatePlanScreen(
-
+fun CreateObjectScreen(
+    state: ObjectCreationState,
+    onEvent: (ObjectCreationEvent) -> Unit,
 ) {
     Scaffold(
         topBar = {
             CreateTopAppBar(
-                title = "План",
-                navigationIconOnClick = { /*TO DO*/ },
-                actionIconOnClick = { /*TO DO*/ }
+                title = "Объект",
+                navigationIconOnClick = { onEvent(ObjectCreationEvent.BackClicked) },
+                actionIconOnClick = { onEvent(ObjectCreationEvent.CloseClicked) }
             )
         },
         containerColor = HackathonTheme.colors.background.grey,
@@ -50,14 +53,9 @@ fun CreatePlanScreen(
             ) {
                 Column {
                     Column {
-                        var name by remember { mutableStateOf("") }
-                        var address by remember { mutableStateOf("") }
-                        var date by remember { mutableStateOf("") }
                         MainCard(
-                            text = name,
-                            onValueChange = { newName ->
-                                name = newName
-                            },
+                            text = state.objectInfo.name,
+                            onValueChange = { onEvent(ObjectCreationEvent.ObjectInfoTitleChanged(it)) },
                             supportingText = "Наименование",
                             modifier = Modifier.padding(
                                 vertical = 6.dp
@@ -65,26 +63,13 @@ fun CreatePlanScreen(
                             iconID = R.drawable.ic_name_24dp
                         )
                         MainCard(
-                            text = address,
-                            onValueChange = { newAddress ->
-                                address = newAddress
-                            },
-                            supportingText = "Краткое описание",
+                            text = state.objectInfo.address,
+                            onValueChange = { onEvent(ObjectCreationEvent.ObjectInfoAddressChanged(it)) },
+                            supportingText = "Адрес",
                             modifier = Modifier.padding(
                                 vertical = 6.dp
                             ),
-                            iconID = R.drawable.ic_description_24dp
-                        )
-                        MainCard(
-                            text = date,
-                            onValueChange = { newDate ->
-                                date = newDate
-                            },
-                            supportingText = "Дата начала работ",
-                            modifier = Modifier.padding(
-                                vertical = 6.dp
-                            ),
-                            iconID = R.drawable.ic_start_date_24dp
+                            iconID = R.drawable.ic_addres_24dp
                         )
                     }
                     Column(
@@ -93,19 +78,11 @@ fun CreatePlanScreen(
                             bottom = 16.dp
                         )
                     ) {
-                        val plans = remember {
-                            mutableStateListOf<String>(
-                                "Контракт 1",
-                                "Контракт 2",
-                                "Контракт 3"
-                            )
-                        }
-
-                        LazyColumn() {
-                            items(plans.size) { plan ->
+                        LazyColumn {
+                            items(state.plans.size) { index ->
                                 HackathonButton.Added(
-                                    onClick = { /*TO DO*/ },
-                                    text = plans[plan],
+                                    onClick = { onEvent(ObjectCreationEvent.PlanSelected(index)) },
+                                    text = state.plans[index].name,
                                     icon = HackathonButtonIcon(
                                         resId = R.drawable.ic_chevron_right_24dp,
                                         sizeDp = 24,
@@ -117,8 +94,8 @@ fun CreatePlanScreen(
 
                         }
                         HackathonButton.L(
-                            onClick = { /*TO DO*/ },
-                            text = "Добавить контракт",
+                            onClick = { onEvent(ObjectCreationEvent.PlanCreated) },
+                            text = "Добавить план",
                             icon = HackathonButtonIcon(
                                 resId = R.drawable.ic_add_24db,
                                 sizeDp = 24,
@@ -130,7 +107,7 @@ fun CreatePlanScreen(
                 }
                 HackathonButton.L(
                     text = "Сохранить",
-                    onClick = { /*TO DO*/ },
+                    onClick = { onEvent(ObjectCreationEvent.SaveClicked) },
                     isFillMaxWidth = true,
                     buttonColors = hackathonButtonColors(
                         containerColor = HackathonTheme.colors.common.accent,
